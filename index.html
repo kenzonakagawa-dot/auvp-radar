@@ -3,103 +3,181 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="lote" content="20260924-1534-investidorsardinha-lista">
 <title>AUVP RADAR — painel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@600&family=Roboto:wght@400;500;700&family=Sora:wght@600;700&display=swap">
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#12151a;--mut:#666e7a;--line:#e3e6ea;--ok:#12805c;--warn:#a15c00;--bad:#b3261e;--accent:#1c5fd6;--bar:#c9d6ee}
-@media(prefers-color-scheme:dark){:root{--bg:#14171c;--card:#1c2026;--ink:#e9ecf1;--mut:#98a2b0;--line:#2b313a;--ok:#4ac08d;--warn:#e0a33a;--bad:#f2756a;--accent:#7aa6f0;--bar:#33445f}}
+:root{
+  --verde:#023619; --verde2:#011F0E; --amarelo:#EFBE4F;
+  --branco:#FFFFFF; --cinza1:#F2F2F2; --cinza2:#6B6B6B; --chumbo:#1B1B1B; --preto:#000000;
+  --linha:rgba(0,0,0,.08);
+  --f-titulo:"Anek Latin","Arial Narrow",Arial,sans-serif;
+  --f-corpo:Roboto,-apple-system,"Segoe UI",Arial,sans-serif;
+  --f-rotulo:Sora,"Segoe UI",Arial,sans-serif;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 60px}
-h1{font-size:26px;margin:0 0 4px;letter-spacing:-.02em}
-h2{font-size:18px;margin:34px 0 12px;letter-spacing:-.01em}
-h3{font-size:14px;margin:18px 0 8px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
-.sub{color:var(--mut);margin:0 0 2px}
-.ts{color:var(--mut);font-size:13px;margin:0 0 22px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:14px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-.stat .k{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
-.stat .v{font-size:27px;font-weight:600;letter-spacing:-.02em;margin:4px 0 2px}
-.stat .n{color:var(--mut);font-size:13px}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
-td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.scroll{overflow-x:auto}
-.bar{height:8px;background:var(--bar);border-radius:99px;min-width:2px}
-.barwrap{background:var(--line);border-radius:99px;height:8px;width:100%;max-width:220px}
-.pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:600}
-.p-ok{background:rgba(18,128,92,.13);color:var(--ok)}
-.p-bad{background:rgba(179,38,30,.13);color:var(--bad)}
-.p-warn{background:rgba(161,92,0,.13);color:var(--warn)}
-.alert{border-left:3px solid var(--warn);background:var(--card);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:8px;font-size:14px}
-.alert.none{border-left-color:var(--ok)}
-.help{color:var(--mut);font-size:13px;margin:0 0 12px}
-.foco{white-space:pre-wrap;font-size:14px;line-height:1.6;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px;max-height:340px;overflow-y:auto}
-.big{font-size:34px;font-weight:700;letter-spacing:-.03em}
-.mut{color:var(--mut)}
-footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);color:var(--mut);font-size:13px}
-code{background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12.5px}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--branco);color:var(--chumbo);font:400 17px/1.6 var(--f-corpo);-webkit-font-smoothing:antialiased}
+.container{max-width:1200px;margin:0 auto;padding-inline:24px}
+.faixa{padding-block:90px}
+.faixa-preta{background:var(--preto);color:var(--cinza1)}
 
-/* abas: uma por titulo de secao, com cara de botao */
-nav.abas{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 20px;padding:0 0 14px;border-bottom:1px solid var(--line)}
-nav.abas button{appearance:none;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-family:inherit;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer}
-nav.abas button:hover{border-color:var(--accent)}
-nav.abas button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+/* tipografia */
+h1,h2,h3,h4{font-family:var(--f-titulo);font-weight:600;color:var(--verde);margin:0}
+h1{font-size:54px;line-height:1.1;letter-spacing:-.02em}
+h2{font-size:41px;line-height:1.15;margin-bottom:30px}
+h3{font-size:28px;line-height:1.2;margin:60px 0 15px}
+h4{font-size:22px;line-height:1.25}
+.eyebrow,.ord,.contagem,.stat .k{font-family:var(--f-rotulo);font-weight:700;font-size:12px;line-height:1.4;text-transform:uppercase;letter-spacing:.15em}
+.eyebrow{display:block;color:var(--verde)}
+.hero h1{margin-top:15px;max-width:900px}
+.hero .sub{font-size:20px;line-height:1.5;color:var(--cinza2);margin:30px 0 0;max-width:720px}
+.hero .ts{font-family:var(--f-rotulo);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.15em;color:var(--cinza2);margin:45px 0 0}
+.help{color:var(--cinza2);font-size:16px;line-height:1.6;margin:0 0 30px;max-width:840px}
+.mut{color:var(--cinza2)}
+strong,b{font-weight:700}
+code{font:14px ui-monospace,Consolas,monospace;background:var(--branco);border:1px solid var(--linha);border-radius:4px;padding:0 5px}
+
+/* cards e containers: raio 12px, padding 30px, sombra discreta no hover */
+.card,.stat,.pauta,.foco{background:var(--cinza1);border:1px solid rgba(0,0,0,.06);border-radius:12px;padding:30px;margin-bottom:30px;transition:box-shadow 240ms ease,transform 240ms ease}
+.card:hover,.stat:hover,.pauta:hover{box-shadow:0 8px 24px rgba(0,0,0,.06);transform:translateY(-2px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:30px;margin-bottom:30px}
+.grid .stat{margin-bottom:0}
+.stat .k{color:var(--verde)}
+.stat .v{font-family:var(--f-titulo);font-weight:600;font-size:41px;line-height:1.15;color:var(--verde);margin-top:15px;font-variant-numeric:tabular-nums}
+.stat .v.v-texto{font-size:28px}
+.stat .v .v-de{font-size:22px;color:var(--cinza2)}
+.stat .v .pill{vertical-align:middle}
+.stat .n{color:var(--cinza2);font-size:15px;margin-top:15px}
+.big{font-family:var(--f-titulo);font-weight:600;font-size:54px;line-height:1.1;color:var(--verde)}
+
+/* tabela */
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:15px 15px 15px 0;border-bottom:1px solid var(--linha);vertical-align:top}
+tr:last-child td{border-bottom:none}
+th{font-family:var(--f-rotulo);font-weight:700;font-size:11px;line-height:1.4;text-transform:uppercase;letter-spacing:.12em;color:var(--cinza2)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sub-linha{display:block;color:var(--cinza2);font-size:14px;line-height:1.5}
+.nota-tabela{margin:15px 0 0}
+
+/* barras de progresso: solidas, sem transparencia */
+.barwrap{background:var(--branco);height:6px;width:100%;max-width:240px}
+.bar{height:6px;background:var(--verde);min-width:2px}
+.bar-2{background:var(--cinza2)}
+.barras{display:flex;align-items:center}
+.leg{display:inline-block;width:15px;height:6px;background:var(--verde);vertical-align:middle}
+.leg-2{background:var(--cinza2)}
+
+/* badges: fundo solido, raio 4px. Amarelo so sobre chumbo */
+.pill{display:inline-block;font-family:var(--f-rotulo);font-weight:700;font-size:11px;line-height:1.5;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:4px}
+.p-ok{background:var(--verde);color:var(--branco)}
+.p-bad{background:var(--preto);color:var(--branco)}
+.p-warn{background:var(--chumbo);color:var(--amarelo)}
+
+/* alertas */
+.alert{background:var(--cinza1);border-radius:12px;border-left:4px solid var(--verde);padding:15px 30px;margin-bottom:15px;font-size:16px}
+.alert.none{border-left-color:var(--cinza2);color:var(--cinza2)}
+
+/* identidade editorial */
+.foco{white-space:pre-wrap;font-size:16px;line-height:1.7;max-height:420px;overflow-y:auto;max-width:900px}
+
+/* abas: bordas retas, fundo solido, ativa verde */
+.abas-faixa{position:sticky;top:0;z-index:5;background:var(--cinza1);border-block:1px solid var(--linha);padding-block:15px}
+nav.abas{display:flex;flex-wrap:wrap}
+nav.abas button{appearance:none;background:var(--branco);color:var(--verde);border:1px solid var(--linha);margin:0 -1px -1px 0;border-radius:0;padding:15px 18px;font-family:var(--f-rotulo);font-weight:700;font-size:12px;line-height:1.2;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;transition:all 240ms ease}
+nav.abas button:hover{background:var(--cinza1)}
+nav.abas button[aria-selected="true"]{background:var(--verde);border-color:var(--verde);color:var(--branco);position:relative;z-index:1}
 .painel[hidden]{display:none}
-.painel>h2:first-child{margin-top:4px}
+button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--verde);outline-offset:2px}
+
+/* secao de impacto (preta) */
+.faixa-preta h2{color:var(--branco)}
+.faixa-preta .eyebrow{color:var(--amarelo)}
+.faixa-preta .alert{background:var(--chumbo);color:var(--cinza1);border-left-color:var(--amarelo)}
+.faixa-preta .alert.none{border-left-color:var(--cinza2)}
+.faixa-preta .alert strong{color:var(--branco)}
+.faixa-preta .help,.faixa-preta .mut{color:var(--cinza1)}
+.faixa-preta button:focus-visible{outline-color:var(--branco)}
+
+/* botoes: raio 5px, borda 1px sempre, 240ms */
+.botao{appearance:none;display:inline-flex;align-items:center;gap:8px;font-family:var(--f-rotulo);font-weight:700;font-size:14px;line-height:1;text-transform:uppercase;letter-spacing:.05em;padding:18px 32px;border-radius:5px;border:1px solid var(--verde);background:var(--verde);color:var(--branco);cursor:pointer;transition:all 240ms ease}
+.botao:hover{background:transparent;color:var(--verde)}
+.botao:active{transform:scale(.99)}
+.botao:disabled{opacity:.5;cursor:not-allowed;pointer-events:none}
+.botao.sec{background:transparent;color:var(--verde)}
+.botao.sec:hover{background:var(--verde);color:var(--branco)}
 
 /* pautas: julgamento da solicitante */
-.pauta{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px}
-.pauta.decidida{border-color:var(--ok);box-shadow:inset 3px 0 0 var(--ok)}
-.pauta h4{margin:4px 0 8px;font-size:15.5px}
-.ord{color:var(--mut);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
-.angulo{margin:6px 0;font-size:14px}
-.campo{margin:5px 0;font-size:13.5px;color:var(--mut)}
-.campo b{color:var(--ink)}
-.opcoes{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.opcoes button,.motivos button{appearance:none;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:6px 12px;font-family:inherit;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer}
-.opcoes button:hover,.motivos button:hover{border-color:var(--accent)}
-.opcoes button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-.motivos{display:none;gap:6px;flex-wrap:wrap;margin-top:8px}
+.pauta.decidida{border-color:var(--verde);box-shadow:inset 4px 0 0 var(--verde)}
+.pauta.decidida:hover{box-shadow:inset 4px 0 0 var(--verde),0 8px 24px rgba(0,0,0,.06)}
+.ord{display:block;color:var(--cinza2)}
+.pauta h4{margin:15px 0}
+.angulo{font-size:17px;color:var(--chumbo);border-left:3px solid var(--verde);padding-left:15px;margin:0 0 15px}
+.campo{font-size:15px;color:var(--cinza2);margin:0 0 15px}
+.campo b{color:var(--chumbo)}
+.opcoes{display:flex;flex-wrap:wrap;gap:15px;margin-top:30px;padding-top:30px;border-top:1px solid var(--linha)}
+.opcoes button,.motivos button{appearance:none;font-family:var(--f-rotulo);font-weight:700;font-size:12px;line-height:1;text-transform:uppercase;letter-spacing:.05em;padding:15px 18px;border-radius:5px;border:1px solid var(--verde);background:var(--branco);color:var(--verde);cursor:pointer;transition:all 240ms ease}
+.opcoes button:hover,.motivos button:hover{box-shadow:inset 0 0 0 1px currentColor}
+.opcoes button:active,.motivos button:active{transform:scale(.99)}
+.opcoes button[aria-pressed="true"]{background:var(--verde);color:var(--branco)}
+.motivos{display:none;flex-wrap:wrap;gap:15px;margin-top:15px}
 .motivos.on{display:flex}
-.motivos button[aria-pressed="true"]{background:var(--warn);border-color:var(--warn);color:#fff}
-.obs{display:none;width:100%;margin-top:8px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-family:inherit;font-size:14px}
+.motivos button{border-color:var(--chumbo);color:var(--chumbo)}
+.motivos button[aria-pressed="true"]{background:var(--chumbo);color:var(--amarelo)}
+.obs{display:none;width:100%;margin-top:15px;padding:15px;border:1px solid var(--linha);border-radius:5px;background:var(--branco);color:var(--chumbo);font:16px/1.5 var(--f-corpo);resize:vertical}
 .obs.on{display:block}
-.barra-acao{position:sticky;bottom:0;background:var(--bg);padding:12px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:14px}
-.botao{appearance:none;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer}
-.botao:disabled{opacity:.45;cursor:not-allowed}
-.botao.sec{background:var(--card);color:var(--ink);border:1px solid var(--line)}
-.contagem{color:var(--mut);font-size:13px}
-.saida{display:none;width:100%;min-height:150px;margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:12.5px/1.5 Consolas,monospace}
+.barra-acao{position:sticky;bottom:0;z-index:4;background:var(--branco);border-top:1px solid var(--linha);padding-block:15px;margin-top:30px;display:flex;flex-wrap:wrap;gap:15px;align-items:center}
+.contagem{color:var(--cinza2)}
+.saida{display:none;width:100%;min-height:180px;margin-top:15px;padding:15px;border:1px solid var(--linha);border-radius:12px;background:var(--cinza1);color:var(--chumbo);font:13px/1.55 ui-monospace,Consolas,monospace;resize:vertical}
 .saida.on{display:block}
-</style></head><body><div class="wrap">
-<h1>AUVP RADAR — painel</h1>
-<p class="sub">Monitoramento de pautas e tendências · RADAR 4.1</p>
-<p class="ts">Painel gerado em 24/09/2026 15:43</p>
-<nav class="abas" role="tablist">
-<button type="button" role="tab" data-aba="como-esta-agora" aria-selected="true">Como está agora</button>
-<button type="button" role="tab" data-aba="precisa-de-atencao" aria-selected="false">Precisa de atenção</button>
-<button type="button" role="tab" data-aba="ultima-coleta-de-temas" aria-selected="false">Última coleta de temas</button>
-<button type="button" role="tab" data-aba="diversidade-do-lote" aria-selected="false">Diversidade do lote</button>
-<button type="button" role="tab" data-aba="o-que-a-ia-sabe-sobre-o-canal" aria-selected="false">O que a IA sabe sobre o canal</button>
-<button type="button" role="tab" data-aba="pautas" aria-selected="false">Última seleção de pautas</button>
-<button type="button" role="tab" data-aba="uso-e-custo" aria-selected="false">Uso e custo</button>
-<button type="button" role="tab" data-aba="historico-de-execucoes" aria-selected="false">Histórico de execuções</button>
-</nav>
-<section class="painel" id="aba-como-esta-agora" role="tabpanel">
+
+/* toast */
+.toast{position:fixed;right:24px;bottom:30px;z-index:10;background:var(--chumbo);color:var(--branco);border-left:4px solid var(--amarelo);border-radius:12px;padding:15px 30px;font-family:var(--f-rotulo);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.1em;opacity:0;transform:translateY(15px);transition:opacity 240ms ease,transform 240ms ease;pointer-events:none}
+.toast.on{opacity:1;transform:none}
+
+footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);font-size:15px}
+
+@media (max-width:767px){
+  .faixa{padding-block:60px}
+  h1{font-size:36px} h2{font-size:30px} h3{font-size:22px}
+  .card,.stat,.pauta,.foco{padding:20px}
+  .stat .v{font-size:30px}
+  nav.abas{flex-wrap:nowrap;overflow-x:auto}
+  nav.abas button{white-space:nowrap}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style></head><body>
+<header class="faixa hero"><div class="container">
+<span class="eyebrow">AUVP Radar · Monitoramento de pautas</span>
+<h1>O que está em alta, e o que rende no canal.</h1>
+<p class="sub">Temas coletados das fontes de economia, a leitura do canal que orienta a IA e as pautas recomendadas para avaliação. Atualizado a cada rodada.</p>
+<p class="ts">Painel gerado em 24/09/2026 15:52</p>
+</div></header>
+<div class="abas-faixa"><div class="container"><nav class="abas" role="tablist" aria-label="Seções do painel">
+<button type="button" role="tab" id="tab-como-esta-agora" aria-controls="aba-como-esta-agora" data-aba="como-esta-agora" aria-selected="true">Como está agora</button>
+<button type="button" role="tab" id="tab-precisa-de-atencao" aria-controls="aba-precisa-de-atencao" data-aba="precisa-de-atencao" aria-selected="false">Precisa de atenção</button>
+<button type="button" role="tab" id="tab-ultima-coleta-de-temas" aria-controls="aba-ultima-coleta-de-temas" data-aba="ultima-coleta-de-temas" aria-selected="false">Última coleta de temas</button>
+<button type="button" role="tab" id="tab-diversidade-do-lote" aria-controls="aba-diversidade-do-lote" data-aba="diversidade-do-lote" aria-selected="false">Diversidade do lote</button>
+<button type="button" role="tab" id="tab-o-que-a-ia-sabe-sobre-o-canal" aria-controls="aba-o-que-a-ia-sabe-sobre-o-canal" data-aba="o-que-a-ia-sabe-sobre-o-canal" aria-selected="false">O que a IA sabe sobre o canal</button>
+<button type="button" role="tab" id="tab-pautas" aria-controls="aba-pautas" data-aba="pautas" aria-selected="false">Última seleção de pautas</button>
+<button type="button" role="tab" id="tab-uso-e-custo" aria-controls="aba-uso-e-custo" data-aba="uso-e-custo" aria-selected="false">Uso e custo</button>
+<button type="button" role="tab" id="tab-historico-de-execucoes" aria-controls="aba-historico-de-execucoes" data-aba="historico-de-execucoes" aria-selected="false">Histórico de execuções</button>
+</nav></div></div>
+<section class="painel faixa" id="aba-como-esta-agora" role="tabpanel" aria-labelledby="tab-como-esta-agora"><div class="container">
 <h2>Como está agora</h2><div class="grid">
 <div class="stat"><div class="k">Última coleta</div><div class="v">102</div><div class="n">itens coletados &middot; hoje</div></div>
-<div class="stat"><div class="k">Fontes funcionando</div><div class="v">6 <span class="mut" style="font-size:18px">de 7</span></div><div class="n">&nbsp;</div></div>
+<div class="stat"><div class="k">Fontes funcionando</div><div class="v">6 <span class="v-de">de 7</span></div><div class="n">&nbsp;</div></div>
 <div class="stat"><div class="k">Perfil do canal</div><div class="v">182</div><div class="n">vídeos analisados &middot; hoje</div></div>
 <div class="stat"><div class="k">Última seleção</div><div class="v">10</div><div class="n">temas curados &middot; gpt-5.5</div></div>
 </div>
-</section>
-<section class="painel" id="aba-precisa-de-atencao" role="tabpanel" hidden>
+</div></section>
+<section class="painel faixa faixa-preta" id="aba-precisa-de-atencao" role="tabpanel" aria-labelledby="tab-precisa-de-atencao" hidden><div class="container">
 <h2>Precisa de atenção</h2>
 <div class="alert">A fonte <strong>Concorrentes (YouTube)</strong> voltou vazia: lista vazia em fontes.json - insumo pendente do RADAR 4.2</div>
 <div class="alert"><strong>39%</strong> do lote veio de uma fonte só (G1 Economia, 40 itens). Um portal está pautando a escolha da IA sozinho.</div>
-</section>
-<section class="painel" id="aba-ultima-coleta-de-temas" role="tabpanel" hidden>
+</div></section>
+<section class="painel faixa" id="aba-ultima-coleta-de-temas" role="tabpanel" aria-labelledby="tab-ultima-coleta-de-temas" hidden><div class="container">
 <h2>Última coleta de temas</h2>
 <div class="card"><div class="scroll"><table><thead><tr>
 <th>Fonte</th><th class="n">Itens</th><th style="width:40%"></th><th>Situação</th>
@@ -112,19 +190,19 @@ nav.abas button[aria-selected="true"]{background:var(--accent);border-color:var(
 <tr><td>CNN Economia</td><td class="n">4</td><td><div class="barwrap"><div class="bar" style="width:10%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
 <tr><td>Concorrentes (YouTube)</td><td class="n">0</td><td><div class="barwrap"><div class="bar" style="width:0%"></div></div></td><td><span class="pill p-warn">voltou vazia</span> <span class="mut">lista vazia em fontes.json - insumo pendente do RADAR 4.2</span></td></tr>
 </tbody></table></div></div>
-</section>
-<section class="painel" id="aba-diversidade-do-lote" role="tabpanel" hidden>
+</div></section>
+<section class="painel faixa" id="aba-diversidade-do-lote" role="tabpanel" aria-labelledby="tab-diversidade-do-lote" hidden><div class="container">
 <h2>Diversidade do lote</h2>
 <p class="help">Três medidas que não dependem de agrupar assunto à mão. Um lote pode ter 100 itens e oferecer pouca escolha real à IA — foi o que aconteceu em 10/09/2026, quando um único portal trouxe 40 itens e o lançamento de um celular ocupou 12.</p>
 <div class="grid">
-<div class="stat"><div class="k">Concentração de fonte</div><div class="v">39% <span class="pill p-bad" style="font-size:11px;vertical-align:middle">40</span></div><div class="n">do lote vem de G1 Economia</div></div>
+<div class="stat"><div class="k">Concentração de fonte</div><div class="v">39% <span class="pill p-bad">40</span></div><div class="n">do lote vem de G1 Economia</div></div>
 <div class="stat"><div class="k">Histórias que saíram em vários veículos</div><div class="v">2</div><div class="n">104 itens brutos viraram 102 histórias (2 absorvidos)</div></div>
 </div>
 <p class="help">Quanto do lote inteiro veio da fonte que mais trouxe. Acima de 30%, um portal está pautando a escolha da IA sozinho. <strong>Repetição aqui é sinal, não lixo.</strong> Quando vários portais publicam a mesma coisa, a imprensa está dizendo que o assunto importa — e a IA passa a ver "isto saiu em 4 veículos" em vez de ver a mesma manchete quatro vezes sem saber que é a mesma. O coletor junta as repetidas num item só e leva a contagem junto. A regra é numérica (Jaccard ≥ 0,30 no título, só entre notícias com 4+ palavras) e foi calibrada nos lotes reais de 10/09 e 22/09.</p>
 <h3>As mais publicadas desta coleta</h3>
 <div class="card"><div class="scroll"><table><tbody>
-<tr><td class="n" style="width:90px"><span class="pill p-warn">2 veículos</span></td><td>BC está preocupado com ofertas 'agressivas e predatórias' de crédito, diz Galípolo<div class="mut" style="font-size:12.5px;margin-top:3px">G1 Economia, UOL Economia</div></td></tr>
-<tr><td class="n" style="width:90px"><span class="pill p-warn">2 veículos</span></td><td>Dólar sobe a R$ 5,16, com negociações entre EUA e Irã e eleições no radar; Ibovespa cai<div class="mut" style="font-size:12.5px;margin-top:3px">G1 Economia, UOL Economia</div></td></tr>
+<tr><td class="n" style="width:90px"><span class="pill p-warn">2 veículos</span></td><td>BC está preocupado com ofertas 'agressivas e predatórias' de crédito, diz Galípolo<div class="sub-linha">G1 Economia, UOL Economia</div></td></tr>
+<tr><td class="n" style="width:90px"><span class="pill p-warn">2 veículos</span></td><td>Dólar sobe a R$ 5,16, com negociações entre EUA e Irã e eleições no radar; Ibovespa cai<div class="sub-linha">G1 Economia, UOL Economia</div></td></tr>
 </tbody></table></div></div>
 <h3>Palavras mais repetidas nos títulos</h3>
 <p class="help">Contagem por <strong>palavra</strong>, não por assunto — "apple", "iphone" e "dobrável" contam separado mesmo sendo a mesma notícia. Serve como textura do lote, não como medida de concentração: ela <em>subestima</em> quando uma história usa muitas palavras diferentes.</p>
@@ -138,12 +216,12 @@ nav.abas button[aria-selected="true"]{background:var(--accent);border-color:var(
 <tr><td style="width:170px">bate</td><td class="n" style="width:80px">3 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:3%"></div></div></td></tr>
 <tr><td style="width:170px">caixa</td><td class="n" style="width:80px">3 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:3%"></div></div></td></tr>
 </tbody></table></div></div>
-</section>
-<section class="painel" id="aba-o-que-a-ia-sabe-sobre-o-canal" role="tabpanel" hidden>
+</div></section>
+<section class="painel faixa" id="aba-o-que-a-ia-sabe-sobre-o-canal" role="tabpanel" aria-labelledby="tab-o-que-a-ia-sabe-sobre-o-canal" hidden><div class="container">
 <h2>O que a IA sabe sobre o canal</h2>
 <div class="grid">
 <div class="stat"><div class="k">Investidor Sardinha l Raul Sena</div><div class="v">1.770.000</div><div class="n">inscritos</div></div>
-<div class="stat"><div class="k">Janela analisada</div><div class="v" style="font-size:19px">2026-03-24</div><div class="n">de 2026-09-23 &middot; Modo de coleta: api</div></div>
+<div class="stat"><div class="k">Janela analisada</div><div class="v v-texto">2026-03-24</div><div class="n">de 2026-09-23 &middot; Modo de coleta: api</div></div>
 <div class="stat"><div class="k">Mediana</div><div class="v">222.370</div><div class="n">p25 157.589 &middot; p75 329.223</div></div>
 </div>
 <h3>A régua que a IA usa — uma por formato</h3>
@@ -159,35 +237,35 @@ nav.abas button[aria-selected="true"]{background:var(--accent);border-color:var(
 <div class="card"><div class="scroll"><table><thead><tr>
 <th>Mês</th><th class="n">Vídeos</th><th class="n">Mediana de views</th><th style="width:30%"></th><th class="n">Likes por mil</th><th style="width:20%"></th></tr></thead><tbody>
 <tr><td>2026-03</td><td class="n">9</td><td class="n">151.431</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:35%"></div></div></td>
-<td class="n">87.7</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:100%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<td class="n">87.7</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:100%"></div></div></td></tr>
 <tr><td>2026-04</td><td class="n">30</td><td class="n">197.204</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:46%"></div></div></td>
-<td class="n">86.9</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:99%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<td class="n">86.9</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:99%"></div></div></td></tr>
 <tr><td>2026-05</td><td class="n">33</td><td class="n">197.058</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:46%"></div></div></td>
-<td class="n">86.7</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:99%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<td class="n">86.7</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:99%"></div></div></td></tr>
 <tr><td>2026-06</td><td class="n">30</td><td class="n">196.628</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:46%"></div></div></td>
-<td class="n">77</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:88%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<td class="n">77</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:88%"></div></div></td></tr>
 <tr><td>2026-07</td><td class="n">32</td><td class="n">223.719</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:52%"></div></div></td>
-<td class="n">70.5</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:80%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<td class="n">70.5</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:80%"></div></div></td></tr>
 <tr><td>2026-08</td><td class="n">28</td><td class="n">255.505</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:59%"></div></div></td>
-<td class="n">61.9</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:71%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<td class="n">61.9</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:71%"></div></div></td></tr>
 <tr><td>2026-09</td><td class="n">20</td><td class="n">432.044</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:100%"></div></div></td>
-<td class="n">33.4</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:38%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<td class="n">33.4</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:38%"></div></div></td></tr>
 </tbody></table>
-<p class="help" style="margin:10px 0 0">Views dizem quanta gente viu; likes por mil views dizem o quanto quem viu se importou. Neste canal os dois <strong>andam em direções contrárias</strong>. Em cerca de 60 dias o alcance dobrou e o engajamento caiu pela metade — e os comentários caíram junto, então não é mudança de hábito no botão de like: é o canal saindo da base fiel para o público amplo.</p>
+<p class="help nota-tabela">Views dizem quanta gente viu; likes por mil views dizem o quanto quem viu se importou. Neste canal os dois <strong>andam em direções contrárias</strong>. Em cerca de 60 dias o alcance dobrou e o engajamento caiu pela metade — e os comentários caíram junto, então não é mudança de hábito no botão de like: é o canal saindo da base fiel para o público amplo.</p>
 </div>
 <h3>Os quatro resultados possíveis</h3>
 <p class="help">Cada vídeo é comparado com os publicados até <strong>21 dias antes ou depois dele</strong>, nunca contra um corte fixo — o patamar do canal muda rápido demais para corte fixo funcionar. Por isso as medianas absolutas abaixo não se comparam entre categorias: "não funcionou" pode ter engajamento absoluto maior que "alcance" e ainda assim estar abaixo dos vizinhos <em>dele</em>.</p>
 <div class="card"><div class="scroll"><table><thead><tr>
 <th>Resultado</th><th class="n">Vídeos</th><th class="n">Mediana de views</th><th class="n">Likes por mil</th><th>&nbsp;</th></tr></thead><tbody>
-<tr><td><strong>acertou os dois</strong></td><td class="n">29</td><td class="n">246.020</td><td class="n">82.8</td><td class="mut" style="font-size:13px">muita gente viu <strong>e</strong> se importou — é o alvo</td></tr>
-<tr><td><strong>alcance</strong></td><td class="n">66</td><td class="n">420.587</td><td class="n">58.9</td><td class="mut" style="font-size:13px">estourou para fora da base. Bom para crescer, fraco para fidelizar</td></tr>
-<tr><td><strong>autoridade</strong></td><td class="n">62</td><td class="n">149.117</td><td class="n">88</td><td class="mut" style="font-size:13px">a base fiel amou, não passou dela. Bom para relação, fraco para crescer</td></tr>
-<tr><td><strong>nao funcionou</strong></td><td class="n">25</td><td class="n">162.360</td><td class="n">68.3</td><td class="mut" style="font-size:13px">abaixo dos dois. Este sim é o que não deu certo</td></tr>
+<tr><td><strong>acertou os dois</strong></td><td class="n">29</td><td class="n">246.020</td><td class="n">82.8</td><td class="mut">muita gente viu <strong>e</strong> se importou — é o alvo</td></tr>
+<tr><td><strong>alcance</strong></td><td class="n">66</td><td class="n">420.587</td><td class="n">58.9</td><td class="mut">estourou para fora da base. Bom para crescer, fraco para fidelizar</td></tr>
+<tr><td><strong>autoridade</strong></td><td class="n">62</td><td class="n">149.117</td><td class="n">88</td><td class="mut">a base fiel amou, não passou dela. Bom para relação, fraco para crescer</td></tr>
+<tr><td><strong>nao funcionou</strong></td><td class="n">25</td><td class="n">162.360</td><td class="n">68.3</td><td class="mut">abaixo dos dois. Este sim é o que não deu certo</td></tr>
 </tbody></table></div></div>
 <h3>Programa de horário fixo</h3>
 <p class="help">Detectado por regularidade, não por nome: o dia da semana em que o canal publica em pelo menos 80% das semanas. Neste canal o programa aparece com nome no título <strong>uma vez em 28</strong> — procurar por "Giro da Bolsa" não acharia. Para esse dia a pergunta não é <em>se</em> vale publicar, e sim <em>qual assunto da semana ocupa o espaço</em>, porque o programa vai ao ar de qualquer jeito. E ele compete com ele mesmo: compare com os outros do mesmo dia, nunca com o canal inteiro.</p>
 <div class="grid">
-<div class="stat"><div class="k">Dia fixo</div><div class="v" style="font-size:22px">domingo</div><div class="n">26 de 26 semanas (100%)</div></div>
+<div class="stat"><div class="k">Dia fixo</div><div class="v v-texto">domingo</div><div class="n">26 de 26 semanas (100%)</div></div>
 <div class="stat"><div class="k">Régua própria do programa</div><div class="v">198.792</div><div class="n">158.532 a 252.133 &middot; 27 vídeos</div></div>
 </div>
 <h3>O que mais funcionou</h3><div class="card"><div class="scroll"><table><thead><tr><th class="n">Views</th><th>Título</th><th class="n">Data</th></tr></thead><tbody>
@@ -227,8 +305,8 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 **A regua pratica para julgar um tema.** Pergunte duas coisas: (1) o tema tem antagonista — alguem que engana, um sistema que prejudica, uma crenca comum que esta errada? (2) a consequencia chega no bolso de quem assiste? Com as duas, vai bem. Se for informacao sobre um ativo, uma sigla ou um numero de mercado, vai mal — mesmo estando em alta la fora.
 
 **Restricao editorial declarada pelo proprio canal.** A descricao se posiciona contra 'gurus de ostentacao', 'promessas faceis' e 'formulas prontas', e diz explicitamente que ali nao tem 'especulacao vazia'. Tema que dependa de prometer retorno garantido ou atalho nao cabe, mesmo que performe em outro lugar.</div>
-</section>
-<section class="painel" id="aba-pautas" role="tabpanel" hidden>
+</div></section>
+<section class="painel faixa" id="aba-pautas" role="tabpanel" aria-labelledby="tab-pautas" hidden><div class="container">
 <h2>Última seleção de pautas</h2>
 <p class="help">2026-09-24 15:34 &middot; gpt-5.5 &middot; 102 candidatos &middot; Custo desta execução: 9.749 entrada + 4.163 saída &middot; 76.1 segundos</p>
 <h3>Observações da IA</h3>
@@ -447,20 +525,20 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <textarea class="obs" rows="2" placeholder="Quer escrever alguma coisa? (opcional)"></textarea>
 </article>
 <div class="barra-acao">
-<button type="button" class="botao" id="btCopiar" disabled>Copiar respostas</button>
+<button type="button" class="botao" id="btCopiar" data-ok="Respostas copiadas" disabled>Copiar respostas</button>
 <button type="button" class="botao sec" id="btLimpar">Limpar tudo</button>
 <span class="contagem" id="contagem"></span>
 </div>
 <textarea class="saida" id="saida" readonly></textarea>
 <p class="help" id="ajudaCopia" style="display:none">Pronto — as respostas estão na sua área de transferência. Cole numa mensagem para o Kenzo e pode fechar esta página.</p>
 <h3>Descartados de propósito</h3><div class="card"><table><tbody>
-<tr><td>89<div class="mut" style="font-size:13px;margin-top:3px">Parece forte para canal de finanças, mas é o tipo de pauta que costuma morrer aqui: Treasuries, juros globais e 'o que fazer agora' soam como comentário de mercado e recomendação tática. O canal performa melhor quando traduz isso em consequência pessoal, não quando segue manchete de ativo ou taxa.</div></td></tr>
-<tr><td>43<div class="mut" style="font-size:13px;margin-top:3px">Mesmo publicado em 2 veículos, dólar subindo e Ibovespa caindo é notícia de mercado pontual. No perfil deste canal, esse tipo de atualização tende a ser fraca se não houver uma tese maior sobre salário, inflação, dívida ou empobrecimento da classe média.</div></td></tr>
-<tr><td>68<div class="mut" style="font-size:13px;margin-top:3px">O tema de drogas ilícitas no PIB é chamativo e combina com o canal, mas já foi praticamente explorado em vídeo recente do próprio canal sobre tráfico e bets entrando no PIB. Repetir agora tende a parecer reciclagem, a menos que haja uma revelação nova muito mais forte.</div></td></tr>
-<tr><td>75<div class="mut" style="font-size:13px;margin-top:3px">Trump, Xi, tarifas, terras raras, agro e IA parecem grandes, mas no canal esse tipo de geopolítica ampla costuma ser arriscado quando não chega rápido no bolso do brasileiro. Pode servir como bloco de programa semanal, não como vídeo próprio forte.</div></td></tr>
+<tr><td><strong>Treasuries disparam outra vez: como isso afeta o Brasil e o que fazer agora?</strong><span class="sub-linha">Parece forte para canal de finanças, mas é o tipo de pauta que costuma morrer aqui: Treasuries, juros globais e 'o que fazer agora' soam como comentário de mercado e recomendação tática. O canal performa melhor quando traduz isso em consequência pessoal, não quando segue manchete de ativo ou taxa.</span></td></tr>
+<tr><td><strong>Dólar sobe a R$ 5,16, com negociações entre EUA e Irã e eleições no radar; Ibovespa cai</strong><span class="sub-linha">Mesmo publicado em 2 veículos, dólar subindo e Ibovespa caindo é notícia de mercado pontual. No perfil deste canal, esse tipo de atualização tende a ser fraca se não houver uma tese maior sobre salário, inflação, dívida ou empobrecimento da classe média.</span></td></tr>
+<tr><td><strong>IBGE quer incluir mercado de drogas ilícitas no PIB; entenda por que e como será o cálculo</strong><span class="sub-linha">O tema de drogas ilícitas no PIB é chamativo e combina com o canal, mas já foi praticamente explorado em vídeo recente do próprio canal sobre tráfico e bets entrando no PIB. Repetir agora tende a parecer reciclagem, a menos que haja uma revelação nova muito mais forte.</span></td></tr>
+<tr><td><strong>Terras raras, tarifas, agro e IA: entenda o que Trump e Xi negociam e os impactos para o Brasil</strong><span class="sub-linha">Trump, Xi, tarifas, terras raras, agro e IA parecem grandes, mas no canal esse tipo de geopolítica ampla costuma ser arriscado quando não chega rápido no bolso do brasileiro. Pode servir como bloco de programa semanal, não como vídeo próprio forte.</span></td></tr>
 </tbody></table></div>
-</section>
-<section class="painel" id="aba-uso-e-custo" role="tabpanel" hidden>
+</div></section>
+<section class="painel faixa" id="aba-uso-e-custo" role="tabpanel" aria-labelledby="tab-uso-e-custo" hidden><div class="container">
 <h2>Uso e custo</h2>
 <p class="help">Quanto esta brincadeira está consumindo. <strong>Cuidado com a intuição aqui:</strong> em tokens, a entrada é o dobro da saída — mas a saída custa <strong>6x mais por token</strong> ($30 contra $5 por milhão), então ela é <strong>três quartos da conta</strong>. Isso inverte a lógica de economia: cortar candidatos reduz entrada, que é a parte barata. O que pesa é o tamanho da resposta, e a resposta tem o mesmo tamanho julgando 100 ou 13 candidatos.</p>
 <div class="grid">
@@ -473,31 +551,31 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <h3>Tokens por execução</h3>
 <div class="card"><div class="scroll"><table><tbody>
 <tr><td style="width:150px" class="mut">2026-09-08 16:54</td><td style="width:60px">lista</td>
-<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:49%"></div><div class="bar" style="width:20%;background:var(--accent);opacity:.55"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:49%"></div><div class="bar bar-2" style="width:20%"></div></div></td>
 <td class="n" style="width:120px">9.540</td></tr>
 <tr><td style="width:150px" class="mut">2026-09-08 16:57</td><td style="width:60px">lista</td>
-<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:51%"></div><div class="bar" style="width:21%;background:var(--accent);opacity:.55"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:51%"></div><div class="bar bar-2" style="width:21%"></div></div></td>
 <td class="n" style="width:120px">10.024</td></tr>
 <tr><td style="width:150px" class="mut">2026-09-08 16:58</td><td style="width:60px">nota</td>
-<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:50%"></div><div class="bar" style="width:27%;background:var(--accent);opacity:.55"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:50%"></div><div class="bar bar-2" style="width:27%"></div></div></td>
 <td class="n" style="width:120px">10.730</td></tr>
 <tr><td style="width:150px" class="mut">2026-09-08 17:02</td><td style="width:60px">lista</td>
-<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:50%"></div><div class="bar" style="width:26%;background:var(--accent);opacity:.55"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:50%"></div><div class="bar bar-2" style="width:26%"></div></div></td>
 <td class="n" style="width:120px">10.476</td></tr>
 <tr><td style="width:150px" class="mut">2026-09-08 17:03</td><td style="width:60px">nota</td>
-<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:49%"></div><div class="bar" style="width:28%;background:var(--accent);opacity:.55"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:49%"></div><div class="bar bar-2" style="width:28%"></div></div></td>
 <td class="n" style="width:120px">10.695</td></tr>
 <tr><td style="width:150px" class="mut">2026-09-10 11:01</td><td style="width:60px">lista</td>
-<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:50%"></div><div class="bar" style="width:26%;background:var(--accent);opacity:.55"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:50%"></div><div class="bar bar-2" style="width:26%"></div></div></td>
 <td class="n" style="width:120px">10.515</td></tr>
 <tr><td style="width:150px" class="mut">2026-09-24 15:34</td><td style="width:60px">lista</td>
-<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:70%"></div><div class="bar" style="width:30%;background:var(--accent);opacity:.55"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:70%"></div><div class="bar bar-2" style="width:30%"></div></div></td>
 <td class="n" style="width:120px">13.912</td></tr>
 </tbody></table>
-<p class="help" style="margin:10px 0 0">entrada / <span style="opacity:.6">saída</span></p>
+<p class="help nota-tabela"><span class="leg"></span> entrada &nbsp;&nbsp; <span class="leg leg-2"></span> saída</p>
 </div></div>
-</section>
-<section class="painel" id="aba-historico-de-execucoes" role="tabpanel" hidden>
+</div></section>
+<section class="painel faixa" id="aba-historico-de-execucoes" role="tabpanel" aria-labelledby="tab-historico-de-execucoes" hidden><div class="container">
 <h2>Histórico de execuções</h2><div class="card"><div class="scroll"><table><thead><tr>
 <th>Quando</th><th>Formato</th><th>Modelo</th><th class="n">Candidatos</th><th class="n">Tokens</th><th class="n">Tempo</th></tr></thead><tbody>
 <tr><td>2026-09-24 15:34</td><td>lista</td><td>gpt-5.5</td><td class="n">102</td><td class="n">13.912</td><td class="n">76.1s</td></tr>
@@ -508,9 +586,9 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <tr><td>2026-09-08 16:57</td><td>lista</td><td>gpt-5.5</td><td class="n">100</td><td class="n">10.024</td><td class="n">59.1s</td></tr>
 <tr><td>2026-09-08 16:54</td><td>lista</td><td>gpt-5.5</td><td class="n">100</td><td class="n">9.540</td><td class="n">53.5s</td></tr>
 </tbody></table></div></div>
-</section>
-<footer>Dados lidos de radar/ nesta máquina. Nada aqui sai do computador. Rode <code>powershell -File radar\painel.ps1</code> para atualizar.</footer>
-</div>
+</div></section>
+<footer class="rodape"><div class="container">Dados lidos de radar/ nesta máquina. Nada aqui sai do computador. Rode <code>powershell -File radar\painel.ps1</code> para atualizar.</div></footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script>
 (function(){
   var abas=[].slice.call(document.querySelectorAll('nav.abas button'));
@@ -519,6 +597,8 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
       var on=(o===b); o.setAttribute('aria-selected',on?'true':'false');
       var p=document.getElementById('aba-'+o.dataset.aba); if(p) p.hidden=!on;
     });
+    var topo=document.querySelector('.hero'); var y=topo?topo.offsetTop+topo.offsetHeight:0;
+    if(window.scrollY>y) window.scrollTo({top:y,behavior:'smooth'});
     if(location.hash!=='#'+b.dataset.aba) history.replaceState(null,'','#'+b.dataset.aba);
   });});
   if(location.hash){var alvo=abas.filter(function(b){return '#'+b.dataset.aba===location.hash;})[0]; if(alvo) alvo.click();}
@@ -570,6 +650,7 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
     pintar(art);
   });
 
+  function aviso(msg){var el=document.getElementById('toast'); if(!el||!msg) return; el.textContent=msg; el.classList.add('on'); clearTimeout(el._h); el._h=setTimeout(function(){el.classList.remove('on');},2400);}
   var bt=document.getElementById('btCopiar'), lim=document.getElementById('btLimpar');
   var cont=document.getElementById('contagem'), sai=document.getElementById('saida');
   var ajuda=document.getElementById('ajudaCopia');
@@ -602,8 +683,7 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
     sai.focus(); sai.select();
     if(navigator.clipboard&&navigator.clipboard.writeText){
       navigator.clipboard.writeText(txt).then(function(){
-        bt.textContent=bt.dataset.ok||'Copiado';
-        setTimeout(function(){bt.textContent=bt.dataset.orig;},2200);
+        aviso(bt.dataset.ok);
       }).catch(function(){});
     }
   });
