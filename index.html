@@ -132,6 +132,16 @@ button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid va
 .saida{display:none;width:100%;min-height:180px;margin-top:15px;padding:15px;border:1px solid var(--linha);border-radius:12px;background:var(--cinza1);color:var(--chumbo);font:13px/1.55 ui-monospace,Consolas,monospace;resize:vertical}
 .saida.on{display:block}
 
+/* link da materia: verde institucional, icone Phosphor 16px com gap 8px (regra de icone do sistema) */
+.fontes{font-size:15px;color:var(--cinza2);margin:0 0 15px}
+.fontes-rot{font-family:var(--f-rotulo);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+.fontes a{display:inline-flex;align-items:center;gap:8px;color:var(--verde);font-weight:500;text-decoration:underline;text-underline-offset:3px;transition:color 240ms ease}
+.fontes a:hover{color:var(--verde2)}
+.fontes .sep{color:var(--cinza2)}
+td .fontes{margin:0}
+.ico{width:16px;height:16px;flex:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
 /* toast */
 .toast{position:fixed;right:24px;bottom:30px;z-index:10;background:var(--chumbo);color:var(--branco);border-left:4px solid var(--amarelo);border-radius:12px;padding:15px 30px;font-family:var(--f-rotulo);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.1em;opacity:0;transform:translateY(15px);transition:opacity 240ms ease,transform 240ms ease;pointer-events:none}
 .toast.on{opacity:1;transform:none}
@@ -152,7 +162,7 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <span class="eyebrow">AUVP Radar · Monitoramento de pautas</span>
 <h1>O que está em alta, e o que rende no canal.</h1>
 <p class="sub">Temas coletados das fontes de economia, a leitura do canal que orienta a IA e as pautas recomendadas para avaliação. Atualizado a cada rodada.</p>
-<p class="ts">Painel gerado em 24/09/2026 15:52</p>
+<p class="ts">Painel gerado em 24/09/2026 16:02</p>
 </div></header>
 <div class="abas-faixa"><div class="container"><nav class="abas" role="tablist" aria-label="Seções do painel">
 <button type="button" role="tab" id="tab-como-esta-agora" aria-controls="aba-como-esta-agora" data-aba="como-esta-agora" aria-selected="true">Como está agora</button>
@@ -317,6 +327,7 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <article class="pauta" data-i="1">
 <span class="ord">Pauta 1</span>
 <h4>PF vai apurar alto escalão da CVM no Caso Master</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://economia.uol.com.br/colunas/mariana-barbosa/2026/09/24/dino-poe-a-pf-para-apurar-atuacao-de-alto-escalao-da-cvm-no-caso-master.htm" target="_blank" rel="noopener noreferrer">UOL Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
 <p class="angulo">A CVM deixou o Banco Master chegar até aqui? A caixa-preta que pode explodir no seu bolso</p>
 <p class="campo"><b>Por quê:</b> Serve muito para vídeo longo de 20-30 minutos e tende a dar alcance com autoridade: junta Brasil, dinheiro do investidor comum, banco, regulador e possível conivência institucional. É exatamente o padrão que já funcionou no canal com Banco Master, Vorcaro, Itaú enganando clientes e Receita abrindo caixa-preta. Há antagonista claro — banco, fiscalização e bastidores do mercado — e consequência direta para quem deixa dinheiro em banco, CDB, corretora e FGC.</p>
 <p class="campo"><b>Risco:</b> Virar atualização jurídica do caso, com nomes e tramitação, em vez de explicar como o sistema financeiro permitiu o risco para o investidor comum.</p>
@@ -338,6 +349,7 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <article class="pauta" data-i="2">
 <span class="ord">Pauta 2</span>
 <h4>Banco Central alerta para crédito agressivo e predatório</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/24/bc-esta-preocupado-com-ofertas-agressivas-e-predatorias-de-credito-diz-galipolo.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
 <p class="angulo">O banco está te empurrando dívida — e o Banco Central acabou de admitir</p>
 <p class="campo"><b>Por quê:</b> Serve para vídeo longo de 15-25 minutos e tende a acertar alcance e autoridade. Foi publicado em 2 veículos, sinal de assunto quente, e encaixa perfeitamente no canal: crédito predatório tem antagonista claro, afeta diretamente o bolso da classe média e permite uma tese forte contra bancos, fintechs, consignado, cartão e parcelamento. Conversa com vídeos que performaram muito bem sobre dívida, bancos digitais, Itaú enganando clientes e consórcio como golpe.</p>
 <p class="campo"><b>Risco:</b> Se ficar técnico demais em regulação bancária, perde força. Precisa ser contado como armadilha cotidiana: limite, cartão, consignado, crédito automático e renegociação falsa.</p>
@@ -359,6 +371,7 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <article class="pauta" data-i="3">
 <span class="ord">Pauta 3</span>
 <h4>Lula diz que vai acabar com bets no Brasil</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://www.infomoney.com.br/politica/lula-afirma-que-vai-acabar-com-bets-no-pais-decisao-ja-tomada/" target="_blank" rel="noopener noreferrer">InfoMoney<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
 <p class="angulo">O fim das bets começou? Quem ficou rico enquanto o brasileiro perdia tudo</p>
 <p class="campo"><b>Por quê:</b> Serve para vídeo longo de 20-30 minutos e tende a dar alcance. Bets já têm histórico recente de funcionar no canal quando conectadas a dinheiro, crime, vício, PIB e influência digital. Há antagonistas fortes — casas de aposta, influenciadores, governo e lavagem de dinheiro — e a consequência é pessoal: endividamento, compulsão, destruição de renda e propaganda para pobre acreditar em dinheiro fácil.</p>
 <p class="campo"><b>Risco:</b> Virar torcida política pró ou contra Lula. O ângulo precisa ser econômico e moral: quem lucrou, quem perdeu e por que o Brasil permitiu isso.</p>
@@ -380,6 +393,7 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <article class="pauta" data-i="4">
 <span class="ord">Pauta 4</span>
 <h4>Mercado Livre vai vender medicamentos com receita, incluindo Ozempic</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://exame.com/invest/mercados/mercado-livre-vai-vender-medicamento-com-receita-incluindo-ozempic/" target="_blank" rel="noopener noreferrer">Exame<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
 <p class="angulo">Ozempic chegou ao Mercado Livre: a caneta que está mudando farmácias, médicos e o seu dinheiro</p>
 <p class="campo"><b>Por quê:</b> Serve para vídeo longo de 20-30 minutos e tende a alcance alto. O canal teve um dos maiores vídeos recentes com Ozempic quebrando indústrias inteiras, então este é uma continuação natural com gancho novo. Tem Brasil, consumo, saúde, e-commerce, regulação e empresas disputando o bolso do consumidor. Funciona melhor como análise de cadeia econômica: farmácias, planos, médicos, plataformas, falsificação e medicalização do emagrecimento.</p>
 <p class="campo"><b>Risco:</b> Se virar vídeo de saúde ou curiosidade sobre remédio, sai do canal. Precisa ser sobre indústria, incentivos econômicos e quem ganha dinheiro com a ansiedade do consumidor.</p>
@@ -401,6 +415,7 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <article class="pauta" data-i="5">
 <span class="ord">Pauta 5</span>
 <h4>Governo diz que isenção do IR é neutra apesar de frustração com dividendos</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://www.cnnbrasil.com.br/economia/money/macroeconomia/governo-minimiza-frustracao-com-dividendos-e-diz-que-isencao-do-ir-e-neutra/" target="_blank" rel="noopener noreferrer">CNN Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
 <p class="angulo">A isenção do IR não é de graça: alguém vai pagar essa conta</p>
 <p class="campo"><b>Por quê:</b> Serve para vídeo longo de 15-25 minutos e tende a autoridade com bom alcance se o título for forte. O tema tem consequência direta no bolso da classe média: imposto de renda, dividendos, arrecadação, promessa política e compensação fiscal. O canal performa bem quando traduz política econômica abstrata em efeito pessoal, como Receita Federal, sonegação e economia brasileira contada pela vida da classe média.</p>
 <p class="campo"><b>Risco:</b> O título original é burocrático e morreria no canal. Se o vídeo for sobre tramitação, dividendos ou neutralidade fiscal em linguagem técnica, fica parecido com notícia setorial.</p>
@@ -422,6 +437,7 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <article class="pauta" data-i="6">
 <span class="ord">Pauta 6</span>
 <h4>BC aperta regras para criptoativos e exige aviso ao Coaf acima de US$ 10 mil</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/23/bc-regras-criptoativos.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
 <p class="angulo">O cerco às criptos começou: o Banco Central quer saber para onde seu dinheiro vai</p>
 <p class="campo"><b>Por quê:</b> Serve para vídeo longo de 15-25 minutos e tende a alcance. O assunto não deve ser tratado como dica de cripto, mas como fiscalização, Receita, Coaf, privacidade financeira e fim da sensação de anonimato. Isso conversa com pautas que funcionaram sobre Receita Federal, sonegação acabando e sistema financeiro monitorando o cidadão. Tem antagonista institucional e consequência pessoal para quem usa cripto, corretora ou manda dinheiro para fora.</p>
 <p class="campo"><b>Risco:</b> Se virar explicação técnica de criptoativo ou compliance, cai no padrão que não funciona no canal, como ABTC11 e temas excessivamente técnicos de investimento.</p>
@@ -443,6 +459,7 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <article class="pauta" data-i="7">
 <span class="ord">Pauta 7</span>
 <h4>Avatares de IA viram máquinas de ganhar dinheiro nas redes</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/tecnologia/noticia/2026/09/24/ela-nao-existe-mas-paga-meu-cartao-avatares-de-ia-viram-maquinas-de-ganhar-dinheiro-nas-redes.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
 <p class="angulo">Ela não existe, mas está ficando rica: a nova fraude emocional da internet</p>
 <p class="campo"><b>Por quê:</b> Serve para vídeo longo de 20-30 minutos e tende a alcance, com chance de autoridade se conectar com comportamento financeiro. Tem o padrão do canal de denunciar uma crença moderna que empobrece pessoas: internet, parasocialidade, golpe emocional, assinatura, cartão, dopamina e falsa intimidade. É próximo do território de 'A internet convenceu você a ficar pobre' e permite mostrar como tecnologia transforma solidão em negócio.</p>
 <p class="campo"><b>Risco:</b> Pode parecer fofoca de rede social se não entrar no dinheiro: modelos de monetização, cartão, vício, assinaturas, golpes e venda de fantasia.</p>
@@ -464,6 +481,7 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <article class="pauta" data-i="8">
 <span class="ord">Pauta 8</span>
 <h4>Banco Central avalia ligar Pix à Europa para remessas em segundos</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/24/banco-central-comeca-a-avaliar-ligacao-do-pix-com-a-europa.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
 <p class="angulo">O Pix vai atravessar o mundo — e isso pode matar uma indústria inteira de taxas</p>
 <p class="campo"><b>Por quê:</b> Serve para vídeo longo de 15-20 minutos e tende mais a autoridade do que alcance. O gancho é bom se for contado como guerra contra bancos, remessas caras, spread cambial, cartão internacional e burocracia para mandar dinheiro para fora. A consequência chega ao bolso de quem viaja, trabalha para fora, tem família no exterior ou quer dolarizar parte do patrimônio.</p>
 <p class="campo"><b>Risco:</b> Se for apenas 'nova funcionalidade do Pix', fica pequeno e institucional. Precisa ter antagonista: bancos, casas de câmbio, cartão e tarifas escondidas.</p>
@@ -485,6 +503,7 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <article class="pauta" data-i="9">
 <span class="ord">Pauta 9</span>
 <h4>Subsídios aos combustíveis já custaram R$ 40 bilhões</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/24/subvencoes-aos-combustiveis-ja-custaram-r40-bi-diz-ministro.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
 <p class="angulo">Você pagou R$ 40 bilhões para a gasolina parecer mais barata</p>
 <p class="campo"><b>Por quê:</b> Serve para vídeo longo de 15-25 minutos e tende a autoridade, podendo alcançar se o título for popular. Tem Brasil, imposto, combustível, governo e ilusão de preço baixo. Funciona porque transforma política econômica abstrata em conta pessoal: o consumidor acha que economizou na bomba, mas pagou via imposto, dívida, inflação ou corte de serviços.</p>
 <p class="campo"><b>Risco:</b> Pode virar discussão fiscal genérica. Precisa ser narrado como truque de bolso: preço artificial, conta escondida e transferência de dinheiro do contribuinte.</p>
@@ -506,6 +525,7 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <article class="pauta" data-i="10">
 <span class="ord">Pauta 10</span>
 <h4>Formalização bate recorde, mas 65% dos autônomos e empregadores ainda não têm CNPJ</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/empreendedorismo/noticia/2026/09/23/formalizacao-bate-recorde-mas-65percent-dos-empregadores-e-autonomos-ainda-nao-tem-cnpj-diz-ibge.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
 <p class="angulo">O brasileiro virou empreendedor — mas continua preso na informalidade</p>
 <p class="campo"><b>Por quê:</b> Serve para vídeo longo de 20-30 minutos e tende a autoridade. É menos explosivo, mas fala com muita gente da audiência: autônomos, pequenos empresários, MEI, PJ, impostos, crédito, aposentadoria e insegurança financeira. O canal pode usar o tema para mostrar como o Brasil empurra a pessoa a empreender sem estrutura e depois pune quem tenta crescer.</p>
 <p class="campo"><b>Risco:</b> O dado isolado é frio. Para funcionar, precisa virar história de vida financeira: por que o autônomo ganha, gasta mal, não se protege, não consegue crédito e vira refém do sistema.</p>
@@ -532,10 +552,10 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <textarea class="saida" id="saida" readonly></textarea>
 <p class="help" id="ajudaCopia" style="display:none">Pronto — as respostas estão na sua área de transferência. Cole numa mensagem para o Kenzo e pode fechar esta página.</p>
 <h3>Descartados de propósito</h3><div class="card"><table><tbody>
-<tr><td><strong>Treasuries disparam outra vez: como isso afeta o Brasil e o que fazer agora?</strong><span class="sub-linha">Parece forte para canal de finanças, mas é o tipo de pauta que costuma morrer aqui: Treasuries, juros globais e 'o que fazer agora' soam como comentário de mercado e recomendação tática. O canal performa melhor quando traduz isso em consequência pessoal, não quando segue manchete de ativo ou taxa.</span></td></tr>
-<tr><td><strong>Dólar sobe a R$ 5,16, com negociações entre EUA e Irã e eleições no radar; Ibovespa cai</strong><span class="sub-linha">Mesmo publicado em 2 veículos, dólar subindo e Ibovespa caindo é notícia de mercado pontual. No perfil deste canal, esse tipo de atualização tende a ser fraca se não houver uma tese maior sobre salário, inflação, dívida ou empobrecimento da classe média.</span></td></tr>
-<tr><td><strong>IBGE quer incluir mercado de drogas ilícitas no PIB; entenda por que e como será o cálculo</strong><span class="sub-linha">O tema de drogas ilícitas no PIB é chamativo e combina com o canal, mas já foi praticamente explorado em vídeo recente do próprio canal sobre tráfico e bets entrando no PIB. Repetir agora tende a parecer reciclagem, a menos que haja uma revelação nova muito mais forte.</span></td></tr>
-<tr><td><strong>Terras raras, tarifas, agro e IA: entenda o que Trump e Xi negociam e os impactos para o Brasil</strong><span class="sub-linha">Trump, Xi, tarifas, terras raras, agro e IA parecem grandes, mas no canal esse tipo de geopolítica ampla costuma ser arriscado quando não chega rápido no bolso do brasileiro. Pode servir como bloco de programa semanal, não como vídeo próprio forte.</span></td></tr>
+<tr><td><strong>Treasuries disparam outra vez: como isso afeta o Brasil e o que fazer agora?</strong><p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://www.infomoney.com.br/onde-investir/treasuries-disparam-de-novo-como-afeta-o-brasil-e-o-que-fazer-agora/" target="_blank" rel="noopener noreferrer">InfoMoney<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p><span class="sub-linha">Parece forte para canal de finanças, mas é o tipo de pauta que costuma morrer aqui: Treasuries, juros globais e 'o que fazer agora' soam como comentário de mercado e recomendação tática. O canal performa melhor quando traduz isso em consequência pessoal, não quando segue manchete de ativo ou taxa.</span></td></tr>
+<tr><td><strong>Dólar sobe a R$ 5,16, com negociações entre EUA e Irã e eleições no radar; Ibovespa cai</strong><p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/23/dolar-ibovespa.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p><span class="sub-linha">Mesmo publicado em 2 veículos, dólar subindo e Ibovespa caindo é notícia de mercado pontual. No perfil deste canal, esse tipo de atualização tende a ser fraca se não houver uma tese maior sobre salário, inflação, dívida ou empobrecimento da classe média.</span></td></tr>
+<tr><td><strong>IBGE quer incluir mercado de drogas ilícitas no PIB; entenda por que e como será o cálculo</strong><p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/24/ibge-quer-incluir-mercado-de-drogas-ilicitas-no-pib-entenda-por-que-e-como-sera-o-calculo.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p><span class="sub-linha">O tema de drogas ilícitas no PIB é chamativo e combina com o canal, mas já foi praticamente explorado em vídeo recente do próprio canal sobre tráfico e bets entrando no PIB. Repetir agora tende a parecer reciclagem, a menos que haja uma revelação nova muito mais forte.</span></td></tr>
+<tr><td><strong>Terras raras, tarifas, agro e IA: entenda o que Trump e Xi negociam e os impactos para o Brasil</strong><p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/24/trump-xi-negociacoes-encontro.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p><span class="sub-linha">Trump, Xi, tarifas, terras raras, agro e IA parecem grandes, mas no canal esse tipo de geopolítica ampla costuma ser arriscado quando não chega rápido no bolso do brasileiro. Pode servir como bloco de programa semanal, não como vídeo próprio forte.</span></td></tr>
 </tbody></table></div>
 </div></section>
 <section class="painel faixa" id="aba-uso-e-custo" role="tabpanel" aria-labelledby="tab-uso-e-custo" hidden><div class="container">
