@@ -1,0 +1,634 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="lote" content="20260910-1101-investidorsardinha-lista">
+<title>AUVP RADAR — painel</title>
+<style>
+:root{
+  --papel:#faf8f4; --bloco:#fff; --tinta:#1a1814; --tinta2:#6b6459; --linha:#e5e0d6;
+  --oliva:#4a6741; --terra:#a04f2a; --ocre:#8a6d1f; --mar:#2f5d62;
+  --barra:#cfd8c4; --barra2:#e3cdb8;
+}
+@media(prefers-color-scheme:dark){:root{
+  --papel:#16150f; --bloco:#1f1e17; --tinta:#efece3; --tinta2:#a09a8c; --linha:#33312a;
+  --oliva:#8fb07f; --terra:#d98a5e; --ocre:#d4b04a; --mar:#7fb3b8;
+  --barra:#3d4a36; --barra2:#4d3a2c;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papel);color:var(--tinta);
+  font:15px/1.6 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:36px 22px 72px}
+
+/* titulos com serifa - o contraste com o sans dos dados e o que tira a cara de template */
+h1,h2,.serif{font-family:Charter,"Bitstream Charter","Iowan Old Style",Georgia,"Times New Roman",serif}
+h1{font-size:31px;margin:0 0 6px;font-weight:600;letter-spacing:-.015em}
+h2{font-size:22px;margin:38px 0 6px;font-weight:600;letter-spacing:-.01em}
+h2:first-child{margin-top:6px}
+h3{font-size:12px;margin:26px 0 9px;color:var(--tinta2);text-transform:uppercase;letter-spacing:.09em;font-weight:700}
+.sub{color:var(--tinta2);margin:0 0 3px;font-size:15.5px}
+.ts{color:var(--tinta2);font-size:13px;margin:0 0 26px;font-variant-numeric:tabular-nums}
+
+/* ritmo irregular de proposito: cada tipo de bloco tem respiro e raio proprios */
+.card{background:var(--bloco);border:1px solid var(--linha);border-radius:3px;padding:18px 20px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--linha);
+  border:1px solid var(--linha);border-radius:3px;overflow:hidden;margin-bottom:20px}
+.stat{background:var(--bloco);padding:16px 18px 18px}
+.stat .k{color:var(--tinta2);font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:700}
+.stat .v{font-size:30px;font-weight:600;letter-spacing:-.025em;margin:6px 0 3px;font-variant-numeric:tabular-nums}
+.stat .n{color:var(--tinta2);font-size:13px}
+
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:9px 12px 9px 0;border-bottom:1px solid var(--linha);vertical-align:top}
+tr:last-child td{border-bottom:none}
+th{color:var(--tinta2);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.07em}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;padding-right:0}
+.scroll{overflow-x:auto}
+
+.bar{height:6px;background:var(--barra);min-width:2px}
+.barwrap{background:transparent;height:6px;width:100%;max-width:210px;border-bottom:1px solid var(--linha)}
+.pill{display:inline-block;padding:2px 8px;font-size:11.5px;font-weight:700;letter-spacing:.02em;border-radius:2px}
+.p-ok{background:var(--oliva);color:var(--papel)}
+.p-bad{background:var(--terra);color:var(--papel)}
+.p-warn{background:var(--ocre);color:var(--papel)}
+.alert{border-left:2px solid var(--terra);padding:9px 0 9px 15px;margin-bottom:12px;font-size:14px}
+.alert.none{border-left-color:var(--oliva);color:var(--tinta2)}
+.help{color:var(--tinta2);font-size:13.5px;margin:0 0 14px;max-width:70ch}
+.mut{color:var(--tinta2)}
+.big{font-size:40px;font-weight:600;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+code{background:var(--papel);border:1px solid var(--linha);border-radius:2px;padding:1px 5px;font-size:12.5px}
+footer{margin-top:52px;padding-top:18px;border-top:1px solid var(--linha);color:var(--tinta2);font-size:13px}
+
+/* abas */
+nav.abas{display:flex;gap:2px;border-bottom:1px solid var(--linha);margin:26px 0 24px;flex-wrap:wrap}
+nav.abas button{appearance:none;background:none;border:none;border-bottom:2px solid transparent;
+  font:600 14.5px/1 inherit;color:var(--tinta2);padding:11px 15px;cursor:pointer;margin-bottom:-1px}
+nav.abas button:hover{color:var(--tinta)}
+nav.abas button[aria-selected="true"]{color:var(--tinta);border-bottom-color:var(--terra)}
+.painel[hidden]{display:none}
+
+/* pautas */
+.pauta{border:1px solid var(--linha);background:var(--bloco);padding:18px 20px;margin-bottom:14px;border-radius:3px}
+.pauta.decidida{border-left:3px solid var(--oliva)}
+.pauta h4{margin:0 0 9px;font-size:17px;font-weight:600;line-height:1.35;
+  font-family:Charter,"Bitstream Charter","Iowan Old Style",Georgia,serif}
+.pauta .campo{font-size:13.5px;margin:6px 0;color:var(--tinta2)}
+.pauta .campo b{color:var(--tinta);font-weight:600}
+.pauta .angulo{font-size:15px;color:var(--tinta);border-left:2px solid var(--barra2);padding-left:12px;margin:11px 0}
+.ord{color:var(--tinta2);font-size:12px;font-weight:700;letter-spacing:.1em;display:block;margin-bottom:5px}
+.opcoes{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 0;padding-top:14px;border-top:1px solid var(--linha)}
+.opcoes button{appearance:none;background:var(--papel);border:1px solid var(--linha);border-radius:2px;
+  padding:7px 13px;font:600 13.5px/1 inherit;color:var(--tinta);cursor:pointer}
+.opcoes button:hover{border-color:var(--tinta2)}
+.opcoes button[aria-pressed="true"]{background:var(--oliva);border-color:var(--oliva);color:var(--papel)}
+.motivos{display:none;gap:6px;flex-wrap:wrap;margin-top:10px}
+.motivos.on{display:flex}
+.motivos button{padding:5px 10px;font-size:12.5px;font-weight:600}
+.motivos button[aria-pressed="true"]{background:var(--ocre);border-color:var(--ocre);color:var(--papel)}
+.obs{display:none;width:100%;margin-top:10px;padding:9px 11px;border:1px solid var(--linha);
+  border-radius:2px;background:var(--papel);color:var(--tinta);font:14px/1.5 inherit;resize:vertical}
+.obs.on{display:block}
+.barra-acao{position:sticky;bottom:0;background:var(--papel);border-top:1px solid var(--linha);
+  padding:14px 0;margin-top:22px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.botao{appearance:none;background:var(--terra);color:var(--papel);border:none;border-radius:2px;
+  padding:11px 20px;font:700 14.5px/1 inherit;cursor:pointer}
+.botao:disabled{background:var(--linha);color:var(--tinta2);cursor:not-allowed}
+.botao.sec{background:none;color:var(--tinta);border:1px solid var(--linha)}
+.contagem{color:var(--tinta2);font-size:13.5px}
+.saida{display:none;width:100%;margin-top:14px;min-height:150px;padding:13px;border:1px solid var(--linha);
+  border-radius:2px;background:var(--bloco);color:var(--tinta);font:12.5px/1.55 ui-monospace,Consolas,monospace;resize:vertical}
+.saida.on{display:block}
+.foco{white-space:pre-wrap;font-size:14px;line-height:1.65;border-left:2px solid var(--barra2);
+  padding:2px 0 2px 16px;max-height:330px;overflow-y:auto;max-width:74ch}
+</style></head><body><div class="wrap">
+<h1>AUVP RADAR — painel</h1>
+<p class="sub">Monitoramento de pautas e tendências · RADAR 4.1</p>
+<p class="ts">Painel gerado em 24/09/2026 12:23</p>
+<h2>Como está agora</h2><div class="grid">
+<div class="stat"><div class="k">Última coleta</div><div class="v">103</div><div class="n">itens coletados &middot; há 2 dia(s)</div></div>
+<div class="stat"><div class="k">Fontes funcionando</div><div class="v">6 <span class="mut" style="font-size:18px">de 7</span></div><div class="n">&nbsp;</div></div>
+<div class="stat"><div class="k">Perfil do canal</div><div class="v">182</div><div class="n">vídeos analisados &middot; hoje</div></div>
+<div class="stat"><div class="k">Última seleção</div><div class="v">10</div><div class="n">temas curados &middot; gpt-5.5</div></div>
+</div>
+<h2>Precisa de atenção</h2>
+<div class="alert">A fonte <strong>Concorrentes (YouTube)</strong> voltou vazia: lista vazia em fontes.json - insumo pendente do RADAR 4.2</div>
+<div class="alert"><strong>39%</strong> do lote veio de uma fonte só (G1 Economia, 40 itens). Um portal está pautando a escolha da IA sozinho.</div>
+<nav class="abas" role="tablist">
+<button type="button" role="tab" data-aba="pautas" aria-selected="true">Pautas</button>
+<button type="button" role="tab" data-aba="canal" aria-selected="false">O canal</button>
+<button type="button" role="tab" data-aba="coleta" aria-selected="false">De onde vêm os temas</button>
+<button type="button" role="tab" data-aba="custo" aria-selected="false">Uso e custo</button>
+</nav>
+<section class="painel" id="aba-pautas" role="tabpanel">
+<h2>Última seleção de pautas</h2>
+<p class="help">2026-09-10 11:01 &middot; gpt-5.5 &middot; 100 candidatos &middot; Custo desta execução: 6.953 entrada + 3.562 saída &middot; 61.8 segundos</p>
+<h3>Observações da IA</h3>
+<p class="help">Este campo já pegou dois defeitos antes de qualquer pessoa: candidatos ilegíveis por bug de leitura de feed, e duplicatas dominando o lote. Vale ler sempre.</p>
+<div class="card">Há muitos candidatos duplicados sobre combustíveis, Apple, Caixa e loteria. Escolhi apenas um representante de cada bloco e priorizei os que permitem transformar a notícia em consequência pessoal para a classe média brasileira.</div>
+<h3>O que você acha de cada uma?</h3>
+<p class="help">Clique numa opção por pauta — leva uns 5 minutos. <strong>Não precisa justificar as que você usaria</strong>; o que ensina a ferramenta são as recusas. Dá para parar no meio: o que você marcou fica salvo neste navegador.</p>
+<article class="pauta" data-i="1">
+<span class="ord">Pauta 1</span>
+<h4>Governo destina R$ 6,6 bilhões em subsídios a combustíveis após alta do petróleo</h4>
+<p class="angulo">A gasolina ficou barata ou o governo só escondeu a conta de você?</p>
+<p class="campo"><b>Por quê:</b> Funciona muito neste canal porque junta Brasil, bolso do público e um sistema que empurra a conta para o cidadão. É parecido com os vídeos fortes sobre Receita, Selic travando o Brasil e crise como consequência pessoal, não como número de mercado.</p>
+<p class="campo"><b>Risco:</b> Virar apenas explicação técnica de Petrobras, petróleo e tributo; precisa mostrar quem paga a conta e como isso volta em inflação, imposto e renda disponível.</p>
+<div class="opcoes">
+<button type="button" data-cod="S" aria-pressed="false">usaria</button>
+<button type="button" data-cod="N" aria-pressed="false">não usaria</button>
+<button type="button" data-cod="T" aria-pressed="false">talvez, mais pra frente</button>
+<button type="button" data-cod="A" aria-pressed="false">assunto certo, ângulo errado</button>
+</div>
+<div class="motivos">
+<button type="button" data-mot="rep" aria-pressed="false">já falamos disso recentemente</button>
+<button type="button" data-mot="fora" aria-pressed="false">não é assunto do canal</button>
+<button type="button" data-mot="tempo" aria-pressed="false">bom, mas não é o momento</button>
+<button type="button" data-mot="raso" aria-pressed="false">não dá um vídeo inteiro</button>
+<button type="button" data-mot="outro" aria-pressed="false">me escreve em uma linha</button>
+</div>
+<textarea class="obs" rows="2" placeholder="Quer escrever alguma coisa? (opcional)"></textarea>
+</article>
+<article class="pauta" data-i="2">
+<span class="ord">Pauta 2</span>
+<h4>Ford faz recall da Ranger por falha no escape, mas reparo só será feito em 2027</h4>
+<p class="angulo">Você compra um carro caro, a montadora erra e quem fica com o risco é você</p>
+<p class="campo"><b>Por quê:</b> Carro é uma das maiores decisões financeiras da classe média, e o canal já performou muito bem com compra de carro. Aqui há antagonista claro, prejuízo potencial, segurança e sensação de consumidor sendo deixado para trás.</p>
+<p class="campo"><b>Risco:</b> Se ficar só no recall específico da Ranger, vira notícia automotiva pontual; o ideal é ampliar para o custo real de comprar carro caro no Brasil.</p>
+<div class="opcoes">
+<button type="button" data-cod="S" aria-pressed="false">usaria</button>
+<button type="button" data-cod="N" aria-pressed="false">não usaria</button>
+<button type="button" data-cod="T" aria-pressed="false">talvez, mais pra frente</button>
+<button type="button" data-cod="A" aria-pressed="false">assunto certo, ângulo errado</button>
+</div>
+<div class="motivos">
+<button type="button" data-mot="rep" aria-pressed="false">já falamos disso recentemente</button>
+<button type="button" data-mot="fora" aria-pressed="false">não é assunto do canal</button>
+<button type="button" data-mot="tempo" aria-pressed="false">bom, mas não é o momento</button>
+<button type="button" data-mot="raso" aria-pressed="false">não dá um vídeo inteiro</button>
+<button type="button" data-mot="outro" aria-pressed="false">me escreve em uma linha</button>
+</div>
+<textarea class="obs" rows="2" placeholder="Quer escrever alguma coisa? (opcional)"></textarea>
+</article>
+<article class="pauta" data-i="3">
+<span class="ord">Pauta 3</span>
+<h4>Apple lança iPhone dobrável por até R$ 30.999 no Brasil</h4>
+<p class="angulo">A Apple descobriu como fazer a classe média pagar R$ 31 mil para parecer rica</p>
+<p class="campo"><b>Por quê:</b> Tem alto potencial porque conversa com consumo aspiracional, ostentação e empobrecimento da classe média — padrão muito forte em vídeos como 'A INTERNET CONVENCEU VOCÊ A FICAR POBRE' e 'A CLASSE MÉDIA ALTA ESTÁ QUEBRADA'.</p>
+<p class="campo"><b>Risco:</b> Virar review de tecnologia ou comparação de aparelho; o foco precisa ser comportamento financeiro, status e custo de oportunidade.</p>
+<div class="opcoes">
+<button type="button" data-cod="S" aria-pressed="false">usaria</button>
+<button type="button" data-cod="N" aria-pressed="false">não usaria</button>
+<button type="button" data-cod="T" aria-pressed="false">talvez, mais pra frente</button>
+<button type="button" data-cod="A" aria-pressed="false">assunto certo, ângulo errado</button>
+</div>
+<div class="motivos">
+<button type="button" data-mot="rep" aria-pressed="false">já falamos disso recentemente</button>
+<button type="button" data-mot="fora" aria-pressed="false">não é assunto do canal</button>
+<button type="button" data-mot="tempo" aria-pressed="false">bom, mas não é o momento</button>
+<button type="button" data-mot="raso" aria-pressed="false">não dá um vídeo inteiro</button>
+<button type="button" data-mot="outro" aria-pressed="false">me escreve em uma linha</button>
+</div>
+<textarea class="obs" rows="2" placeholder="Quer escrever alguma coisa? (opcional)"></textarea>
+</article>
+<article class="pauta" data-i="4">
+<span class="ord">Pauta 4</span>
+<h4>Greve na Caixa muda pagamento de boletos e saque de benefícios</h4>
+<p class="angulo">A greve da Caixa mostrou uma verdade desconfortável: seu dinheiro não depende só de você</p>
+<p class="campo"><b>Por quê:</b> Funciona porque transforma uma notícia operacional em consequência pessoal: boleto, benefício, banco público, dependência do sistema financeiro e risco de ficar sem acesso ao próprio dinheiro. O canal vai bem quando mostra instituições prejudicando pessoas comuns.</p>
+<p class="campo"><b>Risco:</b> Pode parecer vídeo utilitário de 3 minutos; precisa virar uma discussão maior sobre reserva, bancos, concentração e plano B financeiro.</p>
+<div class="opcoes">
+<button type="button" data-cod="S" aria-pressed="false">usaria</button>
+<button type="button" data-cod="N" aria-pressed="false">não usaria</button>
+<button type="button" data-cod="T" aria-pressed="false">talvez, mais pra frente</button>
+<button type="button" data-cod="A" aria-pressed="false">assunto certo, ângulo errado</button>
+</div>
+<div class="motivos">
+<button type="button" data-mot="rep" aria-pressed="false">já falamos disso recentemente</button>
+<button type="button" data-mot="fora" aria-pressed="false">não é assunto do canal</button>
+<button type="button" data-mot="tempo" aria-pressed="false">bom, mas não é o momento</button>
+<button type="button" data-mot="raso" aria-pressed="false">não dá um vídeo inteiro</button>
+<button type="button" data-mot="outro" aria-pressed="false">me escreve em uma linha</button>
+</div>
+<textarea class="obs" rows="2" placeholder="Quer escrever alguma coisa? (opcional)"></textarea>
+</article>
+<article class="pauta" data-i="5">
+<span class="ord">Pauta 5</span>
+<h4>Lotofácil da Independência pode pagar R$ 300 milhões</h4>
+<p class="angulo">A loteria é o plano financeiro de quem desistiu de enriquecer de verdade</p>
+<p class="campo"><b>Por quê:</b> A pauta permite uma provocação contra-intuitiva com dinheiro no centro: o brasileiro aposta porque quer escapar da vida financeira, mas compra uma ilusão matemática. Combina com o estilo do canal de atacar crenças populares que deixam a classe média pobre.</p>
+<p class="campo"><b>Risco:</b> Se o vídeo virar 'quanto rende o prêmio', cai no formato genérico de portal; o gancho deve ser comportamento, probabilidade e exploração da esperança.</p>
+<div class="opcoes">
+<button type="button" data-cod="S" aria-pressed="false">usaria</button>
+<button type="button" data-cod="N" aria-pressed="false">não usaria</button>
+<button type="button" data-cod="T" aria-pressed="false">talvez, mais pra frente</button>
+<button type="button" data-cod="A" aria-pressed="false">assunto certo, ângulo errado</button>
+</div>
+<div class="motivos">
+<button type="button" data-mot="rep" aria-pressed="false">já falamos disso recentemente</button>
+<button type="button" data-mot="fora" aria-pressed="false">não é assunto do canal</button>
+<button type="button" data-mot="tempo" aria-pressed="false">bom, mas não é o momento</button>
+<button type="button" data-mot="raso" aria-pressed="false">não dá um vídeo inteiro</button>
+<button type="button" data-mot="outro" aria-pressed="false">me escreve em uma linha</button>
+</div>
+<textarea class="obs" rows="2" placeholder="Quer escrever alguma coisa? (opcional)"></textarea>
+</article>
+<article class="pauta" data-i="6">
+<span class="ord">Pauta 6</span>
+<h4>Visa, Mastercard e Ant querem criar um 'CPF' para IAs usarem dinheiro</h4>
+<p class="angulo">As IAs vão começar a gastar dinheiro por você — e isso pode dar muito errado</p>
+<p class="campo"><b>Por quê:</b> Tem antagonista sistêmico e consequência futura no bolso: big techs e meios de pagamento criando infraestrutura para agentes automáticos movimentarem dinheiro. Pode repetir o padrão de vídeos fortes sobre internet, TikTok e sistemas invisíveis afetando a vida financeira dos brasileiros.</p>
+<p class="campo"><b>Risco:</b> Ainda é abstrato; precisa trazer exemplos concretos de golpes, compras automáticas, assinaturas, crédito e perda de controle financeiro.</p>
+<div class="opcoes">
+<button type="button" data-cod="S" aria-pressed="false">usaria</button>
+<button type="button" data-cod="N" aria-pressed="false">não usaria</button>
+<button type="button" data-cod="T" aria-pressed="false">talvez, mais pra frente</button>
+<button type="button" data-cod="A" aria-pressed="false">assunto certo, ângulo errado</button>
+</div>
+<div class="motivos">
+<button type="button" data-mot="rep" aria-pressed="false">já falamos disso recentemente</button>
+<button type="button" data-mot="fora" aria-pressed="false">não é assunto do canal</button>
+<button type="button" data-mot="tempo" aria-pressed="false">bom, mas não é o momento</button>
+<button type="button" data-mot="raso" aria-pressed="false">não dá um vídeo inteiro</button>
+<button type="button" data-mot="outro" aria-pressed="false">me escreve em uma linha</button>
+</div>
+<textarea class="obs" rows="2" placeholder="Quer escrever alguma coisa? (opcional)"></textarea>
+</article>
+<article class="pauta" data-i="7">
+<span class="ord">Pauta 7</span>
+<h4>Relatório da PF sobre Moraes vai ao plenário; julgamento no STF</h4>
+<p class="angulo">A crise no STF virou risco financeiro para todo brasileiro?</p>
+<p class="campo"><b>Por quê:</b> Política só funciona aqui quando aparece como segurança jurídica, risco Brasil, imposto, investimentos e vida econômica. O canal teve ótimo desempenho com crise no STF e economia em território desconhecido; este tema pode ser continuação se for tratado pelo impacto no dinheiro.</p>
+<p class="campo"><b>Risco:</b> Virar cobertura política pura ou torcida institucional; sem conexão clara com bolso, investimento e risco país, perde aderência.</p>
+<div class="opcoes">
+<button type="button" data-cod="S" aria-pressed="false">usaria</button>
+<button type="button" data-cod="N" aria-pressed="false">não usaria</button>
+<button type="button" data-cod="T" aria-pressed="false">talvez, mais pra frente</button>
+<button type="button" data-cod="A" aria-pressed="false">assunto certo, ângulo errado</button>
+</div>
+<div class="motivos">
+<button type="button" data-mot="rep" aria-pressed="false">já falamos disso recentemente</button>
+<button type="button" data-mot="fora" aria-pressed="false">não é assunto do canal</button>
+<button type="button" data-mot="tempo" aria-pressed="false">bom, mas não é o momento</button>
+<button type="button" data-mot="raso" aria-pressed="false">não dá um vídeo inteiro</button>
+<button type="button" data-mot="outro" aria-pressed="false">me escreve em uma linha</button>
+</div>
+<textarea class="obs" rows="2" placeholder="Quer escrever alguma coisa? (opcional)"></textarea>
+</article>
+<article class="pauta" data-i="8">
+<span class="ord">Pauta 8</span>
+<h4>Cookie stuffing: esquema envolve startup ligada à filha de Bill Gates</h4>
+<p class="angulo">O golpe invisível que ganha dinheiro em cima das suas compras online</p>
+<p class="campo"><b>Por quê:</b> É uma pauta de esquema, fraude e dinheiro digital — uma das famílias que mais funcionam no canal. Permite explicar como empresas e intermediários capturam valor sem o consumidor perceber, com narrativa de bastidor e antagonista claro.</p>
+<p class="campo"><b>Risco:</b> Pode parecer distante do Brasil e técnico demais; precisa traduzir para e-commerce, afiliados, influenciadores e compras que o público faz.</p>
+<div class="opcoes">
+<button type="button" data-cod="S" aria-pressed="false">usaria</button>
+<button type="button" data-cod="N" aria-pressed="false">não usaria</button>
+<button type="button" data-cod="T" aria-pressed="false">talvez, mais pra frente</button>
+<button type="button" data-cod="A" aria-pressed="false">assunto certo, ângulo errado</button>
+</div>
+<div class="motivos">
+<button type="button" data-mot="rep" aria-pressed="false">já falamos disso recentemente</button>
+<button type="button" data-mot="fora" aria-pressed="false">não é assunto do canal</button>
+<button type="button" data-mot="tempo" aria-pressed="false">bom, mas não é o momento</button>
+<button type="button" data-mot="raso" aria-pressed="false">não dá um vídeo inteiro</button>
+<button type="button" data-mot="outro" aria-pressed="false">me escreve em uma linha</button>
+</div>
+<textarea class="obs" rows="2" placeholder="Quer escrever alguma coisa? (opcional)"></textarea>
+</article>
+<article class="pauta" data-i="9">
+<span class="ord">Pauta 9</span>
+<h4>STF permite uso de carro particular no exame de direção da nova CNH</h4>
+<p class="angulo">Até para tirar CNH o brasileiro paga pedágio para um sistema ineficiente</p>
+<p class="campo"><b>Por quê:</b> A pauta tem Brasil, burocracia, carro e custo para a classe média. Pode funcionar se for tratada como exemplo de como o Estado e cartórios informais encarecem a vida de quem tenta trabalhar, dirigir e ter mobilidade.</p>
+<p class="campo"><b>Risco:</b> Assunto pode parecer pequeno; precisa ampliar para custo total da CNH, autoescola, carro, seguro e burocracia brasileira.</p>
+<div class="opcoes">
+<button type="button" data-cod="S" aria-pressed="false">usaria</button>
+<button type="button" data-cod="N" aria-pressed="false">não usaria</button>
+<button type="button" data-cod="T" aria-pressed="false">talvez, mais pra frente</button>
+<button type="button" data-cod="A" aria-pressed="false">assunto certo, ângulo errado</button>
+</div>
+<div class="motivos">
+<button type="button" data-mot="rep" aria-pressed="false">já falamos disso recentemente</button>
+<button type="button" data-mot="fora" aria-pressed="false">não é assunto do canal</button>
+<button type="button" data-mot="tempo" aria-pressed="false">bom, mas não é o momento</button>
+<button type="button" data-mot="raso" aria-pressed="false">não dá um vídeo inteiro</button>
+<button type="button" data-mot="outro" aria-pressed="false">me escreve em uma linha</button>
+</div>
+<textarea class="obs" rows="2" placeholder="Quer escrever alguma coisa? (opcional)"></textarea>
+</article>
+<article class="pauta" data-i="10">
+<span class="ord">Pauta 10</span>
+<h4>Meta testa substituto da checagem de fatos na América Latina</h4>
+<p class="angulo">A internet vai ficar ainda melhor em fazer você tomar decisões financeiras ruins</p>
+<p class="campo"><b>Por quê:</b> O canal já teve bom desempenho atacando o efeito da internet sobre o bolso. Esse tema pode virar um vídeo sobre desinformação, golpes, gurus, promessas fáceis e como plataformas lucram com conteúdo que empobrece as pessoas.</p>
+<p class="campo"><b>Risco:</b> Se ficar em debate genérico sobre moderação e política, foge do canal; precisa ancorar em finanças pessoais, golpes e manipulação de comportamento.</p>
+<div class="opcoes">
+<button type="button" data-cod="S" aria-pressed="false">usaria</button>
+<button type="button" data-cod="N" aria-pressed="false">não usaria</button>
+<button type="button" data-cod="T" aria-pressed="false">talvez, mais pra frente</button>
+<button type="button" data-cod="A" aria-pressed="false">assunto certo, ângulo errado</button>
+</div>
+<div class="motivos">
+<button type="button" data-mot="rep" aria-pressed="false">já falamos disso recentemente</button>
+<button type="button" data-mot="fora" aria-pressed="false">não é assunto do canal</button>
+<button type="button" data-mot="tempo" aria-pressed="false">bom, mas não é o momento</button>
+<button type="button" data-mot="raso" aria-pressed="false">não dá um vídeo inteiro</button>
+<button type="button" data-mot="outro" aria-pressed="false">me escreve em uma linha</button>
+</div>
+<textarea class="obs" rows="2" placeholder="Quer escrever alguma coisa? (opcional)"></textarea>
+</article>
+<div class="barra-acao">
+<button type="button" class="botao" id="btCopiar" disabled>Copiar respostas</button>
+<button type="button" class="botao sec" id="btLimpar">Limpar tudo</button>
+<span class="contagem" id="contagem"></span>
+</div>
+<textarea class="saida" id="saida" readonly></textarea>
+<p class="help" id="ajudaCopia" style="display:none">Pronto — as respostas estão na sua área de transferência. Cole numa mensagem para o Kenzo e pode fechar esta página.</p>
+<h3>Descartados de propósito</h3><div class="card"><table><tbody>
+<tr><td>5<div class="mut" style="font-size:13px;margin-top:3px">Polymarket está em alta, mas 'mercado preditivo' é muito parecido com uma pauta que já ficou no quartil inferior do canal. É sigla/conceito técnico e tende a atrair curiosos de cripto, não o público principal.</div></td></tr>
+<tr><td>15<div class="mut" style="font-size:13px;margin-top:3px">TSMC e vendas ligadas a IA podem ser relevantes para mercado global, mas aqui viraria notícia setorial de ação/tecnologia. O canal costuma ir mal quando a pauta é ativo, setor ou número de empresa sem consequência direta no bolso do brasileiro.</div></td></tr>
+<tr><td>20<div class="mut" style="font-size:13px;margin-top:3px">Ibovespa ao vivo, dólar, petróleo e eleições é exatamente o tipo de giro de mercado que outros canais de finanças fazem, mas que neste canal tende a performar pior. Falta antagonista claro e sobra variação diária de mercado.</div></td></tr>
+<tr><td>76<div class="mut" style="font-size:13px;margin-top:3px">Light saindo da recuperação judicial parece assunto financeiro forte, mas recuperação judicial de empresa específica aparece no padrão que não funcionou no canal. Sem um ângulo de golpe, consumidor prejudicado ou conta de luz no bolso, tende a morrer.</div></td></tr>
+</tbody></table></div>
+</section>
+<section class="painel" id="aba-canal" role="tabpanel" hidden>
+<h2>O que a IA sabe sobre o canal</h2>
+<div class="grid">
+<div class="stat"><div class="k">Investidor Sardinha l Raul Sena</div><div class="v">1.770.000</div><div class="n">inscritos</div></div>
+<div class="stat"><div class="k">Janela analisada</div><div class="v" style="font-size:19px">2026-03-24</div><div class="n">de 2026-09-23 &middot; Modo de coleta: api</div></div>
+<div class="stat"><div class="k">Mediana</div><div class="v">222.370</div><div class="n">p25 157.589 &middot; p75 329.223</div></div>
+</div>
+<h3>A régua que a IA usa — uma por formato</h3>
+<p class="help"><strong>Não existe um número só.</strong> Um short com 20 mil views pode estar normal; um vídeo de 30 minutos com 20 mil views é um fracasso. Cada faixa tem o patamar dela — e o patamar mede o canal <strong>de agora</strong>, calculado sobre os últimos 90 dias, porque o canal cresceu dentro da própria janela de análise. Mediana, não média: aqui a média seria 26% maior e deixaria <strong>66% dos vídeos "abaixo da média"</strong>, puxada por três virais em 181.</p>
+<div class="card"><div class="scroll"><table><thead><tr>
+<th>Duração</th><th class="n">Vídeos</th><th>Base</th><th class="n">Não funcionou (abaixo de)</th><th class="n">Mediana</th><th class="n">Funcionou (acima de)</th></tr></thead><tbody>
+<tr><td>1 a 10 min</td><td class="n">16</td><td><span class="pill p-warn" title="poucos vídeos recentes nesta faixa — caiu para a janela inteira, então o número pode estar defasado">janela cheia</span></td><td class="n"><span class="pill p-bad">83.428</span></td><td class="n">163.810</td><td class="n"><span class="pill p-ok">302.803</span></td></tr>
+<tr><td>10 a 30 min</td><td class="n">60</td><td><span class="pill p-ok">últimos 90 dias</span></td><td class="n"><span class="pill p-bad">172.503</span></td><td class="n">253.315</td><td class="n"><span class="pill p-ok">463.464</span></td></tr>
+<tr><td>acima de 30 min</td><td class="n">18</td><td><span class="pill p-ok">últimos 90 dias</span></td><td class="n"><span class="pill p-bad">168.268</span></td><td class="n">262.632</td><td class="n"><span class="pill p-ok">303.544</span></td></tr>
+</tbody></table></div></div>
+<h3>O canal está crescendo</h3>
+<p class="help">Mediana de views por mês de publicação. É crescimento, não vídeo novo ainda acumulando — a prova é que vídeo recente tem <strong>mais</strong> views tendo tido <strong>menos</strong> tempo no ar. Por isso a régua acima olha só os últimos 90 dias: herdar o patamar do canal menor de cinco meses atrás faria a IA aprovar tema que hoje é medíocre.</p>
+<div class="card"><div class="scroll"><table><thead><tr>
+<th>Mês</th><th class="n">Vídeos</th><th class="n">Mediana de views</th><th style="width:30%"></th><th class="n">Likes por mil</th><th style="width:20%"></th></tr></thead><tbody>
+<tr><td>2026-03</td><td class="n">9</td><td class="n">151.431</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:35%"></div></div></td>
+<td class="n">87.7</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:100%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<tr><td>2026-04</td><td class="n">30</td><td class="n">197.204</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:46%"></div></div></td>
+<td class="n">86.9</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:99%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<tr><td>2026-05</td><td class="n">33</td><td class="n">197.058</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:46%"></div></div></td>
+<td class="n">86.7</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:99%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<tr><td>2026-06</td><td class="n">30</td><td class="n">196.628</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:46%"></div></div></td>
+<td class="n">77</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:88%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<tr><td>2026-07</td><td class="n">32</td><td class="n">223.719</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:52%"></div></div></td>
+<td class="n">70.5</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:80%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<tr><td>2026-08</td><td class="n">28</td><td class="n">255.505</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:59%"></div></div></td>
+<td class="n">61.9</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:71%;background:var(--accent);opacity:.5"></div></div></td></tr>
+<tr><td>2026-09</td><td class="n">20</td><td class="n">432.044</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:100%"></div></div></td>
+<td class="n">33.4</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:38%;background:var(--accent);opacity:.5"></div></div></td></tr>
+</tbody></table>
+<p class="help" style="margin:10px 0 0">Views dizem quanta gente viu; likes por mil views dizem o quanto quem viu se importou. Neste canal os dois <strong>andam em direções contrárias</strong>. Em cerca de 60 dias o alcance dobrou e o engajamento caiu pela metade — e os comentários caíram junto, então não é mudança de hábito no botão de like: é o canal saindo da base fiel para o público amplo.</p>
+</div>
+<h3>Os quatro resultados possíveis</h3>
+<p class="help">Cada vídeo é comparado com os publicados até <strong>21 dias antes ou depois dele</strong>, nunca contra um corte fixo — o patamar do canal muda rápido demais para corte fixo funcionar. Por isso as medianas absolutas abaixo não se comparam entre categorias: "não funcionou" pode ter engajamento absoluto maior que "alcance" e ainda assim estar abaixo dos vizinhos <em>dele</em>.</p>
+<div class="card"><div class="scroll"><table><thead><tr>
+<th>Resultado</th><th class="n">Vídeos</th><th class="n">Mediana de views</th><th class="n">Likes por mil</th><th>&nbsp;</th></tr></thead><tbody>
+<tr><td><strong>acertou os dois</strong></td><td class="n">29</td><td class="n">246.020</td><td class="n">82.8</td><td class="mut" style="font-size:13px">muita gente viu <strong>e</strong> se importou — é o alvo</td></tr>
+<tr><td><strong>alcance</strong></td><td class="n">66</td><td class="n">420.587</td><td class="n">58.9</td><td class="mut" style="font-size:13px">estourou para fora da base. Bom para crescer, fraco para fidelizar</td></tr>
+<tr><td><strong>autoridade</strong></td><td class="n">62</td><td class="n">149.117</td><td class="n">88</td><td class="mut" style="font-size:13px">a base fiel amou, não passou dela. Bom para relação, fraco para crescer</td></tr>
+<tr><td><strong>nao funcionou</strong></td><td class="n">25</td><td class="n">162.360</td><td class="n">68.3</td><td class="mut" style="font-size:13px">abaixo dos dois. Este sim é o que não deu certo</td></tr>
+</tbody></table></div></div>
+<h3>Programa de horário fixo</h3>
+<p class="help">Detectado por regularidade, não por nome: o dia da semana em que o canal publica em pelo menos 80% das semanas. Neste canal o programa aparece com nome no título <strong>uma vez em 28</strong> — procurar por "Giro da Bolsa" não acharia. Para esse dia a pergunta não é <em>se</em> vale publicar, e sim <em>qual assunto da semana ocupa o espaço</em>, porque o programa vai ao ar de qualquer jeito. E ele compete com ele mesmo: compare com os outros do mesmo dia, nunca com o canal inteiro.</p>
+<div class="grid">
+<div class="stat"><div class="k">Dia fixo</div><div class="v" style="font-size:22px">domingo</div><div class="n">26 de 26 semanas (100%)</div></div>
+<div class="stat"><div class="k">Régua própria do programa</div><div class="v">198.792</div><div class="n">158.532 a 252.133 &middot; 27 vídeos</div></div>
+</div>
+<h3>O que mais funcionou</h3><div class="card"><div class="scroll"><table><thead><tr><th class="n">Views</th><th>Título</th><th class="n">Data</th></tr></thead><tbody>
+<tr><td class="n">1.411.391</td><td>OZEMPIC: COMO UMA CANETA DE EMAGRECER ESTÁ QUEBRANDO INDÚSTRIAS INTEIRAS</td><td class="n mut">2026-09-11</td></tr>
+<tr><td class="n">1.251.211</td><td>O plano econômico de Flávio Bolsonaro</td><td class="n mut">2026-09-16</td></tr>
+<tr><td class="n">874.790</td><td>As propostas econômicas de Renan Santos, uma a uma</td><td class="n mut">2026-06-05</td></tr>
+<tr><td class="n">872.501</td><td>10 coisas que não valem mais a pena gastar o seu dinheiro</td><td class="n mut">2026-09-15</td></tr>
+<tr><td class="n">795.348</td><td>Por que você deveria fazer uma dívida urgente?</td><td class="n mut">2026-07-31</td></tr>
+</tbody></table></div></div>
+<h3>O que menos funcionou</h3><div class="card"><div class="scroll"><table><thead><tr><th class="n">Views</th><th>Título</th><th class="n">Data</th></tr></thead><tbody>
+<tr><td class="n">59.062</td><td>O que é ABTC11 e como WallStreet assumiu o controle do bitcoin?</td><td class="n mut">2026-07-15</td></tr>
+<tr><td class="n">44.711</td><td>O que é MERCADO PREDITIVO? E por que ele é PERIGOSO </td><td class="n mut">2026-04-09</td></tr>
+<tr><td class="n">42.673</td><td>Empresas pequenas agora podem abrir capital e isso vai dar m*rda para quem não sabe analisar...</td><td class="n mut">2026-08-15</td></tr>
+<tr><td class="n">30.030</td><td>Precisamos incentivar a indústria nacional de fertilizantes.</td><td class="n mut">2026-03-29</td></tr>
+<tr><td class="n">26.235</td><td>Estrela entra em recuperação judicial.</td><td class="n mut">2026-05-22</td></tr>
+</tbody></table></div></div>
+<h3>A identidade editorial que vai no prompt da IA</h3>
+<p class="help">Este texto é o que a IA lê antes de julgar qualquer tema. Ele vive em radar/canais.json e é escrito à mão a partir dos vídeos reais.</p>
+<div class="foco">Canal de Raul Sena, fundador da AUVP, com 1,75 milhao de inscritos. Fala para o brasileiro que ja tem algum dinheiro ou esta tentando juntar — classe media e classe media alta — e nao para o investidor profissional.
+
+**Formato.** Video longo, quase exclusivamente. Dos 184 videos dos ultimos 6 meses, 142 tem de 10 a 30 minutos e 23 passam de 30. Nao ha shorts. E quanto mais longo, melhor: a mediana de views sobe de 153 mil (1 a 10 min) para 209 mil (10 a 30 min) e 241 mil (acima de 30 min). Tema que so rende 3 minutos provavelmente nao e pauta deste canal.
+
+**O que funciona aqui.** Tema que junta tres coisas: o Brasil, o dinheiro de quem assiste, e alguem sendo enganado ou prejudicado. Na pratica, tres familias de pauta aparecem no quartil superior:
+- Economia brasileira contada como consequencia pessoal — 'A CLASSE MEDIA ALTA ESTA QUEBRADA', 'O QUE ESTA ACONTECENDO COM A ECONOMIA BRASILEIRA?', 'A Receita Federal abriu a caixa preta do Brasil'
+- Denuncia de esquema, empresa ou instituicao — 'Itau enganando clientes', 'Consorcio para enriquecer: o golpe que mais cresce no Brasil', 'Fast Shop o esquema bilionario por tras da empresa'
+- Provocacao contra-intuitiva que contraria o senso comum financeiro — 'Por que voce deveria fazer uma divida urgente?', 'A INTERNET CONVENCEU VOCE A FICAR POBRE'
+
+Crise entra como oportunidade, nao como lamento: 'Fique rico com a CRISE de 2026' esta no topo.
+
+**O que nao funciona.** Tres familias aparecem no quartil inferior:
+- Noticia setorial pontual — recuperacao judicial de uma empresa, petroleo nas maximas, corte da Selic
+- Explicacao de sigla ou conceito tecnico — o que e ABTC11, o que e mercado preditivo, como encontrar boas acoes na bolsa
+- Politica economica abstrata sem consequencia pessoal — incentivo a industria de fertilizantes
+
+Repare que essas tres sao exatamente o que a maioria dos canais de financas publica. E justamente ai que este canal fica no quartil inferior — o que o diferencia nao e falar de investimento, e o angulo.
+
+**A regua pratica para julgar um tema.** Pergunte duas coisas: (1) o tema tem antagonista — alguem que engana, um sistema que prejudica, uma crenca comum que esta errada? (2) a consequencia chega no bolso de quem assiste? Com as duas, vai bem. Se for informacao sobre um ativo, uma sigla ou um numero de mercado, vai mal — mesmo estando em alta la fora.
+
+**Restricao editorial declarada pelo proprio canal.** A descricao se posiciona contra 'gurus de ostentacao', 'promessas faceis' e 'formulas prontas', e diz explicitamente que ali nao tem 'especulacao vazia'. Tema que dependa de prometer retorno garantido ou atalho nao cabe, mesmo que performe em outro lugar.</div>
+</section>
+<section class="painel" id="aba-coleta" role="tabpanel" hidden>
+<h2>Última coleta de temas</h2>
+<div class="card"><div class="scroll"><table><thead><tr>
+<th>Fonte</th><th class="n">Itens</th><th style="width:40%"></th><th>Situação</th>
+</tr></thead><tbody>
+<tr><td>Google Trends BR</td><td class="n">10</td><td><div class="barwrap"><div class="bar" style="width:25%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
+<tr><td>InfoMoney</td><td class="n">10</td><td><div class="barwrap"><div class="bar" style="width:25%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
+<tr><td>G1 Economia</td><td class="n">40</td><td><div class="barwrap"><div class="bar" style="width:100%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
+<tr><td>Exame</td><td class="n">25</td><td><div class="barwrap"><div class="bar" style="width:62%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
+<tr><td>UOL Economia</td><td class="n">15</td><td><div class="barwrap"><div class="bar" style="width:38%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
+<tr><td>CNN Economia</td><td class="n">8</td><td><div class="barwrap"><div class="bar" style="width:20%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
+<tr><td>Concorrentes (YouTube)</td><td class="n">0</td><td><div class="barwrap"><div class="bar" style="width:0%"></div></div></td><td><span class="pill p-warn">voltou vazia</span> <span class="mut">lista vazia em fontes.json - insumo pendente do RADAR 4.2</span></td></tr>
+</tbody></table></div></div>
+<h2>Diversidade do lote</h2>
+<p class="help">Três medidas que não dependem de agrupar assunto à mão. Um lote pode ter 100 itens e oferecer pouca escolha real à IA — foi o que aconteceu em 10/09/2026, quando um único portal trouxe 40 itens e o lançamento de um celular ocupou 12.</p>
+<div class="grid">
+<div class="stat"><div class="k">Concentração de fonte</div><div class="v">39% <span class="pill p-bad" style="font-size:11px;vertical-align:middle">40</span></div><div class="n">do lote vem de G1 Economia</div></div>
+<div class="stat"><div class="k">Histórias que saíram em vários veículos</div><div class="v">3</div><div class="n">108 itens brutos viraram 103 histórias (5 absorvidos)</div></div>
+</div>
+<p class="help">Quanto do lote inteiro veio da fonte que mais trouxe. Acima de 30%, um portal está pautando a escolha da IA sozinho. <strong>Repetição aqui é sinal, não lixo.</strong> Quando vários portais publicam a mesma coisa, a imprensa está dizendo que o assunto importa — e a IA passa a ver "isto saiu em 4 veículos" em vez de ver a mesma manchete quatro vezes sem saber que é a mesma. O coletor junta as repetidas num item só e leva a contagem junto. A regra é numérica (Jaccard ≥ 0,30 no título, só entre notícias com 4+ palavras) e foi calibrada nos lotes reais de 10/09 e 22/09.</p>
+<h3>As mais publicadas desta coleta</h3>
+<div class="card"><div class="scroll"><table><tbody>
+<tr><td class="n" style="width:90px"><span class="pill p-warn">4 veículos</span></td><td>Dólar hoje sobe enquanto investidores digerem ata do Copom<div class="mut" style="font-size:12.5px;margin-top:3px">InfoMoney, G1 Economia, UOL Economia, CNN Economia</div></td></tr>
+<tr><td class="n" style="width:90px"><span class="pill p-warn">2 veículos</span></td><td>Mendonça pede arquivamento de ação após acusações de Moraes no caso Master<div class="mut" style="font-size:12.5px;margin-top:3px">InfoMoney, Exame</div></td></tr>
+<tr><td class="n" style="width:90px"><span class="pill p-warn">2 veículos</span></td><td>Vale compra 30% de mineradora por R$ 975 milhões e amplia acesso a minério no Pará<div class="mut" style="font-size:12.5px;margin-top:3px">G1 Economia, UOL Economia</div></td></tr>
+</tbody></table></div></div>
+<h3>Palavras mais repetidas nos títulos</h3>
+<p class="help">Contagem por <strong>palavra</strong>, não por assunto — "apple", "iphone" e "dobrável" contam separado mesmo sendo a mesma notícia. Serve como textura do lote, não como medida de concentração: ela <em>subestima</em> quando uma história usa muitas palavras diferentes.</p>
+<div class="card"><div class="scroll"><table><tbody>
+<tr><td style="width:170px">brasil</td><td class="n" style="width:80px">9 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:9%"></div></div></td></tr>
+<tr><td style="width:170px">milhoes</td><td class="n" style="width:80px">8 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:8%"></div></div></td></tr>
+<tr><td style="width:170px">sobe</td><td class="n" style="width:80px">7 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:7%"></div></div></td></tr>
+<tr><td style="width:170px">agosto</td><td class="n" style="width:80px">4 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:4%"></div></div></td></tr>
+<tr><td style="width:170px">bilhoes</td><td class="n" style="width:80px">4 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:4%"></div></div></td></tr>
+<tr><td style="width:170px">china</td><td class="n" style="width:80px">4 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:4%"></div></div></td></tr>
+<tr><td style="width:170px">greve</td><td class="n" style="width:80px">4 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:4%"></div></div></td></tr>
+<tr><td style="width:170px">trabalho</td><td class="n" style="width:80px">4 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:4%"></div></div></td></tr>
+</tbody></table></div></div>
+</section>
+<section class="painel" id="aba-custo" role="tabpanel" hidden>
+<h2>Uso e custo</h2>
+<p class="help">Quanto esta brincadeira está consumindo. <strong>Cuidado com a intuição aqui:</strong> em tokens, a entrada é o dobro da saída — mas a saída custa <strong>6x mais por token</strong> ($30 contra $5 por milhão), então ela é <strong>três quartos da conta</strong>. Isso inverte a lógica de economia: cortar candidatos reduz entrada, que é a parte barata. O que pesa é o tamanho da resposta, e a resposta tem o mesmo tamanho julgando 100 ou 13 candidatos.</p>
+<div class="grid">
+<div class="stat"><div class="k">Execuções</div><div class="v">6</div><div class="n">&nbsp;</div></div>
+<div class="stat"><div class="k">Tokens no total</div><div class="v">61.980</div><div class="n">41.513 entrada + 20.467 saída</div></div>
+<div class="stat"><div class="k">Média por execução</div><div class="v">10.330</div><div class="n">tokens</div></div>
+<div class="stat"><div class="k">Custo acumulado</div><div class="v">USD 0.82</div><div class="n">USD 0.1369 média por execução</div></div>
+</div>
+<p class="help">Se rodar 1 vez(es) por dia, no ritmo médio destas execuções. <strong>USD 4.11</strong> por mês.</p>
+<div class="alert">Preço informado por Kenzo em 22/09/2026 como "parece que" — <strong>não conferido na fatura</strong>. Confirme no billing antes de levar qualquer um destes números para uma decisão de orçamento.</div>
+<h3>Tokens por execução</h3>
+<div class="card"><div class="scroll"><table><tbody>
+<tr><td style="width:150px" class="mut">2026-09-08 16:54</td><td style="width:60px">lista</td>
+<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:63%"></div><div class="bar" style="width:26%;background:var(--accent);opacity:.55"></div></div></td>
+<td class="n" style="width:120px">9.540</td></tr>
+<tr><td style="width:150px" class="mut">2026-09-08 16:57</td><td style="width:60px">lista</td>
+<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:66%"></div><div class="bar" style="width:28%;background:var(--accent);opacity:.55"></div></div></td>
+<td class="n" style="width:120px">10.024</td></tr>
+<tr><td style="width:150px" class="mut">2026-09-08 16:58</td><td style="width:60px">nota</td>
+<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:65%"></div><div class="bar" style="width:35%;background:var(--accent);opacity:.55"></div></div></td>
+<td class="n" style="width:120px">10.730</td></tr>
+<tr><td style="width:150px" class="mut">2026-09-08 17:02</td><td style="width:60px">lista</td>
+<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:64%"></div><div class="bar" style="width:33%;background:var(--accent);opacity:.55"></div></div></td>
+<td class="n" style="width:120px">10.476</td></tr>
+<tr><td style="width:150px" class="mut">2026-09-08 17:03</td><td style="width:60px">nota</td>
+<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:64%"></div><div class="bar" style="width:36%;background:var(--accent);opacity:.55"></div></div></td>
+<td class="n" style="width:120px">10.695</td></tr>
+<tr><td style="width:150px" class="mut">2026-09-10 11:01</td><td style="width:60px">lista</td>
+<td><div style="display:flex;gap:2px;align-items:center"><div class="bar" style="width:65%"></div><div class="bar" style="width:33%;background:var(--accent);opacity:.55"></div></div></td>
+<td class="n" style="width:120px">10.515</td></tr>
+</tbody></table>
+<p class="help" style="margin:10px 0 0">entrada / <span style="opacity:.6">saída</span></p>
+</div></div>
+<h2>Histórico de execuções</h2><div class="card"><div class="scroll"><table><thead><tr>
+<th>Quando</th><th>Formato</th><th>Modelo</th><th class="n">Candidatos</th><th class="n">Tokens</th><th class="n">Tempo</th></tr></thead><tbody>
+<tr><td>2026-09-10 11:01</td><td>lista</td><td>gpt-5.5</td><td class="n">100</td><td class="n">10.515</td><td class="n">61.8s</td></tr>
+<tr><td>2026-09-08 17:03</td><td>nota</td><td>gpt-5.5</td><td class="n">100</td><td class="n">10.695</td><td class="n">54.1s</td></tr>
+<tr><td>2026-09-08 17:02</td><td>lista</td><td>gpt-5.5</td><td class="n">100</td><td class="n">10.476</td><td class="n">72.6s</td></tr>
+<tr><td>2026-09-08 16:58</td><td>nota</td><td>gpt-5.5</td><td class="n">100</td><td class="n">10.730</td><td class="n">53.2s</td></tr>
+<tr><td>2026-09-08 16:57</td><td>lista</td><td>gpt-5.5</td><td class="n">100</td><td class="n">10.024</td><td class="n">59.1s</td></tr>
+<tr><td>2026-09-08 16:54</td><td>lista</td><td>gpt-5.5</td><td class="n">100</td><td class="n">9.540</td><td class="n">53.5s</td></tr>
+</tbody></table></div></div>
+</section>
+<footer>Dados lidos de radar/ nesta máquina. Nada aqui sai do computador. Rode <code>powershell -File radar\painel.ps1</code> para atualizar.</footer>
+</div>
+<script>
+(function(){
+  var abas=[].slice.call(document.querySelectorAll('nav.abas button'));
+  abas.forEach(function(b){b.addEventListener('click',function(){
+    abas.forEach(function(o){
+      var on=(o===b); o.setAttribute('aria-selected',on?'true':'false');
+      var p=document.getElementById('aba-'+o.dataset.aba); if(p) p.hidden=!on;
+    });
+    if(location.hash!=='#'+b.dataset.aba) history.replaceState(null,'','#'+b.dataset.aba);
+  });});
+  if(location.hash){var alvo=abas.filter(function(b){return '#'+b.dataset.aba===location.hash;})[0]; if(alvo) alvo.click();}
+
+  var pautas=[].slice.call(document.querySelectorAll('.pauta'));
+  if(!pautas.length) return;
+  var CHAVE='radar-devolutiva-'+(document.querySelector('meta[name="lote"]')||{content:'x'}).content;
+  var estado={};
+  try{estado=JSON.parse(localStorage.getItem(CHAVE)||'{}');}catch(e){estado={};}
+
+  function precisaMotivo(c){return c==='N'||c==='A';}
+  function salvar(){try{localStorage.setItem(CHAVE,JSON.stringify(estado));}catch(e){}}
+
+  function pintar(art){
+    var i=art.dataset.i, st=estado[i]||{};
+    art.querySelectorAll('.opcoes button').forEach(function(b){
+      b.setAttribute('aria-pressed', b.dataset.cod===st.cod ? 'true':'false');
+    });
+    var mv=art.querySelector('.motivos'), ob=art.querySelector('.obs');
+    var mostra=precisaMotivo(st.cod);
+    mv.classList.toggle('on',mostra); ob.classList.toggle('on',mostra);
+    mv.querySelectorAll('button').forEach(function(b){
+      b.setAttribute('aria-pressed', b.dataset.mot===st.mot ? 'true':'false');
+    });
+    if(ob.value!==(st.obs||'')) ob.value=st.obs||'';
+    art.classList.toggle('decidida', !!st.cod);
+  }
+
+  pautas.forEach(function(art){
+    var i=art.dataset.i;
+    art.querySelectorAll('.opcoes button').forEach(function(b){
+      b.addEventListener('click',function(){
+        estado[i]=estado[i]||{};
+        estado[i].cod = (estado[i].cod===b.dataset.cod) ? null : b.dataset.cod;
+        if(!precisaMotivo(estado[i].cod)){estado[i].mot=null;estado[i].obs='';}
+        salvar(); pintar(art); contar();
+      });
+    });
+    art.querySelectorAll('.motivos button').forEach(function(b){
+      b.addEventListener('click',function(){
+        estado[i]=estado[i]||{};
+        estado[i].mot = (estado[i].mot===b.dataset.mot) ? null : b.dataset.mot;
+        salvar(); pintar(art);
+      });
+    });
+    art.querySelector('.obs').addEventListener('input',function(){
+      estado[i]=estado[i]||{}; estado[i].obs=this.value; salvar();
+    });
+    pintar(art);
+  });
+
+  var bt=document.getElementById('btCopiar'), lim=document.getElementById('btLimpar');
+  var cont=document.getElementById('contagem'), sai=document.getElementById('saida');
+  var ajuda=document.getElementById('ajudaCopia');
+
+  function contar(){
+    var n=pautas.filter(function(a){var s=estado[a.dataset.i]; return s&&s.cod;}).length;
+    cont.textContent = n+' de '+pautas.length+' respondidas';
+    bt.disabled = (n===0);
+  }
+
+  function montar(){
+    var l=[];
+    pautas.forEach(function(a){
+      var i=a.dataset.i, s=estado[i]||{};
+      var tema=a.querySelector('h4').textContent;
+      var ang=a.querySelector('.angulo').textContent;
+      l.push(i+') '+tema);
+      l.push('   angulo sugerido: '+ang);
+      var r='   >>> ';
+      if(s.cod){ r+=s.cod; if(s.mot) r+=' '+s.mot; if(s.obs) r+=(s.mot?'  ':' ')+s.obs.replace(/\s+/g,' ').trim(); }
+      l.push(r);
+      l.push('');
+    });
+    return l.join('\n');
+  }
+
+  bt.addEventListener('click',function(){
+    var txt=montar();
+    sai.value=txt; sai.classList.add('on'); ajuda.style.display='block';
+    sai.focus(); sai.select();
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){
+        bt.textContent=bt.dataset.ok||'Copiado';
+        setTimeout(function(){bt.textContent=bt.dataset.orig;},2200);
+      }).catch(function(){});
+    }
+  });
+  bt.dataset.orig=bt.textContent;
+
+  lim.addEventListener('click',function(){
+    estado={}; salvar();
+    pautas.forEach(pintar); contar();
+    sai.classList.remove('on'); ajuda.style.display='none';
+  });
+
+  contar();
+})();
+</script>
+</body></html>
