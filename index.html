@@ -1,7 +1,7 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<meta name="lote" content="20260924-1534-investidorsardinha-lista">
+<meta name="lote" content="20260925-1120-investidorsardinha-lista">
 <title>AUVP RADAR — painel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,6 +65,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .barwrap{background:var(--branco);height:6px;width:100%;max-width:240px}
 .bar{height:6px;background:var(--verde);min-width:2px}
 .bar-2{background:var(--cinza2)}
+.bar-3{background:var(--chumbo)}
 .barras{display:flex;align-items:center}
 .leg{display:inline-block;width:15px;height:6px;background:var(--verde);vertical-align:middle}
 .leg-2{background:var(--cinza2)}
@@ -142,6 +143,13 @@ td .fontes{margin:0}
 .ico{width:16px;height:16px;flex:none}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
+/* validacao as cegas da identidade editorial */
+.valida{background:var(--cinza1);border:1px solid rgba(0,0,0,.06);border-radius:12px;padding:30px;margin-bottom:30px;transition:box-shadow 240ms ease,transform 240ms ease}
+.valida:hover{box-shadow:0 8px 24px rgba(0,0,0,.06);transform:translateY(-2px)}
+.valida.decidida{border-color:var(--verde);box-shadow:inset 4px 0 0 var(--verde)}
+.valida h4{margin:15px 0}
+.valida .opcoes{margin-top:15px;padding-top:15px}
+
 /* toast */
 .toast{position:fixed;right:24px;bottom:30px;z-index:10;background:var(--chumbo);color:var(--branco);border-left:4px solid var(--amarelo);border-radius:12px;padding:15px 30px;font-family:var(--f-rotulo);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.1em;opacity:0;transform:translateY(15px);transition:opacity 240ms ease,transform 240ms ease;pointer-events:none}
 .toast.on{opacity:1;transform:none}
@@ -162,7 +170,7 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <span class="eyebrow">AUVP Radar · Monitoramento de pautas</span>
 <h1>O que está em alta, e o que rende no canal.</h1>
 <p class="sub">Temas coletados das fontes de economia, a leitura do canal que orienta a IA e as pautas recomendadas para avaliação. Atualizado a cada rodada.</p>
-<p class="ts">Painel gerado em 24/09/2026 16:02</p>
+<p class="ts">Painel gerado em 25/09/2026 11:31</p>
 </div></header>
 <div class="abas-faixa"><div class="container"><nav class="abas" role="tablist" aria-label="Seções do painel">
 <button type="button" role="tab" id="tab-como-esta-agora" aria-controls="aba-como-esta-agora" data-aba="como-esta-agora" aria-selected="true">Como está agora</button>
@@ -170,13 +178,15 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" role="tab" id="tab-ultima-coleta-de-temas" aria-controls="aba-ultima-coleta-de-temas" data-aba="ultima-coleta-de-temas" aria-selected="false">Última coleta de temas</button>
 <button type="button" role="tab" id="tab-diversidade-do-lote" aria-controls="aba-diversidade-do-lote" data-aba="diversidade-do-lote" aria-selected="false">Diversidade do lote</button>
 <button type="button" role="tab" id="tab-o-que-a-ia-sabe-sobre-o-canal" aria-controls="aba-o-que-a-ia-sabe-sobre-o-canal" data-aba="o-que-a-ia-sabe-sobre-o-canal" aria-selected="false">O que a IA sabe sobre o canal</button>
+<button type="button" role="tab" id="tab-padroes-de-titulo" aria-controls="aba-padroes-de-titulo" data-aba="padroes-de-titulo" aria-selected="false">Padrões de título</button>
 <button type="button" role="tab" id="tab-pautas" aria-controls="aba-pautas" data-aba="pautas" aria-selected="false">Última seleção de pautas</button>
+<button type="button" role="tab" id="tab-validar-a-identidade-editorial" aria-controls="aba-validar-a-identidade-editorial" data-aba="validar-a-identidade-editorial" aria-selected="false">Validar a identidade editorial</button>
 <button type="button" role="tab" id="tab-uso-e-custo" aria-controls="aba-uso-e-custo" data-aba="uso-e-custo" aria-selected="false">Uso e custo</button>
 <button type="button" role="tab" id="tab-historico-de-execucoes" aria-controls="aba-historico-de-execucoes" data-aba="historico-de-execucoes" aria-selected="false">Histórico de execuções</button>
 </nav></div></div>
 <section class="painel faixa" id="aba-como-esta-agora" role="tabpanel" aria-labelledby="tab-como-esta-agora"><div class="container">
 <h2>Como está agora</h2><div class="grid">
-<div class="stat"><div class="k">Última coleta</div><div class="v">102</div><div class="n">itens coletados &middot; hoje</div></div>
+<div class="stat"><div class="k">Última coleta</div><div class="v">80</div><div class="n">itens coletados &middot; hoje</div></div>
 <div class="stat"><div class="k">Fontes funcionando</div><div class="v">6 <span class="v-de">de 7</span></div><div class="n">&nbsp;</div></div>
 <div class="stat"><div class="k">Perfil do canal</div><div class="v">182</div><div class="n">vídeos analisados &middot; hoje</div></div>
 <div class="stat"><div class="k">Última seleção</div><div class="v">10</div><div class="n">temas curados &middot; gpt-5.5</div></div>
@@ -185,19 +195,18 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <section class="painel faixa faixa-preta" id="aba-precisa-de-atencao" role="tabpanel" aria-labelledby="tab-precisa-de-atencao" hidden><div class="container">
 <h2>Precisa de atenção</h2>
 <div class="alert">A fonte <strong>Concorrentes (YouTube)</strong> voltou vazia: lista vazia em fontes.json - insumo pendente do RADAR 4.2</div>
-<div class="alert"><strong>39%</strong> do lote veio de uma fonte só (G1 Economia, 40 itens). Um portal está pautando a escolha da IA sozinho.</div>
 </div></section>
 <section class="painel faixa" id="aba-ultima-coleta-de-temas" role="tabpanel" aria-labelledby="tab-ultima-coleta-de-temas" hidden><div class="container">
 <h2>Última coleta de temas</h2>
 <div class="card"><div class="scroll"><table><thead><tr>
 <th>Fonte</th><th class="n">Itens</th><th style="width:40%"></th><th>Situação</th>
 </tr></thead><tbody>
-<tr><td>Google Trends BR</td><td class="n">10</td><td><div class="barwrap"><div class="bar" style="width:25%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
-<tr><td>InfoMoney</td><td class="n">10</td><td><div class="barwrap"><div class="bar" style="width:25%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
-<tr><td>G1 Economia</td><td class="n">40</td><td><div class="barwrap"><div class="bar" style="width:100%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
-<tr><td>Exame</td><td class="n">25</td><td><div class="barwrap"><div class="bar" style="width:62%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
-<tr><td>UOL Economia</td><td class="n">15</td><td><div class="barwrap"><div class="bar" style="width:38%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
-<tr><td>CNN Economia</td><td class="n">4</td><td><div class="barwrap"><div class="bar" style="width:10%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
+<tr><td>Google Trends BR</td><td class="n">10</td><td><div class="barwrap"><div class="bar" style="width:50%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
+<tr><td>InfoMoney</td><td class="n">10</td><td><div class="barwrap"><div class="bar" style="width:50%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
+<tr><td>G1 Economia</td><td class="n">20</td><td><div class="barwrap"><div class="bar" style="width:100%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
+<tr><td>Exame</td><td class="n">20</td><td><div class="barwrap"><div class="bar" style="width:100%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
+<tr><td>UOL Economia</td><td class="n">15</td><td><div class="barwrap"><div class="bar" style="width:75%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
+<tr><td>CNN Economia</td><td class="n">9</td><td><div class="barwrap"><div class="bar" style="width:45%"></div></div></td><td><span class="pill p-ok">trouxe itens</span></td></tr>
 <tr><td>Concorrentes (YouTube)</td><td class="n">0</td><td><div class="barwrap"><div class="bar" style="width:0%"></div></div></td><td><span class="pill p-warn">voltou vazia</span> <span class="mut">lista vazia em fontes.json - insumo pendente do RADAR 4.2</span></td></tr>
 </tbody></table></div></div>
 </div></section>
@@ -205,61 +214,63 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <h2>Diversidade do lote</h2>
 <p class="help">Três medidas que não dependem de agrupar assunto à mão. Um lote pode ter 100 itens e oferecer pouca escolha real à IA — foi o que aconteceu em 10/09/2026, quando um único portal trouxe 40 itens e o lançamento de um celular ocupou 12.</p>
 <div class="grid">
-<div class="stat"><div class="k">Concentração de fonte</div><div class="v">39% <span class="pill p-bad">40</span></div><div class="n">do lote vem de G1 Economia</div></div>
-<div class="stat"><div class="k">Histórias que saíram em vários veículos</div><div class="v">2</div><div class="n">104 itens brutos viraram 102 histórias (2 absorvidos)</div></div>
+<div class="stat"><div class="k">Concentração de fonte</div><div class="v">25% <span class="pill p-ok">20</span></div><div class="n">do lote vem de G1 Economia</div></div>
+<div class="stat"><div class="k">Histórias que saíram em vários veículos</div><div class="v">4</div><div class="n">84 itens brutos viraram 80 histórias (4 absorvidos)</div></div>
 </div>
 <p class="help">Quanto do lote inteiro veio da fonte que mais trouxe. Acima de 30%, um portal está pautando a escolha da IA sozinho. <strong>Repetição aqui é sinal, não lixo.</strong> Quando vários portais publicam a mesma coisa, a imprensa está dizendo que o assunto importa — e a IA passa a ver "isto saiu em 4 veículos" em vez de ver a mesma manchete quatro vezes sem saber que é a mesma. O coletor junta as repetidas num item só e leva a contagem junto. A regra é numérica (Jaccard ≥ 0,30 no título, só entre notícias com 4+ palavras) e foi calibrada nos lotes reais de 10/09 e 22/09.</p>
 <h3>As mais publicadas desta coleta</h3>
 <div class="card"><div class="scroll"><table><tbody>
-<tr><td class="n" style="width:90px"><span class="pill p-warn">2 veículos</span></td><td>BC está preocupado com ofertas 'agressivas e predatórias' de crédito, diz Galípolo<div class="sub-linha">G1 Economia, UOL Economia</div></td></tr>
-<tr><td class="n" style="width:90px"><span class="pill p-warn">2 veículos</span></td><td>Dólar sobe a R$ 5,16, com negociações entre EUA e Irã e eleições no radar; Ibovespa cai<div class="sub-linha">G1 Economia, UOL Economia</div></td></tr>
+<tr><td class="n" style="width:90px"><span class="pill p-warn">2 veículos</span></td><td>Argentina: pobreza sobe de 28,2% para 32,3% no primeiro semestre de 2026<div class="sub-linha">G1 Economia, UOL Economia</div></td></tr>
+<tr><td class="n" style="width:90px"><span class="pill p-warn">2 veículos</span></td><td>Antigo PIS/Pasep: novo lote de dinheiro esquecido começa a ser pago nesta sexta; veja quem tem direito<div class="sub-linha">G1 Economia, CNN Economia</div></td></tr>
+<tr><td class="n" style="width:90px"><span class="pill p-warn">2 veículos</span></td><td>Prévia da inflação: IPCA-15 sobe para 0,70% em setembro, acima da expectativa<div class="sub-linha">Exame, CNN Economia</div></td></tr>
+<tr><td class="n" style="width:90px"><span class="pill p-warn">2 veículos</span></td><td>Real Time: Marina JHC, Renan e Lira lideram corrida ao Senado em Alagoas<div class="sub-linha">Exame</div></td></tr>
 </tbody></table></div></div>
 <h3>Palavras mais repetidas nos títulos</h3>
 <p class="help">Contagem por <strong>palavra</strong>, não por assunto — "apple", "iphone" e "dobrável" contam separado mesmo sendo a mesma notícia. Serve como textura do lote, não como medida de concentração: ela <em>subestima</em> quando uma história usa muitas palavras diferentes.</p>
 <div class="card"><div class="scroll"><table><tbody>
-<tr><td style="width:170px">brasil</td><td class="n" style="width:80px">7 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:7%"></div></div></td></tr>
-<tr><td style="width:170px">trump</td><td class="n" style="width:80px">5 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:5%"></div></div></td></tr>
-<tr><td style="width:170px">2026</td><td class="n" style="width:80px">4 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:4%"></div></div></td></tr>
-<tr><td style="width:170px">dinheiro</td><td class="n" style="width:80px">4 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:4%"></div></div></td></tr>
-<tr><td style="width:170px">governo</td><td class="n" style="width:80px">4 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:4%"></div></div></td></tr>
-<tr><td style="width:170px">greve</td><td class="n" style="width:80px">4 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:4%"></div></div></td></tr>
-<tr><td style="width:170px">bate</td><td class="n" style="width:80px">3 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:3%"></div></div></td></tr>
-<tr><td style="width:170px">caixa</td><td class="n" style="width:80px">3 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:3%"></div></div></td></tr>
+<tr><td style="width:170px">2026</td><td class="n" style="width:80px">5 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:6%"></div></div></td></tr>
+<tr><td style="width:170px">greve</td><td class="n" style="width:80px">5 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:6%"></div></div></td></tr>
+<tr><td style="width:170px">inflacao</td><td class="n" style="width:80px">5 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:6%"></div></div></td></tr>
+<tr><td style="width:170px">ipca</td><td class="n" style="width:80px">5 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:6%"></div></div></td></tr>
+<tr><td style="width:170px">previa</td><td class="n" style="width:80px">5 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:6%"></div></div></td></tr>
+<tr><td style="width:170px">sobe</td><td class="n" style="width:80px">5 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:6%"></div></div></td></tr>
+<tr><td style="width:170px">brasil</td><td class="n" style="width:80px">4 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:5%"></div></div></td></tr>
+<tr><td style="width:170px">dias</td><td class="n" style="width:80px">4 <span class="mut" style="font-weight:400">itens</span></td><td><div class="barwrap"><div class="bar" style="width:5%"></div></div></td></tr>
 </tbody></table></div></div>
 </div></section>
 <section class="painel faixa" id="aba-o-que-a-ia-sabe-sobre-o-canal" role="tabpanel" aria-labelledby="tab-o-que-a-ia-sabe-sobre-o-canal" hidden><div class="container">
 <h2>O que a IA sabe sobre o canal</h2>
 <div class="grid">
 <div class="stat"><div class="k">Investidor Sardinha l Raul Sena</div><div class="v">1.770.000</div><div class="n">inscritos</div></div>
-<div class="stat"><div class="k">Janela analisada</div><div class="v v-texto">2026-03-24</div><div class="n">de 2026-09-23 &middot; Modo de coleta: api</div></div>
-<div class="stat"><div class="k">Mediana</div><div class="v">222.370</div><div class="n">p25 157.589 &middot; p75 329.223</div></div>
+<div class="stat"><div class="k">Janela analisada</div><div class="v v-texto">2026-03-25</div><div class="n">de 2026-09-24 &middot; Modo de coleta: api</div></div>
+<div class="stat"><div class="k">Mediana</div><div class="v">223.267</div><div class="n">p25 158.534 &middot; p75 330.971</div></div>
 </div>
 <h3>A régua que a IA usa — uma por formato</h3>
 <p class="help"><strong>Não existe um número só.</strong> Um short com 20 mil views pode estar normal; um vídeo de 30 minutos com 20 mil views é um fracasso. Cada faixa tem o patamar dela — e o patamar mede o canal <strong>de agora</strong>, calculado sobre os últimos 90 dias, porque o canal cresceu dentro da própria janela de análise. Mediana, não média: aqui a média seria 26% maior e deixaria <strong>66% dos vídeos "abaixo da média"</strong>, puxada por três virais em 181.</p>
 <div class="card"><div class="scroll"><table><thead><tr>
 <th>Duração</th><th class="n">Vídeos</th><th>Base</th><th class="n">Não funcionou (abaixo de)</th><th class="n">Mediana</th><th class="n">Funcionou (acima de)</th></tr></thead><tbody>
-<tr><td>1 a 10 min</td><td class="n">16</td><td><span class="pill p-warn" title="poucos vídeos recentes nesta faixa — caiu para a janela inteira, então o número pode estar defasado">janela cheia</span></td><td class="n"><span class="pill p-bad">83.428</span></td><td class="n">163.810</td><td class="n"><span class="pill p-ok">302.803</span></td></tr>
-<tr><td>10 a 30 min</td><td class="n">60</td><td><span class="pill p-ok">últimos 90 dias</span></td><td class="n"><span class="pill p-bad">172.503</span></td><td class="n">253.315</td><td class="n"><span class="pill p-ok">463.464</span></td></tr>
-<tr><td>acima de 30 min</td><td class="n">18</td><td><span class="pill p-ok">últimos 90 dias</span></td><td class="n"><span class="pill p-bad">168.268</span></td><td class="n">262.632</td><td class="n"><span class="pill p-ok">303.544</span></td></tr>
+<tr><td>1 a 10 min</td><td class="n">16</td><td><span class="pill p-warn" title="poucos vídeos recentes nesta faixa — caiu para a janela inteira, então o número pode estar defasado">janela cheia</span></td><td class="n"><span class="pill p-bad">83.442</span></td><td class="n">163.984</td><td class="n"><span class="pill p-ok">303.046</span></td></tr>
+<tr><td>10 a 30 min</td><td class="n">61</td><td><span class="pill p-ok">últimos 90 dias</span></td><td class="n"><span class="pill p-bad">172.959</span></td><td class="n">255.678</td><td class="n"><span class="pill p-ok">442.426</span></td></tr>
+<tr><td>acima de 30 min</td><td class="n">17</td><td><span class="pill p-ok">últimos 90 dias</span></td><td class="n"><span class="pill p-bad">169.451</span></td><td class="n">279.580</td><td class="n"><span class="pill p-ok">304.275</span></td></tr>
 </tbody></table></div></div>
 <h3>O canal está crescendo</h3>
 <p class="help">Mediana de views por mês de publicação. É crescimento, não vídeo novo ainda acumulando — a prova é que vídeo recente tem <strong>mais</strong> views tendo tido <strong>menos</strong> tempo no ar. Por isso a régua acima olha só os últimos 90 dias: herdar o patamar do canal menor de cinco meses atrás faria a IA aprovar tema que hoje é medíocre.</p>
 <div class="card"><div class="scroll"><table><thead><tr>
 <th>Mês</th><th class="n">Vídeos</th><th class="n">Mediana de views</th><th style="width:30%"></th><th class="n">Likes por mil</th><th style="width:20%"></th></tr></thead><tbody>
-<tr><td>2026-03</td><td class="n">9</td><td class="n">151.431</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:35%"></div></div></td>
-<td class="n">87.7</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:100%"></div></div></td></tr>
-<tr><td>2026-04</td><td class="n">30</td><td class="n">197.204</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:46%"></div></div></td>
-<td class="n">86.9</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:99%"></div></div></td></tr>
-<tr><td>2026-05</td><td class="n">33</td><td class="n">197.058</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:46%"></div></div></td>
-<td class="n">86.7</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:99%"></div></div></td></tr>
-<tr><td>2026-06</td><td class="n">30</td><td class="n">196.628</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:46%"></div></div></td>
-<td class="n">77</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:88%"></div></div></td></tr>
-<tr><td>2026-07</td><td class="n">32</td><td class="n">223.719</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:52%"></div></div></td>
+<tr><td>2026-03</td><td class="n">8</td><td class="n">183.020</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:41%"></div></div></td>
+<td class="n">88.3</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:100%"></div></div></td></tr>
+<tr><td>2026-04</td><td class="n">30</td><td class="n">197.252</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:45%"></div></div></td>
+<td class="n">86.8</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:98%"></div></div></td></tr>
+<tr><td>2026-05</td><td class="n">33</td><td class="n">197.227</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:45%"></div></div></td>
+<td class="n">86.6</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:98%"></div></div></td></tr>
+<tr><td>2026-06</td><td class="n">30</td><td class="n">196.683</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:44%"></div></div></td>
+<td class="n">77</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:87%"></div></div></td></tr>
+<tr><td>2026-07</td><td class="n">32</td><td class="n">224.388</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:51%"></div></div></td>
 <td class="n">70.5</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:80%"></div></div></td></tr>
-<tr><td>2026-08</td><td class="n">28</td><td class="n">255.505</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:59%"></div></div></td>
-<td class="n">61.9</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:71%"></div></div></td></tr>
-<tr><td>2026-09</td><td class="n">20</td><td class="n">432.044</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:100%"></div></div></td>
-<td class="n">33.4</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:38%"></div></div></td></tr>
+<tr><td>2026-08</td><td class="n">28</td><td class="n">255.698</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:58%"></div></div></td>
+<td class="n">61.6</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:70%"></div></div></td></tr>
+<tr><td>2026-09</td><td class="n">21</td><td class="n">442.426</td><td><div class="barwrap" style="max-width:none"><div class="bar" style="width:100%"></div></div></td>
+<td class="n">32.9</td><td><div class="barwrap" style="max-width:none"><div class="bar bar-2" style="width:37%"></div></div></td></tr>
 </tbody></table>
 <p class="help nota-tabela">Views dizem quanta gente viu; likes por mil views dizem o quanto quem viu se importou. Neste canal os dois <strong>andam em direções contrárias</strong>. Em cerca de 60 dias o alcance dobrou e o engajamento caiu pela metade — e os comentários caíram junto, então não é mudança de hábito no botão de like: é o canal saindo da base fiel para o público amplo.</p>
 </div>
@@ -267,70 +278,90 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <p class="help">Cada vídeo é comparado com os publicados até <strong>21 dias antes ou depois dele</strong>, nunca contra um corte fixo — o patamar do canal muda rápido demais para corte fixo funcionar. Por isso as medianas absolutas abaixo não se comparam entre categorias: "não funcionou" pode ter engajamento absoluto maior que "alcance" e ainda assim estar abaixo dos vizinhos <em>dele</em>.</p>
 <div class="card"><div class="scroll"><table><thead><tr>
 <th>Resultado</th><th class="n">Vídeos</th><th class="n">Mediana de views</th><th class="n">Likes por mil</th><th>&nbsp;</th></tr></thead><tbody>
-<tr><td><strong>acertou os dois</strong></td><td class="n">29</td><td class="n">246.020</td><td class="n">82.8</td><td class="mut">muita gente viu <strong>e</strong> se importou — é o alvo</td></tr>
-<tr><td><strong>alcance</strong></td><td class="n">66</td><td class="n">420.587</td><td class="n">58.9</td><td class="mut">estourou para fora da base. Bom para crescer, fraco para fidelizar</td></tr>
-<tr><td><strong>autoridade</strong></td><td class="n">62</td><td class="n">149.117</td><td class="n">88</td><td class="mut">a base fiel amou, não passou dela. Bom para relação, fraco para crescer</td></tr>
-<tr><td><strong>nao funcionou</strong></td><td class="n">25</td><td class="n">162.360</td><td class="n">68.3</td><td class="mut">abaixo dos dois. Este sim é o que não deu certo</td></tr>
+<tr><td><strong>acertou os dois</strong></td><td class="n">28</td><td class="n">246.712</td><td class="n">82.5</td><td class="mut">muita gente viu <strong>e</strong> se importou — é o alvo</td></tr>
+<tr><td><strong>alcance</strong></td><td class="n">68</td><td class="n">412.536</td><td class="n">59</td><td class="mut">estourou para fora da base. Bom para crescer, fraco para fidelizar</td></tr>
+<tr><td><strong>autoridade</strong></td><td class="n">28</td><td class="n">182.355</td><td class="n">87.6</td><td class="mut">audiência média com engajamento alto: a base fiel apareceu e gostou, mas não passou dela. Bom para relação, fraco para crescer</td></tr>
+<tr><td><strong>nao funcionou</strong></td><td class="n">58</td><td class="n">140.456</td><td class="n">77.3</td><td class="mut">abaixo dos dois, ou entre os 25% menos vistos do período. Nesse caso a curtida por view costuma ser alta e engana: só o núcleo mais fiel assistiu</td></tr>
 </tbody></table></div></div>
 <h3>Programa de horário fixo</h3>
 <p class="help">Detectado por regularidade, não por nome: o dia da semana em que o canal publica em pelo menos 80% das semanas. Neste canal o programa aparece com nome no título <strong>uma vez em 28</strong> — procurar por "Giro da Bolsa" não acharia. Para esse dia a pergunta não é <em>se</em> vale publicar, e sim <em>qual assunto da semana ocupa o espaço</em>, porque o programa vai ao ar de qualquer jeito. E ele compete com ele mesmo: compare com os outros do mesmo dia, nunca com o canal inteiro.</p>
 <div class="grid">
 <div class="stat"><div class="k">Dia fixo</div><div class="v v-texto">domingo</div><div class="n">26 de 26 semanas (100%)</div></div>
-<div class="stat"><div class="k">Régua própria do programa</div><div class="v">198.792</div><div class="n">158.532 a 252.133 &middot; 27 vídeos</div></div>
+<div class="stat"><div class="k">Régua própria do programa</div><div class="v">198.860</div><div class="n">158.534 a 252.135 &middot; 27 vídeos</div></div>
 </div>
 <h3>O que mais funcionou</h3><div class="card"><div class="scroll"><table><thead><tr><th class="n">Views</th><th>Título</th><th class="n">Data</th></tr></thead><tbody>
-<tr><td class="n">1.411.391</td><td>OZEMPIC: COMO UMA CANETA DE EMAGRECER ESTÁ QUEBRANDO INDÚSTRIAS INTEIRAS</td><td class="n mut">2026-09-11</td></tr>
-<tr><td class="n">1.251.211</td><td>O plano econômico de Flávio Bolsonaro</td><td class="n mut">2026-09-16</td></tr>
-<tr><td class="n">874.790</td><td>As propostas econômicas de Renan Santos, uma a uma</td><td class="n mut">2026-06-05</td></tr>
-<tr><td class="n">872.501</td><td>10 coisas que não valem mais a pena gastar o seu dinheiro</td><td class="n mut">2026-09-15</td></tr>
-<tr><td class="n">795.348</td><td>Por que você deveria fazer uma dívida urgente?</td><td class="n mut">2026-07-31</td></tr>
+<tr><td class="n">1.430.340</td><td>OZEMPIC: COMO UMA CANETA DE EMAGRECER ESTÁ QUEBRANDO INDÚSTRIAS INTEIRAS</td><td class="n mut">2026-09-11</td></tr>
+<tr><td class="n">1.317.457</td><td>O plano econômico de Flávio Bolsonaro</td><td class="n mut">2026-09-16</td></tr>
+<tr><td class="n">908.926</td><td>10 coisas que não valem mais a pena gastar o seu dinheiro</td><td class="n mut">2026-09-15</td></tr>
+<tr><td class="n">884.336</td><td>As propostas econômicas de Renan Santos, uma a uma</td><td class="n mut">2026-06-05</td></tr>
+<tr><td class="n">800.494</td><td>Por que você deveria fazer uma dívida urgente?</td><td class="n mut">2026-07-31</td></tr>
 </tbody></table></div></div>
 <h3>O que menos funcionou</h3><div class="card"><div class="scroll"><table><thead><tr><th class="n">Views</th><th>Título</th><th class="n">Data</th></tr></thead><tbody>
-<tr><td class="n">59.062</td><td>O que é ABTC11 e como WallStreet assumiu o controle do bitcoin?</td><td class="n mut">2026-07-15</td></tr>
-<tr><td class="n">44.711</td><td>O que é MERCADO PREDITIVO? E por que ele é PERIGOSO </td><td class="n mut">2026-04-09</td></tr>
-<tr><td class="n">42.673</td><td>Empresas pequenas agora podem abrir capital e isso vai dar m*rda para quem não sabe analisar...</td><td class="n mut">2026-08-15</td></tr>
-<tr><td class="n">30.030</td><td>Precisamos incentivar a indústria nacional de fertilizantes.</td><td class="n mut">2026-03-29</td></tr>
-<tr><td class="n">26.235</td><td>Estrela entra em recuperação judicial.</td><td class="n mut">2026-05-22</td></tr>
+<tr><td class="n">59.251</td><td>O que é ABTC11 e como WallStreet assumiu o controle do bitcoin?</td><td class="n mut">2026-07-15</td></tr>
+<tr><td class="n">44.734</td><td>O que é MERCADO PREDITIVO? E por que ele é PERIGOSO </td><td class="n mut">2026-04-09</td></tr>
+<tr><td class="n">42.767</td><td>Empresas pequenas agora podem abrir capital e isso vai dar m*rda para quem não sabe analisar...</td><td class="n mut">2026-08-15</td></tr>
+<tr><td class="n">30.042</td><td>Precisamos incentivar a indústria nacional de fertilizantes.</td><td class="n mut">2026-03-29</td></tr>
+<tr><td class="n">26.265</td><td>Estrela entra em recuperação judicial.</td><td class="n mut">2026-05-22</td></tr>
 </tbody></table></div></div>
 <h3>A identidade editorial que vai no prompt da IA</h3>
 <p class="help">Este texto é o que a IA lê antes de julgar qualquer tema. Ele vive em radar/canais.json e é escrito à mão a partir dos vídeos reais.</p>
-<div class="foco">Canal de Raul Sena, fundador da AUVP, com 1,75 milhao de inscritos. Fala para o brasileiro que ja tem algum dinheiro ou esta tentando juntar — classe media e classe media alta — e nao para o investidor profissional.
+<div class="foco">Canal de Raul Sena, fundador da AUVP. Fala para o brasileiro que já tem algum dinheiro ou está tentando juntar — classe média e classe média alta —, não para o investidor profissional.
 
-**Formato.** Video longo, quase exclusivamente. Dos 184 videos dos ultimos 6 meses, 142 tem de 10 a 30 minutos e 23 passam de 30. Nao ha shorts. E quanto mais longo, melhor: a mediana de views sobe de 153 mil (1 a 10 min) para 209 mil (10 a 30 min) e 241 mil (acima de 30 min). Tema que so rende 3 minutos provavelmente nao e pauta deste canal.
+**Formato.** Vídeo longo, quase exclusivamente: não há shorts, e a grande maioria dura de 10 a 30 minutos. Tema que só rende 3 minutos provavelmente não é pauta deste canal. Os números de desempenho estão nas tabelas logo abaixo, por faixa de duração e calculados sobre o período recente — use sempre a régua da faixa do vídeo, nunca a do canal inteiro.
 
-**O que funciona aqui.** Tema que junta tres coisas: o Brasil, o dinheiro de quem assiste, e alguem sendo enganado ou prejudicado. Na pratica, tres familias de pauta aparecem no quartil superior:
-- Economia brasileira contada como consequencia pessoal — 'A CLASSE MEDIA ALTA ESTA QUEBRADA', 'O QUE ESTA ACONTECENDO COM A ECONOMIA BRASILEIRA?', 'A Receita Federal abriu a caixa preta do Brasil'
-- Denuncia de esquema, empresa ou instituicao — 'Itau enganando clientes', 'Consorcio para enriquecer: o golpe que mais cresce no Brasil', 'Fast Shop o esquema bilionario por tras da empresa'
-- Provocacao contra-intuitiva que contraria o senso comum financeiro — 'Por que voce deveria fazer uma divida urgente?', 'A INTERNET CONVENCEU VOCE A FICAR POBRE'
+**O canal está em fase de crescimento de alcance.** Nos últimos meses as views subiram e o engajamento por view caiu: vídeo que estoura chega em gente de fora da base. Por isso &quot;funcionou&quot; tem dois sentidos, e toda pauta deve dizer qual deles busca.
 
-Crise entra como oportunidade, nao como lamento: 'Fique rico com a CRISE de 2026' esta no topo.
+**Alcance** — o tema puxa gente nova. Aparece em: economia brasileira contada como consequência pessoal (&quot;A classe média alta está quebrada&quot;, &quot;A Receita Federal abriu a caixa-preta do Brasil&quot;); denúncia de esquema, empresa ou instituição (&quot;Fast Shop: o esquema bilionário por trás da empresa&quot;, &quot;Consórcio para enriquecer: o golpe que mais cresce&quot;, &quot;Se o seu dinheiro está em bancos digitais, se liga&quot;); provocação contra o senso comum financeiro (&quot;Por que você deveria fazer uma dívida urgente?&quot;); eleição e planos econômicos de candidatos; e empresa ou produto famoso virando assunto de dinheiro (a caneta de emagrecer quebrando indústrias).
 
-**O que nao funciona.** Tres familias aparecem no quartil inferior:
-- Noticia setorial pontual — recuperacao judicial de uma empresa, petroleo nas maximas, corte da Selic
-- Explicacao de sigla ou conceito tecnico — o que e ABTC11, o que e mercado preditivo, como encontrar boas acoes na bolsa
-- Politica economica abstrata sem consequencia pessoal — incentivo a industria de fertilizantes
+**Autoridade** — audiência média, engajamento alto: a base fiel aparece e gosta. Aparece em análise séria da economia (PIB recorde com população mais pobre, propostas econômicas de governo analisadas uma a uma) e em educação financeira de fundamento (&quot;Você pode pagar. Mas deveria comprar?&quot;, &quot;Investir R$ 100 por mês pode mudar sua vida?&quot;).
 
-Repare que essas tres sao exatamente o que a maioria dos canais de financas publica. E justamente ai que este canal fica no quartil inferior — o que o diferencia nao e falar de investimento, e o angulo.
+**O que acerta os dois.** Tema que junta o Brasil, o dinheiro de quem assiste e alguém sendo enganado ou prejudicado — contado como consequência na vida da pessoa, não como notícia: &quot;A internet convenceu você a ficar pobre&quot;, &quot;Selic a 14,25%: o Brasil está travando&quot;, &quot;Como o TikTok vai destruir a vida dos brasileiros&quot;, &quot;Tráfico e bets agora entraram no PIB&quot;. Crise entra como alerta com consequência pessoal, não como lamento.
 
-**A regua pratica para julgar um tema.** Pergunte duas coisas: (1) o tema tem antagonista — alguem que engana, um sistema que prejudica, uma crenca comum que esta errada? (2) a consequencia chega no bolso de quem assiste? Com as duas, vai bem. Se for informacao sobre um ativo, uma sigla ou um numero de mercado, vai mal — mesmo estando em alta la fora.
+**O que não funciona.** Pergunta sobre um produto ou ativo específico — &quot;CDB a 135% do CDI compensa?&quot;, &quot;Onde deixar o dinheiro das caixinhas?&quot;, previdência privada, bitcoin, IPO de empresa estrangeira. Explicação de sigla ou conceito técnico (&quot;O que é ABTC11&quot;, &quot;O que é mercado preditivo&quot;). Notícia setorial pontual (recuperação judicial de uma empresa) e política econômica abstrata sem consequência no bolso (incentivo à indústria de fertilizantes). Repare que isso é o que a maioria dos canais de finanças publica — o que diferencia este canal não é falar de investimento, é o ângulo.
 
-**Restricao editorial declarada pelo proprio canal.** A descricao se posiciona contra 'gurus de ostentacao', 'promessas faceis' e 'formulas prontas', e diz explicitamente que ali nao tem 'especulacao vazia'. Tema que dependa de prometer retorno garantido ou atalho nao cabe, mesmo que performe em outro lugar.</div>
+**Cuidado com um sinal enganoso.** Vídeo que quase ninguém viu costuma ter muita curtida por view: só o núcleo mais fiel assistiu, e quem assiste por conta própria curte. Curtida alta num vídeo de audiência muito baixa não é sinal de tema bom — é sinal de que o tema não foi empurrado. Os piores vídeos do canal em audiência são justamente os de maior curtida por view.
+
+**A régua prática para julgar um tema.** Pergunte: (1) tem antagonista — alguém que engana, um sistema que prejudica, uma crença comum que está errada? (2) a consequência chega no bolso de quem assiste? (3) é pauta de alcance, de autoridade ou dos dois? Com as duas primeiras, vai bem. Se o tema for informação sobre um ativo, uma sigla ou um número de mercado, vai mal — mesmo estando em alta lá fora.
+
+**Restrição editorial declarada pelo próprio canal.** A descrição se posiciona contra &quot;gurus de ostentação&quot;, &quot;promessas fáceis&quot; e &quot;fórmulas prontas&quot;, e diz que ali não tem &quot;especulação vazia&quot;. Tema que dependa de prometer retorno garantido ou atalho não cabe, mesmo que performe em outro lugar.</div>
+</div></section>
+<section class="painel faixa" id="aba-padroes-de-titulo" role="tabpanel" aria-labelledby="tab-padroes-de-titulo" hidden><div class="container">
+<h2>Padrões de título</h2>
+<p class="help">Para cada característica, os 182 vídeos da janela se dividem entre os que têm e os que não têm. O número que importa é o <strong>desempenho contra os vizinhos</strong>: cada vídeo é comparado com os da mesma faixa de duração publicados até 21 dias antes ou depois — 1,00× é igual aos vizinhos. Comparar com o canal inteiro atribuiria ao título o que é efeito de época ou de formato. <strong>Isto é associação, não causa:</strong> um título junta várias características ao mesmo tempo, e o tema pesa mais que a forma.</p>
+<div class="alert"><strong>"Promessa ou tema de riqueza" aparece acima dos vizinhos e não deve virar recomendação de gancho.</strong> O próprio canal se declara contra promessas fáceis e atalhos, e a marca AUVP não promete enriquecimento. Render views não torna o gancho aceitável.</div>
+<div class="card"><div class="scroll"><table><thead><tr>
+<th>Característica</th><th class="n">Vídeos</th><th class="n">Mediana de views</th><th class="n">Views vs vizinhos</th><th style="width:22%"></th><th class="n">Engajamento vs vizinhos</th></tr></thead><tbody>
+<tr><td><strong>Tem antagonista (golpe, esquema, enganar)</strong><span class="sub-linha">ex.: COMO FAZER UM ESQUEMA IGUAL AO DO VORCARO? [TUTORIAL]</span></td><td class="n">8</td><td class="n">352.556</td><td class="n">1,80&times;</td><td><div class="barwrap"><div class="bar" style="width:100%"></div></div></td><td class="n">0,86&times;</td></tr>
+<tr><td><strong>Promessa ou tema de riqueza (rico, milionário)</strong><span class="sub-linha">ex.: O Brasil te impede de enriquecer? A verdadeira história não contada</span></td><td class="n">10</td><td class="n">324.527</td><td class="n">1,47&times;</td><td><div class="barwrap"><div class="bar" style="width:82%"></div></div></td><td class="n">0,98&times;</td></tr>
+<tr><td><strong>Estrutura &quot;assunto: gancho&quot; (dois-pontos)</strong><span class="sub-linha">ex.: OZEMPIC: COMO UMA CANETA DE EMAGRECER ESTÁ QUEBRANDO INDÚSTRIAS INTEIRAS</span></td><td class="n">25</td><td class="n">280.557</td><td class="n">1,19&times;</td><td><div class="barwrap"><div class="bar" style="width:66%"></div></div></td><td class="n">1,00&times;</td></tr>
+<tr><td><strong>Tem número</strong><span class="sub-linha">ex.: POR QUE SUA VIDA MUDA DEPOIS DE JUNTAR R$ 100 MIL REAIS? | Como juntar R$ 100 mil de forma rápida?</span></td><td class="n">40</td><td class="n">260.406</td><td class="n">1,09&times;</td><td><div class="barwrap"><div class="bar" style="width:61%"></div></div></td><td class="n">0,98&times;</td></tr>
+<tr><td><strong>Título curto (até 45 caracteres)</strong><span class="sub-linha">ex.: Faça uma dívida urgente</span></td><td class="n">61</td><td class="n">245.993</td><td class="n">1,09&times;</td><td><div class="barwrap"><div class="bar" style="width:61%"></div></div></td><td class="n">0,97&times;</td></tr>
+<tr><td><strong>Título em CAIXA ALTA</strong><span class="sub-linha">ex.: COMO FAZER UM ESQUEMA IGUAL AO DO VORCARO? [TUTORIAL]</span></td><td class="n">37</td><td class="n">247.430</td><td class="n">1,06&times;</td><td><div class="barwrap"><div class="bar" style="width:59%"></div></div></td><td class="n">1,00&times;</td></tr>
+<tr><td><strong>Crise, queda ou alerta</strong><span class="sub-linha">ex.: OZEMPIC: COMO UMA CANETA DE EMAGRECER ESTÁ QUEBRANDO INDÚSTRIAS INTEIRAS</span></td><td class="n">23</td><td class="n">240.267</td><td class="n">1,03&times;</td><td><div class="barwrap"><div class="bar bar-2" style="width:57%"></div></div></td><td class="n">0,98&times;</td></tr>
+<tr><td><strong>Cita valor em dinheiro (R$, mil, milhões)</strong><span class="sub-linha">ex.: POR QUE SUA VIDA MUDA DEPOIS DE JUNTAR R$ 100 MIL REAIS? | Como juntar R$ 100 mil de forma rápida?</span></td><td class="n">10</td><td class="n">264.966</td><td class="n">1,01&times;</td><td><div class="barwrap"><div class="bar bar-2" style="width:56%"></div></div></td><td class="n">0,94&times;</td></tr>
+<tr><td><strong>Fala do Brasil ou do brasileiro</strong><span class="sub-linha">ex.: A Receita Federal abriu a caixa preta do Brasil</span></td><td class="n">44</td><td class="n">231.734</td><td class="n">1,00&times;</td><td><div class="barwrap"><div class="bar bar-2" style="width:56%"></div></div></td><td class="n">1,03&times;</td></tr>
+<tr><td><strong>Começa com emoji de alerta</strong><span class="sub-linha">ex.: 🚨 Itaú enganando clientes &amp; crise no Banco Inter</span></td><td class="n">26</td><td class="n">221.718</td><td class="n">1,00&times;</td><td><div class="barwrap"><div class="bar bar-2" style="width:56%"></div></div></td><td class="n">1,06&times;</td></tr>
+<tr><td><strong>Política, governo ou eleição</strong><span class="sub-linha">ex.: O plano econômico de Flávio Bolsonaro</span></td><td class="n">26</td><td class="n">221.718</td><td class="n">0,97&times;</td><td><div class="barwrap"><div class="bar bar-2" style="width:54%"></div></div></td><td class="n">1,09&times;</td></tr>
+<tr><td><strong>Fala direto com quem assiste (você, seu, sua)</strong><span class="sub-linha">ex.: Por que você deveria fazer uma dívida urgente?</span></td><td class="n">29</td><td class="n">223.642</td><td class="n">0,97&times;</td><td><div class="barwrap"><div class="bar bar-2" style="width:54%"></div></div></td><td class="n">0,98&times;</td></tr>
+<tr><td><strong>É uma pergunta</strong><span class="sub-linha">ex.: COMO FAZER UM ESQUEMA IGUAL AO DO VORCARO? [TUTORIAL]</span></td><td class="n">69</td><td class="n">201.986</td><td class="n">0,94&times;</td><td><div class="barwrap"><div class="bar bar-3" style="width:52%"></div></div></td><td class="n">0,98&times;</td></tr>
+<tr><td><strong>Palavra absoluta (ninguém, nunca, todos, pior, maior)</strong><span class="sub-linha">ex.: 🚨 O ÊXODO EM MASSA de Dubai começou – é PIOR do que você imagina...</span></td><td class="n">22</td><td class="n">181.734</td><td class="n">0,88&times;</td><td><div class="barwrap"><div class="bar bar-3" style="width:49%"></div></div></td><td class="n">1,03&times;</td></tr>
+<tr><td><strong>Título longo (mais de 70 caracteres)</strong><span class="sub-linha">ex.: OZEMPIC: COMO UMA CANETA DE EMAGRECER ESTÁ QUEBRANDO INDÚSTRIAS INTEIRAS</span></td><td class="n">31</td><td class="n">172.585</td><td class="n">0,82&times;</td><td><div class="barwrap"><div class="bar bar-3" style="width:46%"></div></div></td><td class="n">1,05&times;</td></tr>
+<tr><td><strong>Produto ou ativo financeiro específico</strong><span class="sub-linha">ex.: A burrice da CLASSE MÉDIA: Dinheiro nas caixinhas</span></td><td class="n">20</td><td class="n">157.332</td><td class="n">0,73&times;</td><td><div class="barwrap"><div class="bar bar-3" style="width:41%"></div></div></td><td class="n">0,97&times;</td></tr>
+<tr><td><strong>Pobreza ou empobrecimento</strong> <span class="pill p-warn">amostra fraca</span><span class="sub-linha">ex.: A INTERNET CONVENCEU VOCÊ A FICAR POBRE</span></td><td class="n">4</td><td class="n">232.306</td><td class="n">0,80&times;</td><td><div class="barwrap"><div class="bar bar-3" style="width:44%"></div></div></td><td class="n">1,10&times;</td></tr>
+</tbody></table></div></div>
 </div></section>
 <section class="painel faixa" id="aba-pautas" role="tabpanel" aria-labelledby="tab-pautas" hidden><div class="container">
 <h2>Última seleção de pautas</h2>
-<p class="help">2026-09-24 15:34 &middot; gpt-5.5 &middot; 102 candidatos &middot; Custo desta execução: 9.749 entrada + 4.163 saída &middot; 76.1 segundos</p>
-<h3>Observações da IA</h3>
-<p class="help">Este campo já pegou dois defeitos antes de qualquer pessoa: candidatos ilegíveis por bug de leitura de feed, e duplicatas dominando o lote. Vale ler sempre.</p>
-<div class="card">Nenhum título continha instrução suspeita ao modelo. As melhores pautas são as que transformam a notícia em conflito com vítima clara: investidor comum, endividado, contribuinte, autônomo ou consumidor.</div>
+<p class="help">2026-09-25 11:20 &middot; gpt-5.5 &middot; 80 candidatos &middot; Custo desta execução: 9.600 entrada + 4.000 saída &middot; 59.3 segundos</p>
 <h3>O que você acha de cada uma?</h3>
 <p class="help">Clique numa opção por pauta — leva uns 5 minutos. <strong>Não precisa justificar as que você usaria</strong>; o que ensina a ferramenta são as recusas. Dá para parar no meio: o que você marcou fica salvo neste navegador.</p>
 <article class="pauta" data-i="1">
 <span class="ord">Pauta 1</span>
-<h4>PF vai apurar alto escalão da CVM no Caso Master</h4>
-<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://economia.uol.com.br/colunas/mariana-barbosa/2026/09/24/dino-poe-a-pf-para-apurar-atuacao-de-alto-escalao-da-cvm-no-caso-master.htm" target="_blank" rel="noopener noreferrer">UOL Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
-<p class="angulo">A CVM deixou o Banco Master chegar até aqui? A caixa-preta que pode explodir no seu bolso</p>
-<p class="campo"><b>Por quê:</b> Serve muito para vídeo longo de 20-30 minutos e tende a dar alcance com autoridade: junta Brasil, dinheiro do investidor comum, banco, regulador e possível conivência institucional. É exatamente o padrão que já funcionou no canal com Banco Master, Vorcaro, Itaú enganando clientes e Receita abrindo caixa-preta. Há antagonista claro — banco, fiscalização e bastidores do mercado — e consequência direta para quem deixa dinheiro em banco, CDB, corretora e FGC.</p>
-<p class="campo"><b>Risco:</b> Virar atualização jurídica do caso, com nomes e tramitação, em vez de explicar como o sistema financeiro permitiu o risco para o investidor comum.</p>
+<h4>Brasil registra mais de 870 mil indícios de contas laranja em seis meses</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/25/brasil-registra-mais-de-870-mil-indicios-de-contas-laranja-em-seis-meses-mostra-levantamento.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<p class="angulo">Seu CPF pode estar financiando golpes: a epidemia das contas laranja no Brasil</p>
+<p class="campo"><b>Por quê:</b> Funciona muito bem para vídeo longo de 10 a 30 minutos. Tem antagonista claro — criminosos, fintechs/bancos negligentes e um sistema que deixa a fraude correr — e chega direto no bolso de quem assiste via Pix, CPF, crédito, bloqueio de conta e risco de cair em golpe. É muito parecido com padrões que funcionaram no canal: bancos digitais, Receita abrindo caixa-preta, consórcio/golpes e denúncias com consequência pessoal. Tendência: acertou os dois, com alcance e autoridade.</p>
+<p class="campo"><b>Risco:</b> Fracassa se virar só estatística policial; precisa mostrar como a pessoa comum é afetada e como o sistema permite isso.</p>
 <div class="opcoes">
 <button type="button" data-cod="S" aria-pressed="false">usaria</button>
 <button type="button" data-cod="N" aria-pressed="false">não usaria</button>
@@ -348,11 +379,11 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 </article>
 <article class="pauta" data-i="2">
 <span class="ord">Pauta 2</span>
-<h4>Banco Central alerta para crédito agressivo e predatório</h4>
-<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/24/bc-esta-preocupado-com-ofertas-agressivas-e-predatorias-de-credito-diz-galipolo.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
-<p class="angulo">O banco está te empurrando dívida — e o Banco Central acabou de admitir</p>
-<p class="campo"><b>Por quê:</b> Serve para vídeo longo de 15-25 minutos e tende a acertar alcance e autoridade. Foi publicado em 2 veículos, sinal de assunto quente, e encaixa perfeitamente no canal: crédito predatório tem antagonista claro, afeta diretamente o bolso da classe média e permite uma tese forte contra bancos, fintechs, consignado, cartão e parcelamento. Conversa com vídeos que performaram muito bem sobre dívida, bancos digitais, Itaú enganando clientes e consórcio como golpe.</p>
-<p class="campo"><b>Risco:</b> Se ficar técnico demais em regulação bancária, perde força. Precisa ser contado como armadilha cotidiana: limite, cartão, consignado, crédito automático e renegociação falsa.</p>
+<h4>Prévia da inflação sobe acima do esperado, puxada pela energia elétrica</h4>
+<p class="fontes"><span class="fontes-rot">Publicado em 2 veículos:</span> <a href="https://exame.com/economia/previa-da-inflacao-ipca-15-sobe-para-070-em-setembro-acima-da-expectativa/" target="_blank" rel="noopener noreferrer">Exame<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a> <span class="sep" aria-hidden="true">&middot;</span> <a href="https://www.cnnbrasil.com.br/economia/money/macroeconomia/previa-da-inflacao-ipca-15-sobe-070-em-setembro-diz-ibge/" target="_blank" rel="noopener noreferrer">CNN Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<p class="angulo">Sua conta de luz voltou a travar o Brasil: a inflação que ninguém consegue fugir</p>
+<p class="campo"><b>Por quê:</b> Serve para vídeo longo de 10 a 30 minutos, com pegada de economia brasileira explicada pelo bolso. O tema foi publicado em 2 veículos e ainda aparece em várias manchetes correlatas sobre energia, dólar e IPCA, sinalizando assunto quente. O canal performa bem quando transforma macroeconomia em consequência pessoal, como Selic, Receita e economia brasileira travando. Tendência: autoridade com chance de alcance se a abertura for pela conta de luz, não pelo índice.</p>
+<p class="campo"><b>Risco:</b> Se o vídeo começar por IPCA-15, mercado e expectativa, vira notícia econômica genérica; o gancho precisa ser a conta que chegou mais cara.</p>
 <div class="opcoes">
 <button type="button" data-cod="S" aria-pressed="false">usaria</button>
 <button type="button" data-cod="N" aria-pressed="false">não usaria</button>
@@ -370,11 +401,11 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 </article>
 <article class="pauta" data-i="3">
 <span class="ord">Pauta 3</span>
-<h4>Lula diz que vai acabar com bets no Brasil</h4>
-<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://www.infomoney.com.br/politica/lula-afirma-que-vai-acabar-com-bets-no-pais-decisao-ja-tomada/" target="_blank" rel="noopener noreferrer">InfoMoney<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
-<p class="angulo">O fim das bets começou? Quem ficou rico enquanto o brasileiro perdia tudo</p>
-<p class="campo"><b>Por quê:</b> Serve para vídeo longo de 20-30 minutos e tende a dar alcance. Bets já têm histórico recente de funcionar no canal quando conectadas a dinheiro, crime, vício, PIB e influência digital. Há antagonistas fortes — casas de aposta, influenciadores, governo e lavagem de dinheiro — e a consequência é pessoal: endividamento, compulsão, destruição de renda e propaganda para pobre acreditar em dinheiro fácil.</p>
-<p class="campo"><b>Risco:</b> Virar torcida política pró ou contra Lula. O ângulo precisa ser econômico e moral: quem lucrou, quem perdeu e por que o Brasil permitiu isso.</p>
+<h4>Bets planejam ampliar apostas para pontos físicos no Brasil</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/25/na-mira-de-lula-bets-planejam-ampliar-apostas-para-pontos-fisicos-governo-previa-regulamentacao.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<p class="angulo">As bets querem sair do celular e entrar na sua esquina</p>
+<p class="campo"><b>Por quê:</b> Ótimo para longo de 10 a 30 minutos. Junta vício, governo, regulação, dinheiro da população e um antagonista forte: a indústria de apostas tentando ocupar ainda mais espaço. O canal já funcionou com bets entrando no PIB e com alertas sobre sistemas que empobrecem o brasileiro. Tendência: acertou os dois, porque tem alcance popular e análise financeira/social forte.</p>
+<p class="campo"><b>Risco:</b> Pode virar discussão moralista sobre aposta; precisa mostrar o mecanismo econômico de captura de renda da classe média e baixa.</p>
 <div class="opcoes">
 <button type="button" data-cod="S" aria-pressed="false">usaria</button>
 <button type="button" data-cod="N" aria-pressed="false">não usaria</button>
@@ -392,11 +423,11 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 </article>
 <article class="pauta" data-i="4">
 <span class="ord">Pauta 4</span>
-<h4>Mercado Livre vai vender medicamentos com receita, incluindo Ozempic</h4>
-<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://exame.com/invest/mercados/mercado-livre-vai-vender-medicamento-com-receita-incluindo-ozempic/" target="_blank" rel="noopener noreferrer">Exame<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
-<p class="angulo">Ozempic chegou ao Mercado Livre: a caneta que está mudando farmácias, médicos e o seu dinheiro</p>
-<p class="campo"><b>Por quê:</b> Serve para vídeo longo de 20-30 minutos e tende a alcance alto. O canal teve um dos maiores vídeos recentes com Ozempic quebrando indústrias inteiras, então este é uma continuação natural com gancho novo. Tem Brasil, consumo, saúde, e-commerce, regulação e empresas disputando o bolso do consumidor. Funciona melhor como análise de cadeia econômica: farmácias, planos, médicos, plataformas, falsificação e medicalização do emagrecimento.</p>
-<p class="campo"><b>Risco:</b> Se virar vídeo de saúde ou curiosidade sobre remédio, sai do canal. Precisa ser sobre indústria, incentivos econômicos e quem ganha dinheiro com a ansiedade do consumidor.</p>
+<h4>Mercado Livre derruba ações de redes de farmácia na Bolsa</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://economia.uol.com.br/noticias/redacao/2026/09/24/mercado-livre-derruba-acoes-de-redes-de-farmacia-na-bolsa.ghtm" target="_blank" rel="noopener noreferrer">UOL Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<p class="angulo">O Mercado Livre vai engolir as farmácias? O que acontece quando remédio vira marketplace</p>
+<p class="campo"><b>Por quê:</b> Serve para vídeo longo de 10 a 30 minutos. Tem empresa famosa, disrupção de setor conhecido e consequência para consumidor: preço, acesso a remédio, segurança, Anvisa e concentração de mercado. Parece com vídeos que funcionaram sobre Ozempic quebrando indústrias e grandes redes fechando lojas. Além disso, a história aparece em candidatos relacionados sobre Anvisa e avaliação de bancos, então há tração noticiosa. Tendência: alcance.</p>
+<p class="campo"><b>Risco:</b> Se ficar na ação das farmácias na Bolsa, morre; o foco precisa ser o impacto no consumidor e no poder do Mercado Livre.</p>
 <div class="opcoes">
 <button type="button" data-cod="S" aria-pressed="false">usaria</button>
 <button type="button" data-cod="N" aria-pressed="false">não usaria</button>
@@ -414,11 +445,11 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 </article>
 <article class="pauta" data-i="5">
 <span class="ord">Pauta 5</span>
-<h4>Governo diz que isenção do IR é neutra apesar de frustração com dividendos</h4>
-<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://www.cnnbrasil.com.br/economia/money/macroeconomia/governo-minimiza-frustracao-com-dividendos-e-diz-que-isencao-do-ir-e-neutra/" target="_blank" rel="noopener noreferrer">CNN Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
-<p class="angulo">A isenção do IR não é de graça: alguém vai pagar essa conta</p>
-<p class="campo"><b>Por quê:</b> Serve para vídeo longo de 15-25 minutos e tende a autoridade com bom alcance se o título for forte. O tema tem consequência direta no bolso da classe média: imposto de renda, dividendos, arrecadação, promessa política e compensação fiscal. O canal performa bem quando traduz política econômica abstrata em efeito pessoal, como Receita Federal, sonegação e economia brasileira contada pela vida da classe média.</p>
-<p class="campo"><b>Risco:</b> O título original é burocrático e morreria no canal. Se o vídeo for sobre tramitação, dividendos ou neutralidade fiscal em linguagem técnica, fica parecido com notícia setorial.</p>
+<h4>Roberto Carlos diz que perdeu 99% do que ganhou nos gramados</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://www.infomoney.com.br/minhas-financas/roberto-carlos-diz-que-perdeu-99-do-que-ganhou-nos-gramados-deixaram-conta-zerada/" target="_blank" rel="noopener noreferrer">InfoMoney<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<p class="angulo">Como alguém ganha milhões e termina sem nada? A tragédia financeira de Roberto Carlos</p>
+<p class="campo"><b>Por quê:</b> Bom para longo de 10 a 30 minutos com apelo de alcance. Celebridade + dinheiro perdido + delegar finanças a terceiros dá uma aula forte sobre patrimônio, confiança, assessores e estilo de vida. Conversa diretamente com a classe média que acha que o problema é só ganhar mais. Tendência: alcance com autoridade, se virar educação financeira real.</p>
+<p class="campo"><b>Risco:</b> Pode parecer fofoca esportiva; precisa usar a história como estudo de caso sobre patrimônio, não como comentário sobre futebol.</p>
 <div class="opcoes">
 <button type="button" data-cod="S" aria-pressed="false">usaria</button>
 <button type="button" data-cod="N" aria-pressed="false">não usaria</button>
@@ -436,11 +467,11 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 </article>
 <article class="pauta" data-i="6">
 <span class="ord">Pauta 6</span>
-<h4>BC aperta regras para criptoativos e exige aviso ao Coaf acima de US$ 10 mil</h4>
-<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/23/bc-regras-criptoativos.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
-<p class="angulo">O cerco às criptos começou: o Banco Central quer saber para onde seu dinheiro vai</p>
-<p class="campo"><b>Por quê:</b> Serve para vídeo longo de 15-25 minutos e tende a alcance. O assunto não deve ser tratado como dica de cripto, mas como fiscalização, Receita, Coaf, privacidade financeira e fim da sensação de anonimato. Isso conversa com pautas que funcionaram sobre Receita Federal, sonegação acabando e sistema financeiro monitorando o cidadão. Tem antagonista institucional e consequência pessoal para quem usa cripto, corretora ou manda dinheiro para fora.</p>
-<p class="campo"><b>Risco:</b> Se virar explicação técnica de criptoativo ou compliance, cai no padrão que não funciona no canal, como ABTC11 e temas excessivamente técnicos de investimento.</p>
+<h4>Pobreza na Argentina sobe de 28,2% para 32,3% no primeiro semestre de 2026</h4>
+<p class="fontes"><span class="fontes-rot">Publicado em 2 veículos:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/24/argentina-indice-pobreza.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a> <span class="sep" aria-hidden="true">&middot;</span> <a href="https://economia.uol.com.br/noticias/redacao/2026/09/24/pobreza-na-argentina-sobe-a-323-criancas-sao-as-mais-afetadas.ghtm" target="_blank" rel="noopener noreferrer">UOL Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<p class="angulo">O laboratório argentino está cobrando a conta: o que acontece quando a economia aperta de verdade</p>
+<p class="campo"><b>Por quê:</b> Serve para vídeo longo, especialmente de autoridade. Foi publicado em 2 veículos, sinal de relevância no dia. O canal costuma ir bem quando analisa planos econômicos e consequências reais para a população, desde que não fique abstrato. Dá para comparar promessa, ajuste, inflação, salário e empobrecimento sem virar torcida política. Tendência: autoridade, com algum alcance se conectado ao Brasil.</p>
+<p class="campo"><b>Risco:</b> Se virar debate ideológico pró ou contra Milei, perde força. Precisa ser: o que muda na vida, no salário e no patrimônio das pessoas.</p>
 <div class="opcoes">
 <button type="button" data-cod="S" aria-pressed="false">usaria</button>
 <button type="button" data-cod="N" aria-pressed="false">não usaria</button>
@@ -458,11 +489,11 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 </article>
 <article class="pauta" data-i="7">
 <span class="ord">Pauta 7</span>
-<h4>Avatares de IA viram máquinas de ganhar dinheiro nas redes</h4>
-<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/tecnologia/noticia/2026/09/24/ela-nao-existe-mas-paga-meu-cartao-avatares-de-ia-viram-maquinas-de-ganhar-dinheiro-nas-redes.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
-<p class="angulo">Ela não existe, mas está ficando rica: a nova fraude emocional da internet</p>
-<p class="campo"><b>Por quê:</b> Serve para vídeo longo de 20-30 minutos e tende a alcance, com chance de autoridade se conectar com comportamento financeiro. Tem o padrão do canal de denunciar uma crença moderna que empobrece pessoas: internet, parasocialidade, golpe emocional, assinatura, cartão, dopamina e falsa intimidade. É próximo do território de 'A internet convenceu você a ficar pobre' e permite mostrar como tecnologia transforma solidão em negócio.</p>
-<p class="campo"><b>Risco:</b> Pode parecer fofoca de rede social se não entrar no dinheiro: modelos de monetização, cartão, vício, assinaturas, golpes e venda de fantasia.</p>
+<h4>Novo lote do antigo PIS/Pasep começa a ser pago</h4>
+<p class="fontes"><span class="fontes-rot">Publicado em 2 veículos:</span> <a href="https://g1.globo.com/trabalho-e-carreira/noticia/2026/09/25/antigo-pispasep-novo-lote-de-dinheiro-esquecido-comeca-a-ser-pago-nesta-sexta-veja-quem-tem-direito.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a> <span class="sep" aria-hidden="true">&middot;</span> <a href="https://www.cnnbrasil.com.br/economia/seu-bolso/meu-dinheiro/pis-pasep-novo-lote-de-dinheiro-esquecido-e-pago-nesta-sexta-feira-25/" target="_blank" rel="noopener noreferrer">CNN Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<p class="angulo">Tem dinheiro esquecido do governo? O que você precisa entender antes de correr atrás</p>
+<p class="campo"><b>Por quê:</b> Funciona melhor como vídeo mais curto do canal, na faixa de 1 a 10 minutos, ou como quadro dentro do programa de domingo. Foi publicado em 2 veículos e tem consequência direta no bolso. Pode atrair busca e utilidade imediata sem virar recomendação de ativo. Tendência: alcance pontual, mais serviço do que autoridade.</p>
+<p class="campo"><b>Risco:</b> Talvez não sustente 20 minutos. Se for só tutorial de saque, fica com cara de portal de notícia e não de Investidor Sardinha.</p>
 <div class="opcoes">
 <button type="button" data-cod="S" aria-pressed="false">usaria</button>
 <button type="button" data-cod="N" aria-pressed="false">não usaria</button>
@@ -480,11 +511,11 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 </article>
 <article class="pauta" data-i="8">
 <span class="ord">Pauta 8</span>
-<h4>Banco Central avalia ligar Pix à Europa para remessas em segundos</h4>
-<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/24/banco-central-comeca-a-avaliar-ligacao-do-pix-com-a-europa.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
-<p class="angulo">O Pix vai atravessar o mundo — e isso pode matar uma indústria inteira de taxas</p>
-<p class="campo"><b>Por quê:</b> Serve para vídeo longo de 15-20 minutos e tende mais a autoridade do que alcance. O gancho é bom se for contado como guerra contra bancos, remessas caras, spread cambial, cartão internacional e burocracia para mandar dinheiro para fora. A consequência chega ao bolso de quem viaja, trabalha para fora, tem família no exterior ou quer dolarizar parte do patrimônio.</p>
-<p class="campo"><b>Risco:</b> Se for apenas 'nova funcionalidade do Pix', fica pequeno e institucional. Precisa ter antagonista: bancos, casas de câmbio, cartão e tarifas escondidas.</p>
+<h4>Trem famoso fatura R$ 70 milhões começando todo mês devendo R$ 1,5 milhão</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://exame.com/negocios/comeco-todo-mes-devendo-r-15-milhao-como-o-trem-mais-famoso-do-brasil-fatura-r-70-milhoes/" target="_blank" rel="noopener noreferrer">Exame<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<p class="angulo">Faturar milhões não significa ser rico: a mentira que quebra empresas e pessoas</p>
+<p class="campo"><b>Por quê:</b> Bom para longo de 10 a 30 minutos, com pegada de autoridade. O caso permite explicar fluxo de caixa, dívida, capital de giro e ilusão de faturamento — temas que servem tanto para empreendedor quanto para pessoa física. Combina com a linha do canal de destruir crenças financeiras erradas. Tendência: autoridade, com chance de alcance pelo título provocativo.</p>
+<p class="campo"><b>Risco:</b> Se ficar específico demais no trem ou no turismo, vira case empresarial nichado. O centro deve ser a diferença entre receita, lucro e liberdade financeira.</p>
 <div class="opcoes">
 <button type="button" data-cod="S" aria-pressed="false">usaria</button>
 <button type="button" data-cod="N" aria-pressed="false">não usaria</button>
@@ -502,11 +533,11 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 </article>
 <article class="pauta" data-i="9">
 <span class="ord">Pauta 9</span>
-<h4>Subsídios aos combustíveis já custaram R$ 40 bilhões</h4>
-<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/24/subvencoes-aos-combustiveis-ja-custaram-r40-bi-diz-ministro.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
-<p class="angulo">Você pagou R$ 40 bilhões para a gasolina parecer mais barata</p>
-<p class="campo"><b>Por quê:</b> Serve para vídeo longo de 15-25 minutos e tende a autoridade, podendo alcançar se o título for popular. Tem Brasil, imposto, combustível, governo e ilusão de preço baixo. Funciona porque transforma política econômica abstrata em conta pessoal: o consumidor acha que economizou na bomba, mas pagou via imposto, dívida, inflação ou corte de serviços.</p>
-<p class="campo"><b>Risco:</b> Pode virar discussão fiscal genérica. Precisa ser narrado como truque de bolso: preço artificial, conta escondida e transferência de dinheiro do contribuinte.</p>
+<h4>Black Friday 2026: data e dicas para não cair em ciladas</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/guia/guia-de-compras/presentes/quando-e-a-black-friday-em-2026-veja-data-e-dicas-para-nao-cair-em-ciladas.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<p class="angulo">A Black Friday não quer te dar desconto. Ela quer te fazer comprar o que você não precisa</p>
+<p class="campo"><b>Por quê:</b> Serve para vídeo longo de 10 a 30 minutos, especialmente perto da data. Tem antagonista claro — varejo, gatilhos de consumo, falsas promoções — e bate no bolso da audiência. Conversa com vídeos que funcionaram sobre internet convencendo pessoas a ficarem pobres e decisões de compra como carro/casa. Tendência: acertou os dois se for publicado no timing certo.</p>
+<p class="campo"><b>Risco:</b> Em setembro pode estar cedo demais. Se virar lista de dicas genéricas, perde o estilo do canal.</p>
 <div class="opcoes">
 <button type="button" data-cod="S" aria-pressed="false">usaria</button>
 <button type="button" data-cod="N" aria-pressed="false">não usaria</button>
@@ -524,11 +555,11 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 </article>
 <article class="pauta" data-i="10">
 <span class="ord">Pauta 10</span>
-<h4>Formalização bate recorde, mas 65% dos autônomos e empregadores ainda não têm CNPJ</h4>
-<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/empreendedorismo/noticia/2026/09/23/formalizacao-bate-recorde-mas-65percent-dos-empregadores-e-autonomos-ainda-nao-tem-cnpj-diz-ibge.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
-<p class="angulo">O brasileiro virou empreendedor — mas continua preso na informalidade</p>
-<p class="campo"><b>Por quê:</b> Serve para vídeo longo de 20-30 minutos e tende a autoridade. É menos explosivo, mas fala com muita gente da audiência: autônomos, pequenos empresários, MEI, PJ, impostos, crédito, aposentadoria e insegurança financeira. O canal pode usar o tema para mostrar como o Brasil empurra a pessoa a empreender sem estrutura e depois pune quem tenta crescer.</p>
-<p class="campo"><b>Risco:</b> O dado isolado é frio. Para funcionar, precisa virar história de vida financeira: por que o autônomo ganha, gasta mal, não se protege, não consegue crédito e vira refém do sistema.</p>
+<h4>Shows sem smartphones viram negócio milionário</h4>
+<p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://exame.com/tecnologia/sem-stories-sem-fotos-por-que-shows-sem-smartphone-se-tornaram-um-negocio-milionario/" target="_blank" rel="noopener noreferrer">Exame<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<p class="angulo">Agora você paga caro para recuperar a atenção que a internet roubou de você</p>
+<p class="campo"><b>Por quê:</b> Bom para longo de 10 a 30 minutos com ângulo ensaístico. Não é uma notícia financeira óbvia, mas cabe no canal se for tratada como economia da atenção, consumo, status e como empresas lucram vendendo a cura para um problema que a própria tecnologia criou. O canal já performou bem com críticas à internet empobrecendo as pessoas. Tendência: autoridade com possibilidade de alcance.</p>
+<p class="campo"><b>Risco:</b> Se ficar só na curiosidade de entretenimento, não é pauta do canal. Precisa amarrar em dinheiro, consumo e perda de controle sobre a própria vida.</p>
 <div class="opcoes">
 <button type="button" data-cod="S" aria-pressed="false">usaria</button>
 <button type="button" data-cod="N" aria-pressed="false">não usaria</button>
@@ -552,45 +583,543 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <textarea class="saida" id="saida" readonly></textarea>
 <p class="help" id="ajudaCopia" style="display:none">Pronto — as respostas estão na sua área de transferência. Cole numa mensagem para o Kenzo e pode fechar esta página.</p>
 <h3>Descartados de propósito</h3><div class="card"><table><tbody>
-<tr><td><strong>Treasuries disparam outra vez: como isso afeta o Brasil e o que fazer agora?</strong><p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://www.infomoney.com.br/onde-investir/treasuries-disparam-de-novo-como-afeta-o-brasil-e-o-que-fazer-agora/" target="_blank" rel="noopener noreferrer">InfoMoney<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p><span class="sub-linha">Parece forte para canal de finanças, mas é o tipo de pauta que costuma morrer aqui: Treasuries, juros globais e 'o que fazer agora' soam como comentário de mercado e recomendação tática. O canal performa melhor quando traduz isso em consequência pessoal, não quando segue manchete de ativo ou taxa.</span></td></tr>
-<tr><td><strong>Dólar sobe a R$ 5,16, com negociações entre EUA e Irã e eleições no radar; Ibovespa cai</strong><p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/23/dolar-ibovespa.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p><span class="sub-linha">Mesmo publicado em 2 veículos, dólar subindo e Ibovespa caindo é notícia de mercado pontual. No perfil deste canal, esse tipo de atualização tende a ser fraca se não houver uma tese maior sobre salário, inflação, dívida ou empobrecimento da classe média.</span></td></tr>
-<tr><td><strong>IBGE quer incluir mercado de drogas ilícitas no PIB; entenda por que e como será o cálculo</strong><p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/24/ibge-quer-incluir-mercado-de-drogas-ilicitas-no-pib-entenda-por-que-e-como-sera-o-calculo.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p><span class="sub-linha">O tema de drogas ilícitas no PIB é chamativo e combina com o canal, mas já foi praticamente explorado em vídeo recente do próprio canal sobre tráfico e bets entrando no PIB. Repetir agora tende a parecer reciclagem, a menos que haja uma revelação nova muito mais forte.</span></td></tr>
-<tr><td><strong>Terras raras, tarifas, agro e IA: entenda o que Trump e Xi negociam e os impactos para o Brasil</strong><p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/24/trump-xi-negociacoes-encontro.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p><span class="sub-linha">Trump, Xi, tarifas, terras raras, agro e IA parecem grandes, mas no canal esse tipo de geopolítica ampla costuma ser arriscado quando não chega rápido no bolso do brasileiro. Pode servir como bloco de programa semanal, não como vídeo próprio forte.</span></td></tr>
+<tr><td><strong>Renda Fixa Hoje: as taxas de CDBs, LCIs e LCAs na XP com prévia da inflação em alta</strong><p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://www.infomoney.com.br/onde-investir/renda-fixa-hoje-as-taxas-de-cdbs-lcis-e-lcas-na-xp-com-previa-da-inflacao-em-alta/" target="_blank" rel="noopener noreferrer">InfoMoney<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p><span class="sub-linha">Parece tema de finanças, mas é exatamente o tipo que o canal costuma matar: taxas de CDB, LCI e LCA em corretora específica. O perfil mostra que produto/ativo específico e renda fixa pontual performam mal aqui.</span></td></tr>
+<tr><td><strong>Ibovespa oscila com pesquisa eleitoral e IPCA-15 no radar; dólar sobe</strong><p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://www.cnnbrasil.com.br/economia/money/mercado/mercado-financeiro-ibovespa-dolar-25-setembro-2026/" target="_blank" rel="noopener noreferrer">CNN Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p><span class="sub-linha">Ibovespa, dólar, pesquisa eleitoral e IPCA no radar é manchete forte para mercado, mas fraca para este canal. É ticker de mercado sem consequência pessoal clara. Melhor aproveitar a inflação pela conta de luz, não pela oscilação da Bolsa.</span></td></tr>
+<tr><td><strong>Bitcoin sobe de novo e acumula ganhos de 8% nos últimos 7 dias</strong><p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://exame.com/future-of-money/bitcoin-hoje-25-09-2026/" target="_blank" rel="noopener noreferrer">Exame<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p><span class="sub-linha">Bitcoin subindo 8% em sete dias é assunto quente, mas vira preço de ativo e timing de mercado. O histórico do canal mostra que cripto/bitcoin só funciona quando há tese ampla ou provocação forte, não como notícia de cotação.</span></td></tr>
+<tr><td><strong>Petróleo na costa do Amapá divide moradores entre expectativa de riqueza e medo de impactos</strong><p class="fontes"><span class="fontes-rot">Matéria:</span> <a href="https://g1.globo.com/economia/noticia/2026/09/25/petroleo-na-costa-do-amapa-divide-moradores-entre-expectativa-de-riqueza-e-medo-de-impactos.ghtml" target="_blank" rel="noopener noreferrer">G1 Economia<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p><span class="sub-linha">Petróleo na costa do Amapá parece grande e nacional, mas tem alto risco de virar pauta setorial/ambiental sem bolso imediato. O canal já teve vídeos de petróleo e choque global com desempenho fraco quando o impacto pessoal não estava evidente.</span></td></tr>
 </tbody></table></div>
+</div></section>
+<section class="painel faixa" id="aba-validar-a-identidade-editorial" role="tabpanel" aria-labelledby="tab-validar-a-identidade-editorial" hidden><div class="container">
+<h2>Validar a identidade editorial</h2>
+<p class="help">Estes 32 vídeos são do próprio canal. Para cada um, marque a família editorial que você acha que ele representa — pelo título, ou abrindo o vídeo. <strong>A IA já classificou os mesmos vídeos, e a resposta dela não aparece aqui de propósito:</strong> ver antes puxaria a resposta. Depois comparamos, e a taxa de acerto diz se a leitura editorial que orienta a IA bate com a sua. Leva uns 5 minutos; o que você marcar fica salvo neste navegador. Passe o mouse sobre uma família para ver a descrição dela.</p>
+<div class="id-lote" data-lote="identidade-amostra-20260925" hidden></div>
+<article class="valida" data-vid="djp3lu_oyyQ">
+<span class="ord">Vídeo 1</span>
+<h4>Um jeito de investir totalmente novo e 100% melhor</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-05-27 &middot; 214.216 views &middot; <a href="https://www.youtube.com/watch?v=djp3lu_oyyQ" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="9jRZEB-lopI">
+<span class="ord">Vídeo 2</span>
+<h4>🚨A verdade sobre a reunião do Trump com o Lula e mais notícias que movimentaram o mercado</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-05-10 &middot; 125.463 views &middot; <a href="https://www.youtube.com/watch?v=9jRZEB-lopI" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="p7zT5UMaT6Y">
+<span class="ord">Vídeo 3</span>
+<h4>OZEMPIC: COMO UMA CANETA DE EMAGRECER ESTÁ QUEBRANDO INDÚSTRIAS INTEIRAS</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-09-11 &middot; 1.430.340 views &middot; <a href="https://www.youtube.com/watch?v=p7zT5UMaT6Y" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="Xl_0YABaXLo">
+<span class="ord">Vídeo 4</span>
+<h4>🚨 O EFEITO DOMINÓ COMEÇOU: grandes empresas estão caindo</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-08-30 &middot; 655.650 views &middot; <a href="https://www.youtube.com/watch?v=Xl_0YABaXLo" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="XernAYrpLoo">
+<span class="ord">Vídeo 5</span>
+<h4>O HOMEM MAIS PODEROSO DO MUNDO?</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-05-13 &middot; 81.153 views &middot; <a href="https://www.youtube.com/watch?v=XernAYrpLoo" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="yE7IZLusJ6I">
+<span class="ord">Vídeo 6</span>
+<h4>O Brasil te impede de enriquecer? A verdadeira história não contada</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-05-01 &middot; 547.259 views &middot; <a href="https://www.youtube.com/watch?v=yE7IZLusJ6I" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="Kd9VNRpeUG8">
+<span class="ord">Vídeo 7</span>
+<h4>O estudo mais controverso das finanças</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-05-05 &middot; 186.448 views &middot; <a href="https://www.youtube.com/watch?v=Kd9VNRpeUG8" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="mAD55BIwCRg">
+<span class="ord">Vídeo 8</span>
+<h4>SUA MULHER PODE DESTRUIR O SEU FUTURO FINANCEIRO</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-07-30 &middot; 255.678 views &middot; <a href="https://www.youtube.com/watch?v=mAD55BIwCRg" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="RUXJXO9tRtY">
+<span class="ord">Vídeo 9</span>
+<h4>Como o TikTok vai destruir a vida dos brasileiros sem ninguém ver...</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-08-11 &middot; 324.286 views &middot; <a href="https://www.youtube.com/watch?v=RUXJXO9tRtY" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="K2Y_4jkfTCg">
+<span class="ord">Vídeo 10</span>
+<h4>Poupar 70% do salário te aposenta em 8,6 anos</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-08-20 &middot; 295.057 views &middot; <a href="https://www.youtube.com/watch?v=K2Y_4jkfTCg" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="EmBh-dimM6E">
+<span class="ord">Vídeo 11</span>
+<h4>🚨 O mercado está com MEDO das eleições: por que os investidores estão fugindo do Brasil?</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-08-23 &middot; 298.475 views &middot; <a href="https://www.youtube.com/watch?v=EmBh-dimM6E" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="_0iSEyDE6pI">
+<span class="ord">Vídeo 12</span>
+<h4>Trump ficou doidão e taxou o Brasil agressivamente</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-07-16 &middot; 202.991 views &middot; <a href="https://www.youtube.com/watch?v=_0iSEyDE6pI" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="j5CshMFh9Tw">
+<span class="ord">Vídeo 13</span>
+<h4>Amortizar a parcela do financiamento vale a pena?</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-06-15 &middot; 148.498 views &middot; <a href="https://www.youtube.com/watch?v=j5CshMFh9Tw" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="sq_BvkbTbVs">
+<span class="ord">Vídeo 14</span>
+<h4>Lula x Flávio: Quem o mercado prefere?</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-04-01 &middot; 453.899 views &middot; <a href="https://www.youtube.com/watch?v=sq_BvkbTbVs" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="4pWt49P4RtU">
+<span class="ord">Vídeo 15</span>
+<h4>Pare de rasgar dinheiro! O básico de economia que ninguém te ensina.</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-08-24 &middot; 160.948 views &middot; <a href="https://www.youtube.com/watch?v=4pWt49P4RtU" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="A-P7kpYWq_s">
+<span class="ord">Vídeo 16</span>
+<h4>Como juntar R$ 100 mil em menos de 10 meses</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-04-23 &middot; 359.109 views &middot; <a href="https://www.youtube.com/watch?v=A-P7kpYWq_s" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="FFKGBZc6G_A">
+<span class="ord">Vídeo 17</span>
+<h4>AULA COMPLETA SOBRE TESOURO DIRETO E PASSO A PASSO PARA INVESTIR HOJE</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-06-12 &middot; 188.926 views &middot; <a href="https://www.youtube.com/watch?v=FFKGBZc6G_A" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="GeLsyTmrUnQ">
+<span class="ord">Vídeo 18</span>
+<h4>SE EXPLICAR FAZ A CLASSE MÉDIA FICAR CADA VEZ MAIS POBRE</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-03-26 &middot; 117.299 views &middot; <a href="https://www.youtube.com/watch?v=GeLsyTmrUnQ" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="vwv4aViBSC0">
+<span class="ord">Vídeo 19</span>
+<h4>Trump declara emergência nacional sobre o Brasil</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-07-29 &middot; 169.079 views &middot; <a href="https://www.youtube.com/watch?v=vwv4aViBSC0" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="B-f1sjU7uFU">
+<span class="ord">Vídeo 20</span>
+<h4>Investir R$ 100 por mês pode mudar sua vida?</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-09-18 &middot; 311.848 views &middot; <a href="https://www.youtube.com/watch?v=B-f1sjU7uFU" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="zuhCK2AovAQ">
+<span class="ord">Vídeo 21</span>
+<h4>Essa renda fixa paga muito mais que a Selic. Vale o risco?</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-07-22 &middot; 105.124 views &middot; <a href="https://www.youtube.com/watch?v=zuhCK2AovAQ" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="NQ9vnGTbgLY">
+<span class="ord">Vídeo 22</span>
+<h4>A regra para você ser aprovado em qualquer entrevista de emprego</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-07-02 &middot; 222.892 views &middot; <a href="https://www.youtube.com/watch?v=NQ9vnGTbgLY" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="zRs40-LtEcY">
+<span class="ord">Vídeo 23</span>
+<h4>É o fim do Dólar? Porque ele está caindo TÃO rápido?</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-04-17 &middot; 179.468 views &middot; <a href="https://www.youtube.com/watch?v=zRs40-LtEcY" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="7_ihShDm6Qk">
+<span class="ord">Vídeo 24</span>
+<h4>O Brasil pode enfrentar uma avalanche de falências?</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-08-05 &middot; 265.402 views &middot; <a href="https://www.youtube.com/watch?v=7_ihShDm6Qk" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="SBOdzW5G8Zk">
+<span class="ord">Vídeo 25</span>
+<h4>Sinal de alerta na economia: O ciclo perigoso começou e vai dar m*rda</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-04-20 &middot; 240.267 views &middot; <a href="https://www.youtube.com/watch?v=SBOdzW5G8Zk" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="vh4NEwbOCj0">
+<span class="ord">Vídeo 26</span>
+<h4>Nubank liquidado?</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-06-12 &middot; 154.403 views &middot; <a href="https://www.youtube.com/watch?v=vh4NEwbOCj0" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="dWkb6N9tGwU">
+<span class="ord">Vídeo 27</span>
+<h4>Estrela entra em recuperação judicial.</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-05-22 &middot; 26.265 views &middot; <a href="https://www.youtube.com/watch?v=dWkb6N9tGwU" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="alG3dhoygDA">
+<span class="ord">Vídeo 28</span>
+<h4>🚨 ACORDO HISTÓRICO muda tudo! Petróleo despenca, bolsas disparam e Brasil segue em alerta</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-06-14 &middot; 179.396 views &middot; <a href="https://www.youtube.com/watch?v=alG3dhoygDA" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="JoyOSVjy6zQ">
+<span class="ord">Vídeo 29</span>
+<h4>A INTERNET CONVENCEU VOCÊ A FICAR POBRE</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-05-16 &middot; 638.213 views &middot; <a href="https://www.youtube.com/watch?v=JoyOSVjy6zQ" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="Dma8Akr0OJw">
+<span class="ord">Vídeo 30</span>
+<h4>Você pode pagar. Mas deveria comprar?</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-08-18 &middot; 236.395 views &middot; <a href="https://www.youtube.com/watch?v=Dma8Akr0OJw" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="rdHK8pvbao8">
+<span class="ord">Vídeo 31</span>
+<h4>🚨 STF implode e Lula aumenta o Bolsa Família: a semana que abalou o Brasil</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-09-20 &middot; 387.072 views &middot; <a href="https://www.youtube.com/watch?v=rdHK8pvbao8" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<article class="valida" data-vid="hORJvcWlJi8">
+<span class="ord">Vídeo 32</span>
+<h4>Como administrar suas finanças como o 1% mais rico (Sem fazer nenhum curso)</h4>
+<p class="fontes"><span class="fontes-rot">Publicado:</span> 2026-04-07 &middot; 157.742 views &middot; <a href="https://www.youtube.com/watch?v=hORJvcWlJi8" target="_blank" rel="noopener noreferrer">YouTube<svg class="ico" aria-hidden="true" viewBox="0 0 256 256" width="16" height="16"><path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span class="sr"> (abre em nova aba)</span></a></p>
+<div class="opcoes">
+<button type="button" data-fam="economia" aria-pressed="false" title="economia brasileira contada como consequência na vida de quem assiste">Economia do Brasil no bolso</button>
+<button type="button" data-fam="denuncia" aria-pressed="false" title="esquema, golpe, empresa ou instituição prejudicando pessoas">Denúncia</button>
+<button type="button" data-fam="provocacao" aria-pressed="false" title="contraria o senso comum financeiro">Provocação</button>
+<button type="button" data-fam="educacao" aria-pressed="false" title="fundamento de finanças pessoais: gastar, poupar, começar a investir">Educação financeira</button>
+<button type="button" data-fam="politica" aria-pressed="false" title="governo, eleição, propostas econômicas de candidatos">Política e eleição</button>
+<button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
+<button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
+<button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+</article>
+<div class="barra-acao">
+<button type="button" class="botao" id="btCopiarId" data-ok="Respostas copiadas" disabled>Copiar respostas</button>
+<button type="button" class="botao sec" id="btLimparId">Limpar tudo</button>
+<span class="contagem" id="contagemId"></span>
+</div>
+<textarea class="saida" id="saidaId" readonly></textarea>
+<p class="help" id="ajudaCopiaId" style="display:none">Pronto — as respostas estão na sua área de transferência. Cole numa mensagem para o Kenzo.</p>
 </div></section>
 <section class="painel faixa" id="aba-uso-e-custo" role="tabpanel" aria-labelledby="tab-uso-e-custo" hidden><div class="container">
 <h2>Uso e custo</h2>
 <p class="help">Quanto esta brincadeira está consumindo. <strong>Cuidado com a intuição aqui:</strong> em tokens, a entrada é o dobro da saída — mas a saída custa <strong>6x mais por token</strong> ($30 contra $5 por milhão), então ela é <strong>três quartos da conta</strong>. Isso inverte a lógica de economia: cortar candidatos reduz entrada, que é a parte barata. O que pesa é o tamanho da resposta, e a resposta tem o mesmo tamanho julgando 100 ou 13 candidatos.</p>
 <div class="grid">
-<div class="stat"><div class="k">Execuções</div><div class="v">7</div><div class="n">&nbsp;</div></div>
-<div class="stat"><div class="k">Tokens no total</div><div class="v">75.892</div><div class="n">51.262 entrada + 24.630 saída</div></div>
-<div class="stat"><div class="k">Média por execução</div><div class="v">10.842</div><div class="n">tokens</div></div>
-<div class="stat"><div class="k">Custo acumulado</div><div class="v">USD 1,00</div><div class="n">USD 0,142 média por execução</div></div>
+<div class="stat"><div class="k">Execuções</div><div class="v">9</div><div class="n">&nbsp;</div></div>
+<div class="stat"><div class="k">Tokens no total</div><div class="v">104.065</div><div class="n">70.402 entrada + 33.663 saída</div></div>
+<div class="stat"><div class="k">Média por execução</div><div class="v">11.563</div><div class="n">tokens</div></div>
+<div class="stat"><div class="k">Custo acumulado</div><div class="v">USD 1,36</div><div class="n">USD 0,151 média por execução</div></div>
 </div>
-<p class="help">Se rodar 1 vez(es) por dia, no ritmo médio destas execuções. <strong>USD 4,27</strong> por mês.</p>
+<p class="help">Se rodar 1 vez(es) por dia, no ritmo médio destas execuções. <strong>USD 4,54</strong> por mês.</p>
 <h3>Tokens por execução</h3>
 <div class="card"><div class="scroll"><table><tbody>
 <tr><td style="width:150px" class="mut">2026-09-08 16:54</td><td style="width:60px">lista</td>
-<td><div class="barras"><div class="bar" style="width:49%"></div><div class="bar bar-2" style="width:20%"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:47%"></div><div class="bar bar-2" style="width:19%"></div></div></td>
 <td class="n" style="width:120px">9.540</td></tr>
 <tr><td style="width:150px" class="mut">2026-09-08 16:57</td><td style="width:60px">lista</td>
-<td><div class="barras"><div class="bar" style="width:51%"></div><div class="bar bar-2" style="width:21%"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:48%"></div><div class="bar bar-2" style="width:20%"></div></div></td>
 <td class="n" style="width:120px">10.024</td></tr>
 <tr><td style="width:150px" class="mut">2026-09-08 16:58</td><td style="width:60px">nota</td>
-<td><div class="barras"><div class="bar" style="width:50%"></div><div class="bar bar-2" style="width:27%"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:48%"></div><div class="bar bar-2" style="width:26%"></div></div></td>
 <td class="n" style="width:120px">10.730</td></tr>
 <tr><td style="width:150px" class="mut">2026-09-08 17:02</td><td style="width:60px">lista</td>
-<td><div class="barras"><div class="bar" style="width:50%"></div><div class="bar bar-2" style="width:26%"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:47%"></div><div class="bar bar-2" style="width:25%"></div></div></td>
 <td class="n" style="width:120px">10.476</td></tr>
 <tr><td style="width:150px" class="mut">2026-09-08 17:03</td><td style="width:60px">nota</td>
-<td><div class="barras"><div class="bar" style="width:49%"></div><div class="bar bar-2" style="width:28%"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:47%"></div><div class="bar bar-2" style="width:27%"></div></div></td>
 <td class="n" style="width:120px">10.695</td></tr>
 <tr><td style="width:150px" class="mut">2026-09-10 11:01</td><td style="width:60px">lista</td>
-<td><div class="barras"><div class="bar" style="width:50%"></div><div class="bar bar-2" style="width:26%"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:48%"></div><div class="bar bar-2" style="width:24%"></div></div></td>
 <td class="n" style="width:120px">10.515</td></tr>
 <tr><td style="width:150px" class="mut">2026-09-24 15:34</td><td style="width:60px">lista</td>
-<td><div class="barras"><div class="bar" style="width:70%"></div><div class="bar bar-2" style="width:30%"></div></div></td>
+<td><div class="barras"><div class="bar" style="width:67%"></div><div class="bar bar-2" style="width:29%"></div></div></td>
 <td class="n" style="width:120px">13.912</td></tr>
+<tr><td style="width:150px" class="mut">2026-09-25 11:20</td><td style="width:60px">lista</td>
+<td><div class="barras"><div class="bar" style="width:66%"></div><div class="bar bar-2" style="width:27%"></div></div></td>
+<td class="n" style="width:120px">13.600</td></tr>
+<tr><td style="width:150px" class="mut">2026-09-25 11:21</td><td style="width:60px">nota</td>
+<td><div class="barras"><div class="bar" style="width:65%"></div><div class="bar bar-2" style="width:35%"></div></div></td>
+<td class="n" style="width:120px">14.573</td></tr>
 </tbody></table>
 <p class="help nota-tabela"><span class="leg"></span> entrada &nbsp;&nbsp; <span class="leg leg-2"></span> saída</p>
 </div></div>
@@ -598,6 +1127,8 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
 <section class="painel faixa" id="aba-historico-de-execucoes" role="tabpanel" aria-labelledby="tab-historico-de-execucoes" hidden><div class="container">
 <h2>Histórico de execuções</h2><div class="card"><div class="scroll"><table><thead><tr>
 <th>Quando</th><th>Formato</th><th>Modelo</th><th class="n">Candidatos</th><th class="n">Tokens</th><th class="n">Tempo</th></tr></thead><tbody>
+<tr><td>2026-09-25 11:21</td><td>nota</td><td>gpt-5.5</td><td class="n">80</td><td class="n">14.573</td><td class="n">60.2s</td></tr>
+<tr><td>2026-09-25 11:20</td><td>lista</td><td>gpt-5.5</td><td class="n">80</td><td class="n">13.600</td><td class="n">59.3s</td></tr>
 <tr><td>2026-09-24 15:34</td><td>lista</td><td>gpt-5.5</td><td class="n">102</td><td class="n">13.912</td><td class="n">76.1s</td></tr>
 <tr><td>2026-09-10 11:01</td><td>lista</td><td>gpt-5.5</td><td class="n">100</td><td class="n">10.515</td><td class="n">61.8s</td></tr>
 <tr><td>2026-09-08 17:03</td><td>nota</td><td>gpt-5.5</td><td class="n">100</td><td class="n">10.695</td><td class="n">54.1s</td></tr>
@@ -715,6 +1246,33 @@ Repare que essas tres sao exatamente o que a maioria dos canais de financas publ
     sai.classList.remove('on'); ajuda.style.display='none';
   });
 
+  contar();
+})();
+</script>
+<script>
+(function(){
+  var itens=[].slice.call(document.querySelectorAll('.valida'));
+  if(!itens.length) return;
+  var el=document.querySelector('.id-lote'); var lote=el?el.dataset.lote:'x';
+  var CHAVE='radar-identidade-'+lote, est={};
+  try{est=JSON.parse(localStorage.getItem(CHAVE)||'{}');}catch(e){est={};}
+  function salvar(){try{localStorage.setItem(CHAVE,JSON.stringify(est));}catch(e){}}
+  function pintar(a){var v=a.dataset.vid; a.querySelectorAll('[data-fam]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.fam===est[v]?'true':'false');}); a.classList.toggle('decidida',!!est[v]);}
+  var bt=document.getElementById('btCopiarId'), lim=document.getElementById('btLimparId'), cont=document.getElementById('contagemId'), sai=document.getElementById('saidaId'), aj=document.getElementById('ajudaCopiaId');
+  function contar(){var n=itens.filter(function(a){return est[a.dataset.vid];}).length; cont.textContent=n+' de '+itens.length+' respondidas'; bt.disabled=(n===0);}
+  function aviso(msg){var t=document.getElementById('toast'); if(!t||!msg) return; t.textContent=msg; t.classList.add('on'); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('on');},2400);}
+  itens.forEach(function(a){
+    a.querySelectorAll('[data-fam]').forEach(function(b){
+      b.addEventListener('click',function(){var v=a.dataset.vid; if(est[v]===b.dataset.fam){delete est[v];}else{est[v]=b.dataset.fam;} salvar(); pintar(a); contar();});
+    });
+    pintar(a);
+  });
+  bt.addEventListener('click',function(){
+    var l=['IDENTIDADE '+lote]; itens.forEach(function(a){var v=a.dataset.vid; l.push(v+' >>> '+(est[v]||''));});
+    var txt=l.join('\n'); sai.value=txt; sai.classList.add('on'); aj.style.display='block'; sai.focus(); sai.select();
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){aviso(bt.dataset.ok);}).catch(function(){});}
+  });
+  lim.addEventListener('click',function(){est={}; salvar(); itens.forEach(pintar); contar(); sai.classList.remove('on'); aj.style.display='none';});
   contar();
 })();
 </script>
