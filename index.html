@@ -149,6 +149,13 @@ td .fontes{margin:0}
 .valida.decidida{border-color:var(--verde);box-shadow:inset 4px 0 0 var(--verde)}
 .valida h4{margin:15px 0}
 .valida .opcoes{margin-top:15px;padding-top:15px}
+.valida .opcoes button:disabled{cursor:default}
+.valida .opcoes button:disabled:not([aria-pressed="true"]){opacity:.45}
+.ia-resp{margin-top:15px;padding:15px;border-radius:12px;background:var(--branco);border:1px solid rgba(0,0,0,.08)}
+.ia-resp p{margin:0}
+.ia-resp .ia-porque{margin-top:5px;color:var(--cinza2)}
+.ia-cmp.igual{color:var(--verde);font-weight:600}
+.ia-cmp.dif{color:var(--chumbo);font-weight:600}
 
 /* toast */
 .toast{position:fixed;right:24px;bottom:30px;z-index:10;background:var(--chumbo);color:var(--branco);border-left:4px solid var(--amarelo);border-radius:12px;padding:15px 30px;font-family:var(--f-rotulo);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.1em;opacity:0;transform:translateY(15px);transition:opacity 240ms ease,transform 240ms ease;pointer-events:none}
@@ -170,7 +177,7 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <span class="eyebrow">AUVP Radar · Monitoramento de pautas</span>
 <h1>O que está em alta, e o que rende no canal.</h1>
 <p class="sub">Temas coletados das fontes de economia, a leitura do canal que orienta a IA e as pautas recomendadas para avaliação. Atualizado a cada rodada.</p>
-<p class="ts">Painel gerado em 25/09/2026 11:31</p>
+<p class="ts">Painel gerado em 25/09/2026 12:29</p>
 </div></header>
 <div class="abas-faixa"><div class="container"><nav class="abas" role="tablist" aria-label="Seções do painel">
 <button type="button" role="tab" id="tab-como-esta-agora" aria-controls="aba-como-esta-agora" data-aba="como-esta-agora" aria-selected="true">Como está agora</button>
@@ -591,7 +598,7 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 </div></section>
 <section class="painel faixa" id="aba-validar-a-identidade-editorial" role="tabpanel" aria-labelledby="tab-validar-a-identidade-editorial" hidden><div class="container">
 <h2>Validar a identidade editorial</h2>
-<p class="help">Estes 32 vídeos são do próprio canal. Para cada um, marque a família editorial que você acha que ele representa — pelo título, ou abrindo o vídeo. <strong>A IA já classificou os mesmos vídeos, e a resposta dela não aparece aqui de propósito:</strong> ver antes puxaria a resposta. Depois comparamos, e a taxa de acerto diz se a leitura editorial que orienta a IA bate com a sua. Leva uns 5 minutos; o que você marcar fica salvo neste navegador. Passe o mouse sobre uma família para ver a descrição dela.</p>
+<p class="help">Estes 32 vídeos são do próprio canal. Para cada um, marque a família editorial que você acha que ele representa — pelo título, ou abrindo o vídeo. <strong>A IA já classificou os mesmos vídeos, e a resposta dela aparece logo depois que você escolhe</strong>, com o motivo. A escolha trava nesse momento, de propósito: se desse para trocar depois de ver a IA, a comparação mediria cortesia, não acerto. Se clicou errado, o botão Limpar zera tudo. Leva uns 5 minutos; o que você marcar fica salvo neste navegador. Passe o mouse sobre uma família para ver a descrição dela.</p>
 <div class="id-lote" data-lote="identidade-amostra-20260925" hidden></div>
 <article class="valida" data-vid="djp3lu_oyyQ">
 <span class="ord">Vídeo 1</span>
@@ -606,6 +613,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="provocacao" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Provocação</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Propõe uma forma nova e superior de investir, contrariando métodos comuns.</p>
 </div>
 </article>
 <article class="valida" data-vid="9jRZEB-lopI">
@@ -622,6 +633,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="politica" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Política e eleição</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Reunião Trump e Lula com impacto econômico e político.</p>
+</div>
 </article>
 <article class="valida" data-vid="p7zT5UMaT6Y">
 <span class="ord">Vídeo 3</span>
@@ -636,6 +651,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="mercado" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Notícia de mercado</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Produto famoso afetando setores e indústrias inteiras.</p>
 </div>
 </article>
 <article class="valida" data-vid="Xl_0YABaXLo">
@@ -652,6 +671,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="mercado" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Notícia de mercado</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Queda de grandes empresas como notícia de mercado.</p>
+</div>
 </article>
 <article class="valida" data-vid="XernAYrpLoo">
 <span class="ord">Vídeo 5</span>
@@ -666,6 +689,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="outro" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Outro</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Título genérico sobre poder, sem ângulo financeiro claro.</p>
 </div>
 </article>
 <article class="valida" data-vid="yE7IZLusJ6I">
@@ -682,6 +709,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="economia" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Economia do Brasil no bolso</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Relaciona estrutura econômica do Brasil ao enriquecimento pessoal.</p>
+</div>
 </article>
 <article class="valida" data-vid="Kd9VNRpeUG8">
 <span class="ord">Vídeo 7</span>
@@ -696,6 +727,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="educacao" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Educação financeira</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Aborda estudo de finanças, com caráter educativo.</p>
 </div>
 </article>
 <article class="valida" data-vid="mAD55BIwCRg">
@@ -712,6 +747,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="provocacao" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Provocação</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Provoca sobre relacionamento e impacto no futuro financeiro.</p>
+</div>
 </article>
 <article class="valida" data-vid="RUXJXO9tRtY">
 <span class="ord">Vídeo 9</span>
@@ -726,6 +765,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="denuncia" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Denúncia</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Aponta plataforma prejudicando a vida financeira dos brasileiros.</p>
 </div>
 </article>
 <article class="valida" data-vid="K2Y_4jkfTCg">
@@ -742,6 +785,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="educacao" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Educação financeira</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Ensina poupança, aposentadoria e planejamento financeiro pessoal.</p>
+</div>
 </article>
 <article class="valida" data-vid="EmBh-dimM6E">
 <span class="ord">Vídeo 11</span>
@@ -756,6 +803,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="politica" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Política e eleição</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Eleições brasileiras afetando investidores e mercado.</p>
 </div>
 </article>
 <article class="valida" data-vid="_0iSEyDE6pI">
@@ -772,6 +823,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="politica" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Política e eleição</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Medida de Trump contra o Brasil com impacto econômico.</p>
+</div>
 </article>
 <article class="valida" data-vid="j5CshMFh9Tw">
 <span class="ord">Vídeo 13</span>
@@ -786,6 +841,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="educacao" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Educação financeira</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Dúvida prática sobre financiamento e decisão financeira pessoal.</p>
 </div>
 </article>
 <article class="valida" data-vid="sq_BvkbTbVs">
@@ -802,6 +861,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="politica" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Política e eleição</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Compara preferência do mercado entre nomes políticos.</p>
+</div>
 </article>
 <article class="valida" data-vid="4pWt49P4RtU">
 <span class="ord">Vídeo 15</span>
@@ -816,6 +879,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="educacao" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Educação financeira</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Ensina fundamentos básicos de economia aplicados ao dinheiro.</p>
 </div>
 </article>
 <article class="valida" data-vid="A-P7kpYWq_s">
@@ -832,6 +899,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="educacao" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Educação financeira</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Meta de poupança e organização financeira pessoal.</p>
+</div>
 </article>
 <article class="valida" data-vid="FFKGBZc6G_A">
 <span class="ord">Vídeo 17</span>
@@ -846,6 +917,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="produto" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Produto, ativo ou sigla</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Explicação e passo a passo sobre Tesouro Direto.</p>
 </div>
 </article>
 <article class="valida" data-vid="GeLsyTmrUnQ">
@@ -862,6 +937,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="economia" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Economia do Brasil no bolso</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Mostra comportamento que empobrece a classe média.</p>
+</div>
 </article>
 <article class="valida" data-vid="vwv4aViBSC0">
 <span class="ord">Vídeo 19</span>
@@ -876,6 +955,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="politica" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Política e eleição</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Declaração de emergência de Trump envolvendo o Brasil.</p>
 </div>
 </article>
 <article class="valida" data-vid="B-f1sjU7uFU">
@@ -892,6 +975,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="educacao" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Educação financeira</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Discute investimento mensal pequeno e construção de patrimônio.</p>
+</div>
 </article>
 <article class="valida" data-vid="zuhCK2AovAQ">
 <span class="ord">Vídeo 21</span>
@@ -906,6 +993,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="produto" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Produto, ativo ou sigla</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Pergunta sobre produto de renda fixa e seu risco.</p>
 </div>
 </article>
 <article class="valida" data-vid="NQ9vnGTbgLY">
@@ -922,6 +1013,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="outro" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Outro</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Tema de carreira, sem foco financeiro editorial.</p>
+</div>
 </article>
 <article class="valida" data-vid="zRs40-LtEcY">
 <span class="ord">Vídeo 23</span>
@@ -936,6 +1031,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="produto" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Produto, ativo ou sigla</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Explica movimento de um ativo específico: o dólar.</p>
 </div>
 </article>
 <article class="valida" data-vid="7_ihShDm6Qk">
@@ -952,6 +1051,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="economia" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Economia do Brasil no bolso</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Risco de falências no Brasil com impacto econômico amplo.</p>
+</div>
 </article>
 <article class="valida" data-vid="SBOdzW5G8Zk">
 <span class="ord">Vídeo 25</span>
@@ -966,6 +1069,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="economia" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Economia do Brasil no bolso</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Alerta sobre ciclo perigoso da economia brasileira.</p>
 </div>
 </article>
 <article class="valida" data-vid="vh4NEwbOCj0">
@@ -982,6 +1089,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="mercado" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Notícia de mercado</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Notícia sobre situação de uma empresa financeira específica.</p>
+</div>
 </article>
 <article class="valida" data-vid="dWkb6N9tGwU">
 <span class="ord">Vídeo 27</span>
@@ -996,6 +1107,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="mercado" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Notícia de mercado</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Recuperação judicial de empresa como notícia pontual.</p>
 </div>
 </article>
 <article class="valida" data-vid="alG3dhoygDA">
@@ -1012,6 +1127,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="mercado" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Notícia de mercado</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Movimentos de petróleo, bolsas e mercado financeiro.</p>
+</div>
 </article>
 <article class="valida" data-vid="JoyOSVjy6zQ">
 <span class="ord">Vídeo 29</span>
@@ -1026,6 +1145,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="provocacao" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Provocação</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Contraria influência comum da internet sobre consumo e pobreza.</p>
 </div>
 </article>
 <article class="valida" data-vid="Dma8Akr0OJw">
@@ -1042,6 +1165,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="educacao" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Educação financeira</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Fundamento de consumo consciente e decisão de compra.</p>
+</div>
 </article>
 <article class="valida" data-vid="rdHK8pvbao8">
 <span class="ord">Vídeo 31</span>
@@ -1056,6 +1183,10 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="produto" aria-pressed="false" title="pergunta ou explicação sobre um produto, ativo ou sigla específicos">Produto, ativo ou sigla</button>
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
+</div>
+<div class="ia-resp" data-ia="politica" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Política e eleição</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">STF, Lula e Bolsa Família em contexto político-econômico.</p>
 </div>
 </article>
 <article class="valida" data-vid="hORJvcWlJi8">
@@ -1072,11 +1203,15 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
 <button type="button" data-fam="mercado" aria-pressed="false" title="notícia setorial ou de mercado sem consequência pessoal direta">Notícia de mercado</button>
 <button type="button" data-fam="outro" aria-pressed="false" title="não se encaixa em nenhuma das anteriores">Outro</button>
 </div>
+<div class="ia-resp" data-ia="educacao" data-igual="igual à sua" data-dif="diferente da sua" hidden>
+<p><span class="fontes-rot">Resposta da IA:</span> <strong>Educação financeira</strong> <span class="ia-cmp"></span></p>
+<p class="ia-porque">Ensina administração de finanças pessoais com referência aos ricos.</p>
+</div>
 </article>
 <div class="barra-acao">
 <button type="button" class="botao" id="btCopiarId" data-ok="Respostas copiadas" disabled>Copiar respostas</button>
 <button type="button" class="botao sec" id="btLimparId">Limpar tudo</button>
-<span class="contagem" id="contagemId"></span>
+<span class="contagem" id="contagemId" data-placar="{0} de {1} iguais à IA"></span>
 </div>
 <textarea class="saida" id="saidaId" readonly></textarea>
 <p class="help" id="ajudaCopiaId" style="display:none">Pronto — as respostas estão na sua área de transferência. Cole numa mensagem para o Kenzo.</p>
@@ -1257,13 +1392,23 @@ footer.rodape{background:var(--cinza1);padding-block:45px;color:var(--cinza2);fo
   var CHAVE='radar-identidade-'+lote, est={};
   try{est=JSON.parse(localStorage.getItem(CHAVE)||'{}');}catch(e){est={};}
   function salvar(){try{localStorage.setItem(CHAVE,JSON.stringify(est));}catch(e){}}
-  function pintar(a){var v=a.dataset.vid; a.querySelectorAll('[data-fam]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.fam===est[v]?'true':'false');}); a.classList.toggle('decidida',!!est[v]);}
+  function pintar(a){
+    var v=a.dataset.vid, esc=est[v], r=a.querySelector('.ia-resp');
+    a.querySelectorAll('[data-fam]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.fam===esc?'true':'false'); b.disabled=!!esc;});
+    a.classList.toggle('decidida',!!esc);
+    if(r){ r.hidden=!esc; var c=r.querySelector('.ia-cmp'); if(c&&esc){var ok=(r.dataset.ia===esc); c.textContent='('+(ok?r.dataset.igual:r.dataset.dif)+')'; c.className='ia-cmp '+(ok?'igual':'dif');} }
+  }
   var bt=document.getElementById('btCopiarId'), lim=document.getElementById('btLimparId'), cont=document.getElementById('contagemId'), sai=document.getElementById('saidaId'), aj=document.getElementById('ajudaCopiaId');
-  function contar(){var n=itens.filter(function(a){return est[a.dataset.vid];}).length; cont.textContent=n+' de '+itens.length+' respondidas'; bt.disabled=(n===0);}
+  function contar(){
+    var resp=itens.filter(function(a){return est[a.dataset.vid];}), n=resp.length;
+    var iguais=resp.filter(function(a){var r=a.querySelector('.ia-resp'); return r&&r.dataset.ia===est[a.dataset.vid];}).length;
+    var txt=n+' de '+itens.length+' respondidas'; if(n&&cont.dataset.placar){txt+=' '+String.fromCharCode(183)+' '+cont.dataset.placar.replace('{0}',iguais).replace('{1}',n);}
+    cont.textContent=txt; bt.disabled=(n===0);
+  }
   function aviso(msg){var t=document.getElementById('toast'); if(!t||!msg) return; t.textContent=msg; t.classList.add('on'); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('on');},2400);}
   itens.forEach(function(a){
     a.querySelectorAll('[data-fam]').forEach(function(b){
-      b.addEventListener('click',function(){var v=a.dataset.vid; if(est[v]===b.dataset.fam){delete est[v];}else{est[v]=b.dataset.fam;} salvar(); pintar(a); contar();});
+      b.addEventListener('click',function(){var v=a.dataset.vid; if(est[v]){return;} est[v]=b.dataset.fam; salvar(); pintar(a); contar();});
     });
     pintar(a);
   });
