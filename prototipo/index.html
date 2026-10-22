@@ -283,14 +283,7 @@ const PAGINAS = {
         </tbody></table></div>${fracos.length ? `<p class="mut" style="font-size:13px">Fora da tabela por amostra pequena: ${fracos.map(f => esc(f.rotulo)).join(' · ')}.</p>` : ''}`;
     }],
     'linha': ['Linha editorial', () => `<div class="card"><p class="conclusao">A equipe confirmou que a IA está lendo bem a linha editorial — a validação vídeo a vídeo foi encerrada.</p><p class="mut">As respostas que já chegaram pela planilha continuam sendo usadas para afinar a escolha de pautas. Esta aba vai mostrar o texto que a IA recebe sobre o canal.</p></div>`],
-    'objetivo': ['Objetivo dos vídeos', () => `<div class="card"><p class="conclusao">Alcance, autoridade e venda por vídeo.</p><p class="mut">Os dados de venda ficam fora da página pública — esta aba vai abrir com senha (Parte 3.3). Por enquanto mostra só a validação da amostra, que está em Validar.</p></div>`]
-  }},
-  validar: {rotulo: 'Validar', icone: 'validar', desenhar() {
-    return `<h1>Validar</h1><p class="lead">Vídeos do próprio canal para classificar. É assim que a gente confere se a leitura do RADAR bate com a de quem conhece o canal.</p>
-      <div class="lista">
-        <a class="card" style="text-decoration:none;color:inherit;display:flex;gap:16px;align-items:center" href="${SITE_ATUAL}#validar-o-objetivo-dos-videos"><div style="flex:1"><p class="conclusao" style="margin:0">Objetivo dos vídeos</p><p class="mut" style="margin:4px 0 0">Alcance, autoridade ou venda — a amostra da 1.4</p></div>${pill('Abrir', 'p-info')}</a>
-      </div>
-      <div class="aviso" style="margin-top:20px">No protótipo, os formulários abrem no site atual. Na versão final eles vêm para cá, com um contador de “faltam X de Y”.</div>`;
+    'objetivo': ['Objetivo dos vídeos', () => `<div class="card"><p class="conclusao">Alcance, autoridade e venda por vídeo.</p><p class="mut">Os dados de venda ficam fora da página pública — esta aba vai abrir com senha (Parte 3.3). A classificação de cada vídeo é feita pela IA; a validação manual foi encerrada em 22/10.</p></div>`]
   }},
   sistema: {rotulo: 'Sistema', icone: 'sistema', rodape: true, desenhar() {
     const c = D.sistema.coleta || {fontes: []}, ex = D.sistema.execucoes || [];
