@@ -22,6 +22,7 @@
 body{margin:0;background:var(--fundo);color:var(--chumbo);font:400 15px/1.55 var(--f-corpo);-webkit-font-smoothing:antialiased}
 a{color:var(--verde)}
 button{font:inherit;cursor:pointer}
+[hidden]{display:none!important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 /* estrutura */
@@ -111,6 +112,18 @@ tr.nosso td{background:#F3F8F5;font-weight:600}
 .dupla{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .vazio{color:var(--cinza);text-align:center;padding:28px}
 .aviso{background:var(--alerta-f);color:var(--alerta);border-radius:12px;padding:12px 16px;font-size:14px;margin-bottom:20px}
+
+.acoes{display:flex;justify-content:center;margin-top:16px}
+.botao{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:99px;padding:11px 22px;background:var(--verde);color:var(--branco);font:600 14px var(--f-titulo);text-decoration:none}
+.botao.sec{background:var(--branco);color:var(--verde);border:1px solid var(--verde)}
+.botao:hover{filter:brightness(1.15)}
+.todas li{display:flex;gap:10px;align-items:baseline;padding:10px 0;border-top:1px solid var(--borda);list-style:none}
+.todas li:first-child{border-top:0}
+.todas ul{margin:0;padding:0}
+.todas a.t{font-weight:500;color:var(--chumbo);text-decoration:none}
+.todas a.t:hover{text-decoration:underline}
+.todas .f{font-size:13px;color:var(--cinza);white-space:nowrap}
+.busca{width:100%;max-width:420px;padding:11px 14px;border:1px solid var(--borda);border-radius:10px;font:inherit;background:var(--branco);margin-bottom:16px}
 
 /* calendario do historico */
 .cal{max-width:420px}
@@ -224,6 +237,13 @@ function cartaoPauta(p, i) {
     <details><summary>Por que a IA escolheu</summary><p>${esc(p.porque)}</p>${p.risco ? `<p><strong>Risco:</strong> ${esc(p.risco)}</p>` : ''}</details>
   </article>`;
 }
+// lista de pautas: 10 a vista + reserva atras de 'Ver mais' (pedido de 23/10/2026) + atalho para Todas as noticias
+function listaPautas(itens, comTodas) {
+  const prim = itens.slice(0, 10), resto = itens.slice(10);
+  return `<div class="lista">${prim.map((x, i) => cartaoPauta(x, i + 1)).join('')}</div>`
+    + (resto.length ? `<div class="lista mais" hidden style="margin-top:12px">${resto.map((x, i) => cartaoPauta(x, i + 11)).join('')}</div><div class="acoes"><button class="botao" data-vermais>Ver mais ${resto.length} pautas</button></div>` : '')
+    + (comTodas ? `<div class="acoes"><a class="botao sec" href="#todas">Ver todas as notícias da coleta →</a></div>` : '');
+}
 function cartaoQuente(q) {
   const selo = q.nos_ja_falamos ? pill('Nós já falamos', 'p-ok') : pill('Ainda não falamos', 'p-alerta');
   return `<article class="card quente"><div class="cab"><h3>${esc(q.assunto)}</h3>${pill(q.canais + ' canais', 'p-info')}${selo}<span class="mut" style="font-size:13px">${fmtCurto(q.views_somadas)} views somadas</span></div>
@@ -248,8 +268,8 @@ const PAGINAS = {
       </div>
       ${qn.length ? `<h2>Assunto quente que ainda não falamos</h2><p class="lead">Apareceu em 3 ou mais canais concorrentes nesta semana.</p><div class="lista">${qn.map(cartaoQuente).join('')}</div>` : ''}
       <h2>Pautas do dia</h2>
-      <p class="lead">Escolhidas às ${fmtDataHora(p.gerado_em).split(' ')[1] || ''} entre ${fmtNum(p.candidatos)} notícias. ${explica('ex-pautas', 'A IA leu as notícias do dia, os vídeos dos concorrentes e o histórico do canal, e escolheu as 10 que mais combinam com a linha editorial. Cada pauta diz se busca <strong>alcance</strong> (puxar gente nova) ou <strong>autoridade</strong> (agradar a base). Abra "Por que a IA escolheu" para ver o raciocínio e o risco.')}</p>
-      <div class="lista">${p.itens.map((x, i) => cartaoPauta(x, i + 1)).join('')}</div>`;
+      <p class="lead">As 10 principais, escolhidas às ${fmtDataHora(p.gerado_em).split(' ')[1] || ''} entre ${fmtNum(p.candidatos)} notícias. ${explica('ex-pautas', 'A IA leu as notícias do dia, os vídeos dos concorrentes e o histórico do canal, e escolheu as 10 que mais combinam com a linha editorial. Cada pauta diz se busca <strong>alcance</strong> (puxar gente nova) ou <strong>autoridade</strong> (agradar a base). Abra "Por que a IA escolheu" para ver o raciocínio e o risco.')}</p>
+      ${listaPautas(p.itens, true)}`;
   }},
   concorrentes: {rotulo: 'Concorrentes', icone: 'concorrentes', abas: {
     'em-alta': ['Em alta agora', () => {
@@ -310,6 +330,9 @@ const PAGINAS = {
         </tbody></table></div>${fracos.length ? `<p class="mut" style="font-size:13px">Fora da tabela por amostra pequena: ${fracos.map(f => esc(f.rotulo)).join(' · ')}.</p>` : ''}`;
     }]
   }},
+  todas: {rotulo: 'Todas as notícias', icone: 'hoje', oculta: true, desenhar() {
+    return `<p style="margin:0 0 8px"><a href="#hoje">← Voltar para Hoje</a></p><h1>Todas as notícias</h1><p class="lead" id="todas-lead">Tudo o que o RADAR leu na coleta do dia, antes da IA escolher. Só título, fonte e link.</p><input class="busca" type="search" id="busca" placeholder="Filtrar por palavra…" aria-label="Filtrar notícias"><div class="card todas" id="todas-lista"><p class="vazio">Carregando…</p></div>`;
+  }, depois() { todasNoticias(); }},
   historico: {rotulo: 'Histórico', icone: 'historico', desenhar() {
     return `<h1>Histórico</h1><p class="lead">As pautas que a IA escolheu em cada dia. Os dias em verde têm lista — clique para ver.</p><div class="hist"><div class="card cal" id="cal"><p class="vazio">Carregando…</p></div><div id="hist-dia"></div></div>`;
   }, depois(arg) { historico(arg); }},
@@ -327,6 +350,20 @@ const PAGINAS = {
   }}
 };
 
+// ---------------------------------------------------------------- todas as noticias
+let TD = null;
+async function todasNoticias() {
+  if (!TD) { try { TD = await (await fetch('todas.json', {cache: 'no-store'})).json(); } catch (e) { document.getElementById('todas-lista').innerHTML = '<p class="vazio">Não consegui carregar.</p>'; return; } }
+  const lead = document.getElementById('todas-lead'); if (lead) lead.textContent = `${TD.itens.length} notícias lidas na coleta de ${fmtDataHora(TD.coletado_em)}, antes da IA escolher. Primeiro as que saíram em mais veículos.`;
+  desenharTodas('');
+}
+function desenharTodas(filtro) {
+  const el = document.getElementById('todas-lista'); if (!el || !TD) return;
+  const f = filtro.trim().toLowerCase();
+  const its = TD.itens.map((x, i) => ({...x, i})).filter(x => !f || String(x.titulo).toLowerCase().includes(f)).sort((a, b) => (b.repeticoes - a.repeticoes) || (a.i - b.i));
+  el.innerHTML = its.length ? `<ul>${its.map(x => { const l = (x.links || [])[0]; const tit = l ? `<a class="t" href="${esc(l.link)}" target="_blank" rel="noopener noreferrer">${esc(x.titulo)} ↗</a>` : esc(x.titulo);
+    return `<li><span style="flex:1">${tit}</span>${x.repeticoes > 1 ? pill(x.repeticoes + ' veículos', 'p-info') : ''}<span class="f">${esc(x.tipo === 'tendencia' ? 'Google Trends' : x.fonte)}</span></li>`; }).join('')}</ul>` : '<p class="vazio">Nenhuma notícia com essa palavra.</p>';
+}
 // ---------------------------------------------------------------- historico (calendario)
 let H = null, mesCal = null;
 const maiuscula = s => s.charAt(0).toUpperCase() + s.slice(1);
@@ -355,19 +392,19 @@ function desenharCal(sel, dias) {
 function desenharDia(k) {
   const el = document.getElementById('hist-dia'); if (!el) return; const d = H[k];
   const dt = new Date(k + 'T12:00:00');
-  el.innerHTML = `<h2 style="margin-top:0">${esc(maiuscula(dt.toLocaleDateString('pt-BR', {weekday: 'long', day: '2-digit', month: 'long'})))}</h2><p class="lead">${d.itens.length} pautas escolhidas entre ${fmtNum(d.candidatos)} notícias · ${esc(d.modelo)}</p><div class="lista">${d.itens.map((x, i) => cartaoPauta(x, i + 1)).join('')}</div>`;
+  el.innerHTML = `<h2 style="margin-top:0">${esc(maiuscula(dt.toLocaleDateString('pt-BR', {weekday: 'long', day: '2-digit', month: 'long'})))}</h2><p class="lead">${Math.min(10, d.itens.length)} pautas principais${d.itens.length > 10 ? ' + ' + (d.itens.length - 10) + ' de reserva' : ''}, escolhidas entre ${fmtNum(d.candidatos)} notícias · ${esc(d.modelo)}</p>${listaPautas(d.itens, false)}`;
 }
 // ---------------------------------------------------------------- navegacao (#pagina/aba)
 function menu(atual) {
   const qn = quentesNovos().length;
   const link = ([id, p]) => `<a href="#${id}" ${id === atual ? 'aria-current="page"' : ''}>${ico(p.icone)}<span class="rot">${p.rotulo}</span>${id === 'hoje' && qn ? `<span class="cont" title="assuntos quentes novos">${qn}</span>` : ''}</a>`;
   const e = Object.entries(PAGINAS);
-  document.getElementById('menu').innerHTML = e.filter(([, p]) => !p.rodape).map(link).join('') + `<div class="rodape">${e.filter(([, p]) => p.rodape).map(link).join('')}</div>`;
+  document.getElementById('menu').innerHTML = e.filter(([, p]) => !p.rodape && !p.oculta).map(link).join('') + `<div class="rodape">${e.filter(([, p]) => p.rodape).map(link).join('')}</div>`;
 }
 function render() {
   let [pag, aba] = location.hash.replace('#', '').split('/');
   if (!PAGINAS[pag]) pag = 'hoje';
-  const P = PAGINAS[pag]; menu(pag);
+  const P = PAGINAS[pag]; menu(pag === 'todas' ? 'hoje' : pag);
   let html;
   if (P.abas) {
     const ids = Object.keys(P.abas); if (!P.abas[aba]) aba = ids[0];
@@ -379,10 +416,12 @@ function render() {
 }
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-aba]'); if (b) { location.hash = b.dataset.aba; return; }
+  const vm = e.target.closest('[data-vermais]'); if (vm) { const l = vm.parentElement.previousElementSibling; l.hidden = false; vm.parentElement.remove(); return; }
   const dd = e.target.closest('[data-dia]'); if (dd) { history.replaceState(null, '', '#historico/' + dd.dataset.dia); desenharCal(dd.dataset.dia, Object.keys(H).sort()); desenharDia(dd.dataset.dia); return; }
   const mm = e.target.closest('[data-mes]'); if (mm) { mesCal = new Date(mesCal.getFullYear(), mesCal.getMonth() + Number(mm.dataset.mes), 1); desenharCal((location.hash.split('/')[1]) || '', Object.keys(H).sort()); return; }
   const a = e.target.closest('[data-explica]'); if (a) { const p = document.getElementById(a.dataset.explica); const ab = p.classList.toggle('aberto'); a.setAttribute('aria-expanded', ab); }
 });
+document.addEventListener('input', e => { if (e.target.id === 'busca') desenharTodas(e.target.value); });
 window.addEventListener('hashchange', render);
 fetch('dados.json', {cache: 'no-store'}).then(r => r.json()).then(d => { D = d; document.getElementById('quando').textContent = fmtDataHora(d.gerado_em); render(); })
   .catch(() => { document.getElementById('conteudo').innerHTML = '<div class="card vazio">Não consegui carregar os dados.</div>'; });
