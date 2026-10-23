@@ -70,6 +70,9 @@ h2+.lead{margin-bottom:14px}
 
 /* pauta */
 .pauta{display:grid;grid-template-columns:44px 1fr;gap:4px 14px}
+.pauta.com-img{grid-template-columns:44px 1fr 176px}
+.pauta .mini{grid-column:3;grid-row:1;width:176px;aspect-ratio:16/9;object-fit:cover;border-radius:10px;background:var(--cab)}
+.pauta.com-img details{grid-column:2 / 4}
 .pauta .num{font:700 22px var(--f-titulo);color:var(--amarelo);background:var(--verde);width:44px;height:44px;border-radius:12px;display:grid;place-items:center}
 .pauta h3{margin:0;font:600 17px/1.35 var(--f-titulo)}
 .pauta .ang{margin:6px 0 0;color:#333}
@@ -139,8 +142,13 @@ tr.nosso td{background:#F3F8F5;font-weight:600}
   .vid{grid-template-columns:22px 96px 1fr}
   .vid img{width:96px}
   .vid .num{grid-column:3;text-align:left}
+  .vid.sem-pos{grid-template-columns:96px 1fr}
+  .vid.sem-pos .num{grid-column:2}
   .vid .num strong{display:inline;font-size:14px;margin-right:6px}
   .dupla{grid-template-columns:1fr}
+  .pauta.com-img{grid-template-columns:44px 1fr}
+  .pauta .mini{grid-column:1 / 3;grid-row:auto;order:-1;width:100%;aspect-ratio:2.4/1}
+  .pauta.com-img details{grid-column:2}
   .topo .quando span{display:none}
   .topo{padding:0 16px}
   .marca{white-space:nowrap}
@@ -207,7 +215,8 @@ function cartaoVideo(v, pos) {
 function cartaoPauta(p, i) {
   const r = RESULTADO[String(p.resultado || '').toLowerCase()];
   const links = (p.links || []).map(l => linkSeguro(l.link) ? `<a href="${esc(l.link)}" target="_blank" rel="noopener noreferrer">${esc(l.fonte)} ↗</a>` : '').join('');
-  return `<article class="card pauta">
+  const img = linkSeguro(p.imagem) && /^https:/.test(p.imagem) ? `<img class="mini" src="${esc(p.imagem)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.pauta').classList.remove('com-img');this.remove()">` : '';
+  return `<article class="card pauta${img ? ' com-img' : ''}">${img}
     <span class="num">${i}</span>
     <div><h3>${esc(p.tema)}</h3><p class="ang">${esc(p.angulo)}</p>
       <div class="meta">${r ? pill(r[0], r[1]) : ''}${p.formato ? `<span class="tag">${esc(p.formato)}</span>` : ''}</div>
