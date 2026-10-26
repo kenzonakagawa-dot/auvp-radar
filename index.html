@@ -154,7 +154,16 @@ tr.nosso td{background:#F3F8F5;font-weight:600}
 .todas .f{font-size:13px;color:var(--cinza);white-space:nowrap}
 .busca{width:100%;max-width:420px;padding:11px 14px;border:1px solid var(--borda);border-radius:10px;font:inherit;background:var(--branco);margin-bottom:16px}
 
-/* tela de canais e seletor no topo */
+/* cartao de pauta FECHADO tem altura padrao (pedido de 26/10/2026): titulo e angulo em ate 3 linhas, fontes em ate
+   2 - sempre com o mesmo espaco reservado, sobrando ou faltando texto. Aberto ("Por que a IA escolheu"), so ELE cresce
+   e mostra tudo; o vizinho da mesma linha nao acompanha (align-items:start). */
+.lista.pautas{align-items:start}
+.pauta h3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;min-height:calc(1.35em * 3)}
+.pauta .ang{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;min-height:calc(1.55em * 3)}
+.pauta .meta{min-height:24px}
+.pauta .fontes{overflow:hidden;height:calc(1.5em * 2 + 6px);align-content:flex-start;line-height:1.5}
+.pauta:has(details[open]) h3,.pauta:has(details[open]) .ang{-webkit-line-clamp:unset;display:block;min-height:0}
+.pauta:has(details[open]) .fontes{height:auto}/* tela de canais e seletor no topo */
 .canal-chip{display:inline-flex;align-items:center;gap:8px;margin-left:12px;padding:5px 12px 5px 5px;border:1px solid var(--borda);border-radius:99px;text-decoration:none;color:var(--chumbo);font-weight:500;font-size:14px;max-width:260px}
 .canal-chip:hover{background:var(--cab)}
 .canal-chip img{width:26px;height:26px;border-radius:50%}
@@ -314,7 +323,7 @@ function cartaoPauta(p, i) {
     <span class="num">${i}</span>
     <div><h3>${esc(p.tema)}</h3><p class="ang">${esc(p.angulo)}</p>
       <div class="meta">${r ? pill(r[0], r[1]) : ''}${p.formato ? `<span class="tag">${esc(p.formato)}</span>` : ''}</div>
-      ${links ? `<div class="fontes"><span class="mut">Fonte:</span>${links}</div>` : ''}</div>
+      <div class="fontes">${links ? `<span class="mut">Fonte:</span>${links}` : ''}</div></div>
     <details><summary>Por que a IA escolheu</summary><p>${esc(p.porque)}</p>${p.risco ? `<p><strong>Risco:</strong> ${esc(p.risco)}</p>` : ''}</details>
   </article>`;
 }
