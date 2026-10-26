@@ -113,7 +113,7 @@ td.selos{white-space:nowrap}
   .resp2 tr{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px 18px;padding:16px 18px;border-top:1px solid var(--borda)}
   .resp2 tr:first-child{border-top:0}
   .resp2 td{border:0;padding:0;text-align:left!important;white-space:normal}
-  .resp2 td.principal{grid-column:1 / -1}
+  .resp2 td.principal,.resp2 td.largo{grid-column:1 / -1}
   .resp2 td[data-rot]::before{content:attr(data-rot);display:block;font:600 10px var(--f-titulo);letter-spacing:.06em;text-transform:uppercase;color:var(--cinza);margin-bottom:2px}
   .resp2 tr.nosso{background:#F3F8F5}
 }
@@ -164,6 +164,11 @@ tr.nosso td{background:#F3F8F5;font-weight:600}
 .pauta .fontes{overflow:hidden;height:calc(1.5em * 2 + 6px);align-content:flex-start;line-height:1.5}
 .pauta:has(details[open]) h3,.pauta:has(details[open]) .ang{-webkit-line-clamp:unset;display:block;min-height:0}
 .pauta:has(details[open]) .fontes{height:auto}/* tela de canais e seletor no topo */
+.logo-mini{width:26px;height:26px;flex:none}
+.opcoes .logo-mini{width:34px;height:34px}
+.canal .logo-mini{width:84px;height:84px}
+.com-foto{display:inline-flex;align-items:center;gap:10px}
+.com-foto img,.com-foto .logo-mini{width:28px;height:28px;border-radius:50%}
 .canal-chip{display:inline-flex;align-items:center;gap:8px;margin-left:12px;padding:5px 12px 5px 5px;border:1px solid var(--borda);border-radius:99px;text-decoration:none;color:var(--chumbo);font-weight:500;font-size:14px;max-width:260px}
 .canal-chip:hover{background:var(--cab)}
 .canal-chip img{width:26px;height:26px;border-radius:50%}
@@ -349,20 +354,50 @@ const placarBR = () => ((D.concorrentes.placar || {}).canais || []).filter(c => 
 const CHAVE_CANAL = 'radar-canal';
 const lerCanal = () => { try { return localStorage.getItem(CHAVE_CANAL); } catch (e) { return null; } };
 const gravarCanal = h => { try { localStorage.setItem(CHAVE_CANAL, h); } catch (e) { } };
-const canal = () => (D.canais || []).find(c => c.handle === lerCanal()) || null;
+// "Todos os canais" (RADAR 3.4) entra como um canal a mais, com handle proprio; as paginas checam c.todos
+const TODOS = {handle: '__todos', nome: 'Todos os canais', todos: true, pautas_diarias: false, compara_concorrentes: false};
+const canal = () => lerCanal() === '__todos' ? TODOS : ((D.canais || []).find(c => c.handle === lerCanal()) || null);
+const LOGO = '<svg class="logo-mini" aria-hidden="true" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#023619"/><g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="16" cy="16" r="9"/><circle cx="16" cy="16" r="4.5"/><path d="M16 16l6.5-6.5"/></g></svg>';
+const fotoCanal = c => c.todos ? LOGO : (c.avatar ? `<img src="${esc(c.avatar)}" alt="" referrerpolicy="no-referrer">` : '');
+// consolidado: soma dos canais, conferida contra o total que o exportador calculou (criterio da 3.4)
+function visaoTodos() {
+  const cs = D.canais || [], k = D.consolidado || {};
+  const soma = f => cs.reduce((a, c) => a + (+f(c) || 0), 0);
+  const confere = soma(c => c.inscritos) === k.inscritos && soma(c => c.videos) === k.videos && soma(c => c.j90.views) === k.views_90d && soma(c => c.j90.longos + c.j90.shorts) === k.videos_90d;
+  const tot90 = k.views_90d || 1;
+  const meses = (cs[0] && cs[0].meses || []).map(m => m.mes);
+  const rotMes = mes => { const [a, mm] = mes.split('-'); return maiuscula(new Date(+a, +mm - 1, 15).toLocaleDateString('pt-BR', {month: 'short', year: '2-digit'}).replace('.', '')); };
+  return `<div class="kpis">
+      ${kpi('Inscritos', fmtCurto(k.inscritos), `somando os ${k.canais} canais`)}
+      ${kpi('Vídeos publicados', fmtNum(k.videos), `${k.videos_90d} nos últimos 90 dias`)}
+      ${kpi('Views em 90 dias', fmtCurto(k.views_90d), 'dos vídeos publicados no período')}
+      ${kpi('Views totais', fmtCurto(k.views_totais), 'desde a criação dos canais')}
+    </div>
+    <h2>Por canal</h2><p class="lead">Quanto cada canal pesa no total. ${explica('ex-todos', '“Views em 90 dias” soma as views dos vídeos publicados nos últimos 90 dias. A parte de cada canal é a fatia dele nessa soma. “Views típicas” é o vídeo longo do meio, como na visão de cada canal.')}</p>
+    <div class="card tabela resp2"><table><thead><tr><th>Canal</th><th class="n">Inscritos</th><th class="n">Vídeos</th><th class="n">Vídeos em 90 dias</th><th>Views em 90 dias</th><th class="n">Views típicas</th></tr></thead><tbody>
+    ${cs.map(c => `<tr><td class="principal"><span class="com-foto">${fotoCanal(c)}<strong>${esc(c.nome)}</strong></span></td><td class="n" data-rot="Inscritos">${fmtCurto(c.inscritos)}</td><td class="n" data-rot="Vídeos">${fmtNum(c.videos)}</td><td class="n" data-rot="Vídeos em 90 dias">${c.j90.longos + c.j90.shorts}</td>
+      <td class="largo" data-rot="Views em 90 dias"><div style="display:flex;gap:10px;align-items:center"><strong style="min-width:58px">${fmtCurto(c.j90.views)}</strong><div class="barra" style="flex:1;min-width:80px"><i style="width:${Math.round(100 * c.j90.views / tot90)}%"></i></div><span class="mut" style="min-width:36px">${Math.round(100 * c.j90.views / tot90)}%</span></div></td><td class="n" data-rot="Views típicas">${fmtCurto(c.j90.mediana_longos)}</td></tr>`).join('')}
+    <tr class="nosso"><td class="principal"><strong>Total</strong></td><td class="n" data-rot="Inscritos">${fmtCurto(k.inscritos)}</td><td class="n" data-rot="Vídeos">${fmtNum(k.videos)}</td><td class="n" data-rot="Vídeos em 90 dias">${k.videos_90d}</td><td data-rot="Views em 90 dias"><strong>${fmtCurto(k.views_90d)}</strong></td><td class="n mut" data-rot="Views típicas">–</td></tr>
+    </tbody></table></div>
+    <p class="mut" style="font-size:13px;margin-top:10px">${confere ? '✓ Conferido: o total é exatamente a soma dos canais (inscritos, vídeos e views).' : '⚠ O total não bate com a soma dos canais — alguma linha se perdeu. Avise o Kenzo.'}</p>
+    <h2>Mês a mês</h2><p class="lead">Views somadas dos vídeos publicados em cada mês, por canal. Os meses recentes ainda estão juntando views.</p>
+    <div class="card tabela"><table><thead><tr><th>Mês</th>${cs.map(c => `<th class="n">${esc(c.nome.split(' l ')[0])}</th>`).join('')}<th class="n">Total</th></tr></thead><tbody>
+    ${meses.map(mes => { const vs = cs.map(c => ((c.meses || []).find(m => m.mes === mes) || {}).views || 0); return `<tr><td>${rotMes(mes)}</td>${vs.map(v => `<td class="n">${v ? fmtCurto(v) : '<span class="mut">–</span>'}</td>`).join('')}<td class="n"><strong>${fmtCurto(vs.reduce((a, b) => a + b, 0))}</strong></td></tr>`; }).join('')}
+    </tbody></table></div>`;
+}
 // seletor do topo: botao com o canal atual; ao clicar, a lista dos canais desce logo abaixo (pedido de 26/10/2026)
 function chip() {
   const caixa = document.getElementById('seletor'), el = document.getElementById('canal-chip'), lista = document.getElementById('opcoes'), c = canal();
   if (!c) { caixa.hidden = true; return; }
   caixa.hidden = false;
-  el.innerHTML = `${c.avatar ? `<img src="${esc(c.avatar)}" alt="" referrerpolicy="no-referrer">` : ''}<span>${esc(c.nome)}</span><b aria-hidden="true">▾</b>`;
-  lista.innerHTML = (D.canais || []).map(x => `<li role="option" aria-selected="${x.handle === c.handle}"><button data-trocar="${esc(x.handle)}">${x.avatar ? `<img src="${esc(x.avatar)}" alt="" referrerpolicy="no-referrer">` : ''}<span><strong>${esc(x.nome)}</strong><small>${fmtCurto(x.inscritos)} inscritos · ${fmtNum(x.videos)} vídeos</small></span>${x.handle === c.handle ? '<i aria-hidden="true">✓</i>' : ''}</button></li>`).join('');
+  el.innerHTML = `${fotoCanal(c)}<span>${esc(c.nome)}</span><b aria-hidden="true">▾</b>`;
+  lista.innerHTML = [TODOS, ...(D.canais || [])].map(x => `<li role="option" aria-selected="${x.handle === c.handle}"><button data-trocar="${esc(x.handle)}">${fotoCanal(x)}<span><strong>${esc(x.nome)}</strong><small>${x.todos ? 'visão consolidada' : fmtCurto(x.inscritos) + ' inscritos · ' + fmtNum(x.videos) + ' vídeos'}</small></span>${x.handle === c.handle ? '<i aria-hidden="true">✓</i>' : ''}</button></li>`).join('');
   fecharSeletor();
 }
 function fecharSeletor() { document.getElementById('opcoes').hidden = true; document.getElementById('canal-chip').setAttribute('aria-expanded', 'false'); }
 function abrirSeletor() { document.getElementById('opcoes').hidden = false; document.getElementById('canal-chip').setAttribute('aria-expanded', 'true'); }
 // aviso para pagina que ainda nao existe para o canal escolhido
-const soSardinha = (o_que) => `<div class="card"><p class="conclusao">${o_que} ainda é só do Investidor Sardinha.</p><p class="mut" style="margin:0">Para o ${esc(canal().nome)}, veja a <a href="#nosso/visao">visão geral do canal</a>. ${o_que === 'A lista de pautas do dia' ? 'Gerar pautas para este canal exige escrever a linha editorial dele — dá para fazer quando vocês quiserem.' : ''}</p></div>`;
+const soSardinha = (o_que) => `<div class="card"><p class="conclusao">${o_que} ainda é só do Investidor Sardinha.</p><p class="mut" style="margin:0">${canal().todos ? 'Para os canais juntos' : 'Para o ' + esc(canal().nome)}, veja a <a href="#nosso/visao">visão geral do canal</a>. ${o_que === 'A lista de pautas do dia' ? 'Gerar pautas para este canal exige escrever a linha editorial dele — dá para fazer quando vocês quiserem.' : ''}</p></div>`;
 function visaoCanal(c) {
   const ms = c.meses || [], max = Math.max(1, ...ms.map(m => m.mediana_longos || 0));
   const semanas = 90 / 7;
@@ -393,10 +428,11 @@ const PAGINAS = {
         <span class="nums"><span><strong>${fmtCurto(c.inscritos)}</strong> inscritos</span><span><strong>${fmtNum(c.videos)}</strong> vídeos</span></span>
         <span class="nums"><span>Views típicas (90 dias): <strong>${fmtCurto(c.j90.mediana_longos)}</strong></span></span>
         ${c.pautas_diarias ? pill('Pautas do dia', 'p-ok') : pill('Visão do canal', 'p-neutro')}
-      </button>`).join('')}</div></div>`;
+      </button>`).join('')}<button class="card canal todos ${atual === '__todos' ? 'atual' : ''}" data-canal="__todos">${LOGO}<span class="nome">Todos os canais</span><span class="nums"><span><strong>${fmtCurto((D.consolidado || {}).inscritos)}</strong> inscritos</span><span><strong>${fmtNum((D.consolidado || {}).videos)}</strong> vídeos</span></span>${pill('Visão consolidada', 'p-info')}</button></div></div>`;
   }},
   hoje: {rotulo: 'Hoje', icone: 'hoje', desenhar() {
     const c = canal();
+    if (c && c.todos) return `<h1>Todos os canais</h1><p class="lead">Os 4 canais da AUVP somados.</p>${visaoTodos()}`;
     if (c && !c.pautas_diarias) return `<h1>${esc(c.nome)}</h1><p class="lead">Como o canal está. ${''}</p>${soSardinha('A lista de pautas do dia')}<div style="margin-top:20px">${visaoCanal(c)}</div>`;
     const p = D.pautas, qn = quentesNovos(), br = placarBR(), nos = br.find(c => c.grupo === 'nosso');
     const posViews = nos ? 1 + br.filter(c => c.grupo !== 'nosso' && (c.mediana_views_90d || 0) > (nos.mediana_views_90d || 0)).length : null;
@@ -460,7 +496,7 @@ const PAGINAS = {
     }]
   }},
   nosso: {rotulo: 'Canal', icone: 'nosso', abas: {
-    'visao': ['Visão geral', () => visaoCanal(canal())],
+    'visao': ['Visão geral', () => canal().todos ? visaoTodos() : visaoCanal(canal())],
     'titulos': ['Títulos que rendem', () => {
       const t = D.nosso.titulos; if (!t) return '<div class="card vazio">Sem análise de títulos.</div>';
       const ps = (t.padroes || []).filter(p => !p.fraca).sort((a, b) => b.efeito_views - a.efeito_views);
@@ -534,6 +570,26 @@ function conversaoDesenhar() {
     el.innerHTML = `<form class="card cofre" id="form-senha"><p class="conclusao" style="margin:0 0 6px">Digite a senha para ver</p><p class="mut" style="margin:0 0 14px;font-size:14px">Os números de venda são publicados embaralhados e só são lidos aqui, no seu navegador, com a senha certa.</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap"><input class="busca" style="margin:0;flex:1;min-width:200px" type="password" id="senha" autocomplete="current-password" placeholder="Senha" aria-label="Senha"><button class="botao" type="submit">Entrar</button></div><p id="erro-senha" class="mut" style="color:var(--ruim);margin:10px 0 0" hidden></p></form>`;
     setTimeout(() => document.getElementById('senha')?.focus(), 0);
+    return;
+  }
+  if (canal().todos) {
+    // consolidado (RADAR 3.4): uma linha por canal + total; o total e a soma das linhas, conferida na tela
+    const cs = Object.values(CV.canais), s = f => cs.reduce((a, c) => a + (+f(c) || 0), 0);
+    const tot = {videos: s(c => c.videos), vis: s(c => c.contagem.visualizacao), aut: s(c => c.contagem.autoridade), conv: s(c => c.contagem.conversao), leads: s(c => c.leads_canal), vendas: s(c => c.vendas_canal), views: s(c => c.views)};
+    const pc = (a, b) => b ? Math.round(100 * a / b) + '%' : '–';
+    const linha = (nome, foto, x, cls) => `<tr class="${cls || ''}"><td class="principal"><span class="com-foto">${foto}<strong>${esc(nome)}</strong></span></td><td class="n" data-rot="Vídeos longos">${fmtNum(x.videos)}</td><td class="n" data-rot="Visualização">${pc(x.vis, x.videos)}</td><td class="n" data-rot="Autoridade">${pc(x.aut, x.videos)}</td><td class="n" data-rot="Leads">${fmtNum(x.leads)}</td><td class="n" data-rot="Vendas">${fmtNum(x.vendas)}</td><td class="n" data-rot="Vendas por lead">${x.leads ? fmtDec(100 * x.vendas / x.leads) + '%' : '–'}</td></tr>`;
+    el.innerHTML = `<div class="kpis">
+        ${kpi('Leads gerados', fmtNum(tot.leads), 'pelos links dos 4 canais, últimos ' + CV.janela_dias + ' dias')}
+        ${kpi('Vendas', fmtNum(tot.vendas), 'pelos links dos 4 canais')}
+        ${kpi('Vendas por lead', tot.leads ? fmtDec(100 * tot.vendas / tot.leads) + '%' : '–', 'vendas ÷ leads no período')}
+        ${kpi('Vídeos analisados', fmtNum(tot.videos), 'longos, com 7+ dias no ar')}
+      </div>
+      <h2>Por canal</h2>
+      <div class="card tabela resp2"><table><thead><tr><th>Canal</th><th class="n">Vídeos longos</th><th class="n">Visualização</th><th class="n">Autoridade</th><th class="n">Leads</th><th class="n">Vendas</th><th class="n">Vendas por lead</th></tr></thead><tbody>
+      ${Object.entries(CV.canais).map(([h, c]) => { const info = (D.canais || []).find(x => x.handle === h) || {}; return linha(c.nome, fotoCanal(info), {videos: c.videos, vis: c.contagem.visualizacao, aut: c.contagem.autoridade, leads: c.leads_canal, vendas: c.vendas_canal}); }).join('')}
+      ${linha('Total', '', tot, 'nosso')}
+      </tbody></table></div>
+      <p class="mut" style="font-size:13px;margin-top:10px">✓ O total é a soma das linhas de cada canal — os mesmos números que aparecem no Desempenho de cada um. Leads e vendas contam pela origem do link de cada canal. <button class="ajuda" id="bloquear">Bloquear de novo</button></p>`;
     return;
   }
   const c = CV.canais[canal().handle];
