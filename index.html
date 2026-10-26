@@ -132,7 +132,29 @@ tr.nosso td{background:#F3F8F5;font-weight:600}
 .canal-chip img{width:26px;height:26px;border-radius:50%}
 .canal-chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .canal-chip b{color:var(--cinza);font-weight:400;font-size:12px}
-.inicio{max-width:960px}
+.seletor{position:relative;margin-left:12px}
+.seletor .canal-chip{margin-left:0;background:var(--branco);cursor:pointer;font:inherit;font-weight:500;font-size:14px}
+.opcoes{position:absolute;top:calc(100% + 6px);left:0;z-index:50;min-width:280px;margin:0;padding:6px;list-style:none;background:var(--branco);border:1px solid var(--borda);border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.12)}
+.opcoes button{display:flex;align-items:center;gap:12px;width:100%;padding:10px;border:0;border-radius:10px;background:none;text-align:left;color:var(--chumbo)}
+.opcoes button:hover{background:var(--cab)}
+.opcoes li[aria-selected=true] button{background:var(--ok-f)}
+.opcoes img{width:34px;height:34px;border-radius:50%;flex:none}
+.opcoes span{display:flex;flex-direction:column;flex:1;min-width:0}
+.opcoes strong{font-weight:600;font-size:14px}
+.opcoes small{font-size:12px;color:var(--cinza)}
+.opcoes i{font-style:normal;color:var(--verde);font-weight:700}
+/* tela de inicio em pagina inteira */
+body.tela-inicio{background:var(--branco)}
+body.tela-inicio .topo,body.tela-inicio .menu{display:none}
+body.tela-inicio .casca{display:block;min-height:100vh}
+body.tela-inicio main{max-width:none;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:40px 20px}
+body.tela-inicio .inicio{text-align:center}
+body.tela-inicio .inicio .lead{margin-left:auto;margin-right:auto}
+body.tela-inicio .canal{box-shadow:none;border:1px solid var(--borda)}
+body.tela-inicio .canal:hover{border-color:var(--verde);box-shadow:var(--sombra)}
+.marca-inicio{display:inline-flex;align-items:center;gap:10px;font:700 18px var(--f-titulo);color:var(--verde);margin-bottom:28px}
+.marca-inicio .logo{width:36px;height:36px;color:var(--verde)}
+.inicio{max-width:960px;width:100%}
 .canais{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
 .canal{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;border:2px solid transparent;cursor:pointer;padding:24px 18px}
 .canal:hover{border-color:var(--verde)}
@@ -181,7 +203,9 @@ tr.nosso td{background:#F3F8F5;font-weight:600}
   .pauta.com-img details{grid-column:2}
   .topo .quando span{display:none}
   .topo .quando{display:none}
-  .canal-chip{max-width:190px;margin-left:auto}
+  .seletor{margin-left:auto}
+  .canal-chip{max-width:190px}
+  .opcoes{left:auto;right:0;min-width:260px}
   td:first-child{white-space:nowrap}
   .topo{padding:0 16px}
   .marca{white-space:nowrap}
@@ -196,7 +220,10 @@ tr.nosso td{background:#F3F8F5;font-weight:600}
 <body>
 <header class="topo">
   <a class="marca" href="#hoje"><svg class="logo" aria-hidden="true" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="currentColor"/><g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="16" cy="16" r="9"/><circle cx="16" cy="16" r="4.5"/><path d="M16 16l6.5-6.5"/></g></svg>AUVP RADAR</a>
-  <a class="canal-chip" id="canal-chip" href="#canais" hidden aria-label="Trocar de canal"></a>
+  <div class="seletor" id="seletor" hidden>
+    <button class="canal-chip" id="canal-chip" aria-haspopup="listbox" aria-expanded="false" aria-label="Trocar de canal"></button>
+    <ul class="opcoes" id="opcoes" role="listbox" hidden></ul>
+  </div>
   <span class="quando"><span>Atualizado em </span><strong id="quando">-</strong></span>
 </header>
 <div class="casca">
@@ -281,12 +308,17 @@ const CHAVE_CANAL = 'radar-canal';
 const lerCanal = () => { try { return localStorage.getItem(CHAVE_CANAL); } catch (e) { return null; } };
 const gravarCanal = h => { try { localStorage.setItem(CHAVE_CANAL, h); } catch (e) { } };
 const canal = () => (D.canais || []).find(c => c.handle === lerCanal()) || null;
+// seletor do topo: botao com o canal atual; ao clicar, a lista dos canais desce logo abaixo (pedido de 26/10/2026)
 function chip() {
-  const el = document.getElementById('canal-chip'), c = canal();
-  if (!c) { el.hidden = true; return; }
-  el.hidden = false;
+  const caixa = document.getElementById('seletor'), el = document.getElementById('canal-chip'), lista = document.getElementById('opcoes'), c = canal();
+  if (!c) { caixa.hidden = true; return; }
+  caixa.hidden = false;
   el.innerHTML = `${c.avatar ? `<img src="${esc(c.avatar)}" alt="" referrerpolicy="no-referrer">` : ''}<span>${esc(c.nome)}</span><b aria-hidden="true">▾</b>`;
+  lista.innerHTML = (D.canais || []).map(x => `<li role="option" aria-selected="${x.handle === c.handle}"><button data-trocar="${esc(x.handle)}">${x.avatar ? `<img src="${esc(x.avatar)}" alt="" referrerpolicy="no-referrer">` : ''}<span><strong>${esc(x.nome)}</strong><small>${fmtCurto(x.inscritos)} inscritos · ${fmtNum(x.videos)} vídeos</small></span>${x.handle === c.handle ? '<i aria-hidden="true">✓</i>' : ''}</button></li>`).join('');
+  fecharSeletor();
 }
+function fecharSeletor() { document.getElementById('opcoes').hidden = true; document.getElementById('canal-chip').setAttribute('aria-expanded', 'false'); }
+function abrirSeletor() { document.getElementById('opcoes').hidden = false; document.getElementById('canal-chip').setAttribute('aria-expanded', 'true'); }
 // aviso para pagina que ainda nao existe para o canal escolhido
 const soSardinha = (o_que) => `<div class="card"><p class="conclusao">${o_que} ainda é só do Investidor Sardinha.</p><p class="mut" style="margin:0">Para o ${esc(canal().nome)}, veja a <a href="#nosso/visao">visão geral do canal</a>. ${o_que === 'A lista de pautas do dia' ? 'Gerar pautas para este canal exige escrever a linha editorial dele — dá para fazer quando vocês quiserem.' : ''}</p></div>`;
 function visaoCanal(c) {
@@ -312,7 +344,7 @@ function visaoCanal(c) {
 const PAGINAS = {
   canais: {rotulo: 'Canais', icone: 'nosso', oculta: true, desenhar() {
     const atual = lerCanal();
-    return `<div class="inicio"><h1>Qual canal você quer ver?</h1><p class="lead">Escolha um canal da AUVP. Dá para trocar a qualquer momento pelo nome do canal, no topo.</p>
+    return `<div class="inicio"><div class="marca-inicio"><svg class="logo" aria-hidden="true" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="currentColor"/><g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="16" cy="16" r="9"/><circle cx="16" cy="16" r="4.5"/><path d="M16 16l6.5-6.5"/></g></svg>AUVP RADAR</div><h1>Qual canal você quer ver?</h1><p class="lead">Escolha um canal da AUVP. Dá para trocar depois, pelo nome do canal no topo.</p>
       <div class="canais">${(D.canais || []).map(c => `<button class="card canal ${c.handle === atual ? 'atual' : ''}" data-canal="${esc(c.handle)}">
         ${c.avatar ? `<img src="${esc(c.avatar)}" alt="" referrerpolicy="no-referrer">` : '<span class="sem-foto"></span>'}
         <span class="nome">${esc(c.nome)}</span>
@@ -471,10 +503,13 @@ function menu(atual) {
   document.getElementById('menu').innerHTML = e.filter(([, p]) => !p.rodape && !p.oculta).map(link).join('') + `<div class="rodape">${e.filter(([, p]) => p.rodape).map(link).join('')}</div>`;
 }
 function render() {
+  if (!D) return;  // o endereco pode mudar antes de os dados chegarem
   let [pag, aba] = location.hash.replace('#', '').split('/');
   if (!PAGINAS[pag]) pag = 'hoje';
   // sem canal escolhido, tudo comeca pela tela de canais
   if (!canal()) pag = 'canais';
+  // tela de canais = pagina inteira, sem topo e sem menu, como uma tela de entrada
+  document.body.classList.toggle('tela-inicio', pag === 'canais');
   chip();
   const P = PAGINAS[pag]; menu(pag === 'todas' ? 'hoje' : pag);
   const c = canal();
@@ -492,12 +527,16 @@ function render() {
 }
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-aba]'); if (b) { location.hash = b.dataset.aba; return; }
+  if (e.target.closest('#canal-chip')) { document.getElementById('opcoes').hidden ? abrirSeletor() : fecharSeletor(); return; }
+  const tr = e.target.closest('[data-trocar]'); if (tr) { gravarCanal(tr.dataset.trocar); render(); return; }
+  if (!e.target.closest('#seletor')) fecharSeletor();
   const ec = e.target.closest('[data-canal]'); if (ec) { gravarCanal(ec.dataset.canal); if (location.hash === '#hoje') render(); else location.hash = 'hoje'; return; }
   const vm = e.target.closest('[data-vermais]'); if (vm) { const l = vm.parentElement.previousElementSibling; l.hidden = false; vm.parentElement.remove(); return; }
   const dd = e.target.closest('[data-dia]'); if (dd) { history.replaceState(null, '', '#historico/' + dd.dataset.dia); desenharCal(dd.dataset.dia, Object.keys(H).sort()); desenharDia(dd.dataset.dia); return; }
   const mm = e.target.closest('[data-mes]'); if (mm) { mesCal = new Date(mesCal.getFullYear(), mesCal.getMonth() + Number(mm.dataset.mes), 1); desenharCal((location.hash.split('/')[1]) || '', Object.keys(H).sort()); return; }
   const a = e.target.closest('[data-explica]'); if (a) { const p = document.getElementById(a.dataset.explica); const ab = p.classList.toggle('aberto'); a.setAttribute('aria-expanded', ab); }
 });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharSeletor(); });
 document.addEventListener('input', e => { if (e.target.id === 'busca') desenharTodas(e.target.value); });
 window.addEventListener('hashchange', render);
 fetch('dados.json', {cache: 'no-store'}).then(r => r.json()).then(d => { D = d; document.getElementById('quando').textContent = fmtDataHora(d.gerado_em); render(); })
