@@ -40,7 +40,11 @@ button{font:inherit;cursor:pointer}
 .menu .cont{margin-left:auto;font:600 12px var(--f-titulo);background:var(--amarelo);color:var(--verde2);border-radius:99px;padding:1px 8px}
 .menu .rodape{margin-top:auto;border-top:1px solid var(--borda);padding-top:10px}
 .menu .rodape a{color:var(--cinza);font-size:14px}
-main{padding:32px 40px 64px;max-width:1120px;width:100%;min-width:0}
+/* largura: o conteudo usa a tela toda (ate 1680px); so o que e TEXTO corrido fica estreito, para a leitura nao cansar */
+main{padding:32px clamp(16px,3vw,48px) 64px;max-width:1680px;width:100%;min-width:0}
+/* pautas: uma coluna ate 1400px de tela; acima disso, duas lado a lado (sem faixa branca sobrando) */
+@media (min-width:1400px){.lista.pautas{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.lista.pautas .pauta.com-img{grid-template-columns:44px minmax(0,1fr) 150px}.lista.pautas .pauta .mini{width:150px}}
+@media (min-width:1500px){.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
 h1{font:700 28px/1.2 var(--f-titulo);margin:0 0 6px;color:var(--verde2)}
 .lead{color:var(--cinza);margin:0 0 24px;max-width:70ch}
 h2{font:600 18px var(--f-titulo);margin:36px 0 4px;color:var(--verde2)}
@@ -102,6 +106,30 @@ h2+.lead{margin-bottom:14px}
 
 /* tabela */
 .tabela{overflow-x:auto;padding:0}
+td.selos{white-space:nowrap}
+@media (max-width:1100px){
+  .resp2 table,.resp2 tbody,.resp2 tr,.resp2 td{display:block}
+  .resp2 thead{display:none}
+  .resp2 tr{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px 18px;padding:16px 18px;border-top:1px solid var(--borda)}
+  .resp2 tr:first-child{border-top:0}
+  .resp2 td{border:0;padding:0;text-align:left!important;white-space:normal}
+  .resp2 td.principal{grid-column:1 / -1}
+  .resp2 td[data-rot]::before{content:attr(data-rot);display:block;font:600 10px var(--f-titulo);letter-spacing:.06em;text-transform:uppercase;color:var(--cinza);margin-bottom:2px}
+  .resp2 tr.nosso{background:#F3F8F5}
+}
+/* tabelas largas (Desempenho, Placar): abaixo de 1500px cada linha vira um cartao, com o nome da coluna em cima do valor */
+@media (max-width:1500px){
+  .resp table,.resp tbody,.resp tr,.resp td{display:block}
+  .resp thead{display:none}
+  .resp tr{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px 18px;padding:16px 18px;border-top:1px solid var(--borda)}
+  .resp tr:first-child{border-top:0}
+  .resp td{border:0;padding:0;text-align:left!important;white-space:normal}
+  .resp td.principal{grid-column:1 / -1}
+  .resp td[data-rot]::before{content:attr(data-rot);display:block;font:600 10px var(--f-titulo);letter-spacing:.06em;text-transform:uppercase;color:var(--cinza);margin-bottom:2px}
+  .resp td.selos .pill{display:inline-flex;margin:0 4px 0 0}
+  .resp tr.nosso{background:#F3F8F5}
+}
+td.selos .pill{display:flex;width:max-content;margin:2px 0}
 table{width:100%;border-collapse:collapse;font-size:14px}
 th{font:600 11px var(--f-titulo);letter-spacing:.06em;text-transform:uppercase;color:var(--cinza);text-align:left;background:var(--cab);padding:10px 14px;white-space:nowrap}
 td{padding:11px 14px;border-top:1px solid var(--borda);vertical-align:middle}
@@ -204,11 +232,13 @@ body.tela-inicio .canal:hover{border-color:var(--verde);box-shadow:var(--sombra)
   .topo .quando span{display:none}
   .topo .quando{display:none}
   .seletor{margin-left:auto;min-width:0}
-  .canal-chip{max-width:calc(100vw - 175px)}
-  .menu a{padding:6px 2px;font-size:10px;min-width:0}
+  .canal-chip{max-width:calc(100vw - 195px)}
+  .menu{padding:4px 2px;gap:0}
+  .menu a{padding:6px 2px;font-size:10px;min-width:0;flex:1 1 0;overflow:hidden}
+  .menu a .rot{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .menu a svg{width:18px;height:18px}
   .opcoes{left:auto;right:0;min-width:260px}
-  td:first-child{white-space:nowrap}
+  td:first-child:not(.principal){white-space:nowrap}
   .topo{padding:0 16px}
   .marca{white-space:nowrap}
   .topo .quando{font-size:12px}
@@ -291,8 +321,8 @@ function cartaoPauta(p, i) {
 // lista de pautas: 10 a vista + reserva atras de 'Ver mais' (pedido de 23/10/2026) + atalho para Todas as noticias
 function listaPautas(itens, comTodas) {
   const prim = itens.slice(0, 10), resto = itens.slice(10);
-  return `<div class="lista">${prim.map((x, i) => cartaoPauta(x, i + 1)).join('')}</div>`
-    + (resto.length ? `<div class="lista mais" hidden style="margin-top:12px">${resto.map((x, i) => cartaoPauta(x, i + 11)).join('')}</div><div class="acoes"><button class="botao" data-vermais>Ver mais ${resto.length} pautas</button></div>` : '')
+  return `<div class="lista pautas">${prim.map((x, i) => cartaoPauta(x, i + 1)).join('')}</div>`
+    + (resto.length ? `<div class="lista pautas mais" hidden style="margin-top:12px">${resto.map((x, i) => cartaoPauta(x, i + 11)).join('')}</div><div class="acoes"><button class="botao" data-vermais>Ver mais ${resto.length} pautas</button></div>` : '')
     + (comTodas ? `<div class="acoes"><a class="botao sec" href="#todas">Ver todas as notícias da coleta →</a></div>` : '');
 }
 function cartaoQuente(q) {
@@ -387,11 +417,11 @@ const PAGINAS = {
       const pl = D.concorrentes.placar || {canais: []};
       const linhas = grupo => pl.canais.filter(c => grupo === 'int' ? c.grupo === 'internacional' : c.grupo !== 'internacional').sort((a, b) => (b.mediana_views_90d || 0) - (a.mediana_views_90d || 0));
       const max = Math.max(...pl.canais.map(c => c.mediana_views_90d || 0));
-      const tab = (lista) => `<div class="card tabela"><table><thead><tr><th>#</th><th>Canal</th><th>Views típicas</th><th class="n">Longos/sem</th><th class="n">Shorts/sem</th><th class="n">Inscritos</th><th>Fala mais de</th></tr></thead><tbody>
-        ${lista.map((c, i) => { const g = GRUPO[c.grupo]; return `<tr class="${c.grupo === 'nosso' ? 'nosso' : ''}"><td class="n">${i + 1}</td><td>${esc(c.nome)}${c.grupo === 'nosso' ? ' ' + pill('Nós', 'p-ok') : ''}</td>
-          <td><div style="display:flex;align-items:center;gap:10px"><strong style="min-width:56px">${fmtCurto(c.mediana_views_90d)}</strong><div class="barra" style="flex:1"><i style="width:${max ? Math.round(100 * (c.mediana_views_90d || 0) / max) : 0}%"></i></div></div></td>
-          <td class="n">${fmtDec(c.longos_por_semana)}</td><td class="n">${fmtDec(c.shorts_por_semana)}</td><td class="n">${fmtCurto(c.inscritos)}</td>
-          <td>${c.categoria_top ? `<span class="tag">${esc(rotFam(c.categoria_top, c.grupo))}</span>` : '<span class="mut">–</span>'}</td></tr>`; }).join('')}</tbody></table></div>`;
+      const tab = (lista) => `<div class="card tabela resp2"><table><thead><tr><th>Canal</th><th>Views típicas</th><th class="n">Longos/sem</th><th class="n">Shorts/sem</th><th class="n">Inscritos</th><th>Fala mais de</th></tr></thead><tbody>
+        ${lista.map((c, i) => { const g = GRUPO[c.grupo]; return `<tr class="${c.grupo === 'nosso' ? 'nosso' : ''}"><td class="principal"><strong>${i + 1}º</strong> ${esc(c.nome)}${c.grupo === 'nosso' ? ' ' + pill('Nós', 'p-ok') : ''}</td>
+          <td data-rot="Views típicas"><div style="display:flex;align-items:center;gap:10px"><strong style="min-width:56px">${fmtCurto(c.mediana_views_90d)}</strong><div class="barra" style="flex:1"><i style="width:${max ? Math.round(100 * (c.mediana_views_90d || 0) / max) : 0}%"></i></div></div></td>
+          <td class="n" data-rot="Longos/sem">${fmtDec(c.longos_por_semana)}</td><td class="n" data-rot="Shorts/sem">${fmtDec(c.shorts_por_semana)}</td><td class="n" data-rot="Inscritos">${fmtCurto(c.inscritos)}</td>
+          <td data-rot="Fala mais de">${c.categoria_top ? `<span class="tag">${esc(rotFam(c.categoria_top, c.grupo))}</span>` : '<span class="mut">–</span>'}</td></tr>`; }).join('')}</tbody></table></div>`;
       return `<p class="lead">A mesma régua para todos os canais, sobre os últimos 90 dias. ${explica('ex-pl', '<strong>Views típicas</strong> é a mediana de views dos vídeos longos (mais de 3 min) com pelo menos 7 dias no ar — o vídeo do meio, nem o melhor nem o pior. Short fica de fora porque é outro jogo de views. O ganho de inscritos no mês entra quando houver 30 dias de anotação (por volta de 20/11).')}</p>
         <h2 style="margin-top:8px">Brasil</h2>${tab(linhas('br'))}<h2>Internacional</h2>${tab(linhas('int'))}`;
     }],
@@ -512,11 +542,11 @@ function conversaoDesenhar() {
     ${(c.vendas_canal || c.leads_canal) ? `<div class="dupla" style="margin-top:16px"><div class="card tabela"><table><thead><tr><th>Mês</th><th class="n">Leads</th><th class="n">Vendas</th></tr></thead><tbody>${[...new Set([...(c.leads_por_mes || []).map(x => x.mes), ...(c.vendas_por_mes || []).map(x => x.mes)])].sort().map(mes => { const [a, mm] = mes.split('-'); const l = (c.leads_por_mes || []).find(x => x.mes === mes), v = (c.vendas_por_mes || []).find(x => x.mes === mes); return `<tr><td>${maiuscula(new Date(+a, +mm - 1, 15).toLocaleDateString('pt-BR', {month: 'short', year: '2-digit'}).replace('.', ''))}</td><td class="n">${fmtNum(l ? l.leads : 0)}</td><td class="n">${fmtNum(v ? v.vendas : 0)}</td></tr>`; }).join('')}</tbody></table></div><div class="card tabela"><table><thead><tr><th>Campanha do link</th><th class="n">Vendas</th></tr></thead><tbody>${(c.campanhas || []).map(x => `<tr><td>${esc(x.campanha)}</td><td class="n">${fmtNum(x.vendas)}</td></tr>`).join('')}</tbody></table></div></div>` : ''}`}
     <p class="lead" style="margin-top:20px">Vídeos longos publicados nos últimos ${CV.janela_dias} dias, com 7 dias ou mais no ar. <strong>Visualização</strong>: views pelo menos 1,25x as dos vizinhos. <strong>Autoridade</strong>: engajamento (curtidas e comentários por view) acima dos vizinhos, sem estar entre os menos vistos. <strong>Venda</strong>: vendas por mil views pelo menos 1,25x as dos vizinhos, com 3 vendas ou mais. ${explica('ex-conv', 'Cada vídeo é comparado com os vídeos longos do mesmo canal publicados até 21 dias antes ou depois. <strong>1,0x</strong> = igual aos vizinhos. As views são as da base completa do canal (a mesma da visão geral). Venda = negócio ganho no Salesforce com o link do YouTube cuja campanha é a data do vídeo.')}</p>
     <div class="abas" style="margin-bottom:14px">${['todos', 'visualizacao', 'autoridade', ...(c.conversao_medida ? ['conversao'] : [])].map(k => `<button aria-selected="${filtroConv === k}" data-filtro-conv="${k}">${k === 'todos' ? 'Todos' : FIN[k][0]} <span class="mut">(${k === 'todos' ? c.videos : c.contagem[k]})</span></button>`).join('')}</div>
-    <div class="card tabela"><table><thead><tr><th>Vídeo</th><th class="n">Views</th><th class="n">vs. vizinhos</th><th class="n">Engajamento</th>${c.conversao_medida ? '<th class="n">Leads</th><th class="n">Vendas</th><th class="n">Vendas por mil views</th>' : ''}<th>Cumpriu</th></tr></thead><tbody>
-    ${lista.map(v => `<tr><td style="min-width:260px"><a href="https://www.youtube.com/watch?v=${encodeURIComponent(v.id)}" target="_blank" rel="noopener noreferrer" style="color:var(--chumbo);text-decoration:none;font-weight:500">${esc(v.titulo)}</a><div class="mut" style="font-size:12px">${fmtData(v.publicado)}</div></td>
-      <td class="n">${fmtCurto(v.views)}</td><td class="n">${rel(v.views_rel)}</td><td class="n">${rel(v.eng_rel)}</td>
-      ${c.conversao_medida ? (v.sem_rastreio ? '<td class="n mut" colspan="3">sem rastreio</td>' : `<td class="n">${fmtNum(v.leads)} <span class="mut" style="font-size:12px">(${fmtDec(v.leads_por_mil)}/mil)</span></td><td class="n">${fmtNum(v.vendas)}</td><td class="n">${v.vendas_por_mil != null ? v.vendas_por_mil.toFixed(2).replace('.', ',') : '–'} <span class="mut">(${fmtDec(v.conversao_rel)}x)</span></td>`) : ''}
-      <td>${v.finalidades.map(f => pill(FIN[f][0], FIN[f][1])).join(' ') || '<span class="mut">–</span>'}</td></tr>`).join('') || `<tr><td colspan="7" class="vazio">Nenhum vídeo neste filtro.</td></tr>`}
+    <div class="card tabela resp"><table><thead><tr><th>Vídeo</th><th class="n">Views</th><th class="n">vs. vizinhos</th><th class="n">Engajamento</th>${c.conversao_medida ? '<th class="n">Leads</th><th class="n">Vendas</th><th class="n">Vendas por mil views</th>' : ''}<th>Cumpriu</th></tr></thead><tbody>
+    ${lista.map(v => `<tr><td class="principal" style="min-width:260px"><a href="https://www.youtube.com/watch?v=${encodeURIComponent(v.id)}" target="_blank" rel="noopener noreferrer" style="color:var(--chumbo);text-decoration:none;font-weight:500">${esc(v.titulo)}</a><div class="mut" style="font-size:12px">${fmtData(v.publicado)}</div></td>
+      <td class="n" data-rot="Views">${fmtCurto(v.views)}</td><td class="n" data-rot="vs. vizinhos">${rel(v.views_rel)}</td><td class="n" data-rot="Engajamento">${rel(v.eng_rel)}</td>
+      ${c.conversao_medida ? (v.sem_rastreio ? '<td class="n mut" colspan="3" data-rot="Leads e vendas">sem rastreio</td>' : `<td class="n" data-rot="Leads">${fmtNum(v.leads)} <span class="mut" style="font-size:12px">(${fmtDec(v.leads_por_mil)}/mil)</span></td><td class="n" data-rot="Vendas">${fmtNum(v.vendas)}</td><td class="n" data-rot="Vendas por mil views">${v.vendas_por_mil != null ? v.vendas_por_mil.toFixed(2).replace('.', ',') : '–'} <span class="mut">(${fmtDec(v.conversao_rel)}x)</span></td>`) : ''}
+      <td class="selos" data-rot="Cumpriu">${v.finalidades.map(f => pill(FIN[f][0], FIN[f][1])).join('') || '<span class="mut">–</span>'}</td></tr>`).join('') || `<tr><td colspan="7" class="vazio">Nenhum vídeo neste filtro.</td></tr>`}
     </tbody></table></div>
     <p class="mut" style="font-size:13px;margin-top:14px">Atualizado em ${fmtDataHora(CV.gerado_em)}. ${c.conversao_medida ? `${fmtNum(c.vendas_canal)} vendas pelo link do canal no período; ${fmtNum(c.vendas)} delas casadas com um vídeo longo pela data. Última campanha com venda em ${fmtData(CV.rastreio.ultima_data_com_campanha)}.` : ''} <button class="ajuda" id="bloquear">Bloquear de novo</button></p>`;
 }
