@@ -550,7 +550,7 @@ function desenharTodas(filtro) {
 // conversao.enc.json chega CIFRADO (radar\painel-conversao.ps1). A senha vira chave aqui no navegador
 // (PBKDF2-SHA256 -> AES-256 + HMAC); a assinatura e conferida antes de decifrar. Os dados decifrados ficam so
 // na memoria desta aba - recarregar a pagina pede a senha de novo. Nada de venda sai deste navegador.
-let CV = null, filtroConv = 'todos';
+let CV = null, filtroConv = 'todos', vistaConv = 'videos';
 const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
 async function decifrar(senha) {
   const env = await (await fetch('conversao.enc.json', {cache: 'no-store'})).json();
@@ -593,10 +593,29 @@ function conversaoDesenhar() {
     return;
   }
   const c = CV.canais[canal().handle];
+  // RADAR 3.6: "O que vende" (padroes de alta conversao) - so onde ha venda por video e a analise existe
+  const P = (c && c.conversao_medida && CV.padroes && canal().handle === 'investidorsardinha') ? CV.padroes : null;
+  const vistas = P ? `<div class="abas" style="margin:4px 0 20px">${[['videos', 'Vídeos'], ['padroes', 'O que vende']].map(([k, r]) => `<button aria-selected="${vistaConv === k}" data-vista-conv="${k}">${r}</button>`).join('')}</div>` : '';
+  if (P && vistaConv === 'padroes') {
+    const L = P.leitura || {};
+    const linhaTop = (v, i) => `<tr><td class="principal"><span class="mut">${i + 1}º</span> <a href="https://www.youtube.com/watch?v=${encodeURIComponent(v.id)}" target="_blank" rel="noopener noreferrer" style="color:var(--chumbo);text-decoration:none;font-weight:500">${esc(v.titulo)}</a><div class="mut" style="font-size:12px">${fmtData(v.publicado.slice(0, 10))} · campanha <strong>${esc(v.campanha)}</strong>${v.categoria ? ' · ' + esc(v.categoria) : ''}</div></td><td class="n" data-rot="Vendas">${fmtNum(v.vendas)}</td><td class="n" data-rot="Leads">${fmtNum(v.leads)}</td><td class="n" data-rot="Views">${fmtCurto(v.views)}</td><td class="n" data-rot="Vendas por mil views">${v.vendas_por_mil.toFixed(2).replace('.', ',')}</td></tr>`;
+    const tabTop = lista => `<div class="card tabela resp2"><table><thead><tr><th>Vídeo</th><th class="n">Vendas</th><th class="n">Leads</th><th class="n">Views</th><th class="n">Vendas por mil views</th></tr></thead><tbody>${lista.map(linhaTop).join('')}</tbody></table></div>`;
+    el.innerHTML = vistas + `<div class="card" style="margin-bottom:20px"><p class="mut" style="margin:0 0 6px;font-size:13px">O PADRÃO DOS VÍDEOS QUE MAIS VENDEM</p><p class="conclusao" style="font-size:20px">${esc(L.padrao || 'Sem leitura da IA nesta rodada')}</p><p style="margin:0">${esc(L.resumo || '')}</p></div>
+      ${(L.receita || []).length ? `<h2 style="margin-top:0">Para a próxima pauta que queira vender</h2><div class="card"><ol style="margin:0;padding-left:20px;display:grid;gap:8px">${L.receita.map(x => `<li>${esc(x)}</li>`).join('')}</ol></div>` : ''}
+      ${L.cuidado ? `<div class="aviso" style="margin-top:14px">${esc(L.cuidado)}</div>` : ''}
+      <h2>O que o top 20 tem em comum</h2><p class="lead">Os 20 vídeos com mais vendas por mil views contra o resto do período (${fmtData(P.periodo_de)} a ${fmtData(P.periodo_ate)}, ${P.videos} vídeos longos). Só entra característica com 5 vídeos ou mais. ${explica('ex-pad', '<strong>No top 20 × no resto</strong>: em quantos % dos vídeos de cada grupo a característica aparece — é o sinal principal. <strong>Efeito</strong>: vendas por mil views (mediana) dos vídeos que têm a característica dividido pelos que não têm; a mediana dilui os picos, então um efeito perto de 1x não anula uma concentração forte. É correlação, não prova de causa.')}</p>
+      <div class="card tabela resp2"><table><thead><tr><th>Característica</th><th class="n">No top 20</th><th class="n">No resto</th><th class="n">Efeito</th><th class="n">Vídeos</th></tr></thead><tbody>
+      ${(P.caracteristicas || []).slice(0, 15).map(x => { const d = x.pct_top - x.pct_resto; return `<tr><td class="principal">${esc(maiuscula(x.caracteristica))}</td><td class="n" data-rot="No top 20"><strong style="color:${d >= 15 ? 'var(--ok)' : d <= -15 ? 'var(--ruim)' : 'inherit'}">${x.pct_top}%</strong></td><td class="n" data-rot="No resto">${x.pct_resto}%</td><td class="n" data-rot="Efeito">${x.efeito != null ? fmtDec(x.efeito) + 'x' : '–'}</td><td class="n" data-rot="Vídeos">${x.videos}</td></tr>`; }).join('')}
+      </tbody></table></div>
+      <h2>Top 20 por vendas por mil views</h2><p class="lead">Os que convertem melhor a audiência que tiveram (com 3 vendas ou mais). Para conferir no Salesforce: negócios ganhos com origem <em>youtube</em>, meio <em>link</em> e a campanha indicada.</p>${tabTop(P.top_por_mil || [])}
+      <h2>Top 20 por vendas</h2><p class="lead">Os que mais venderam no total — aqui pesa o tamanho da audiência.</p>${tabTop(P.top_vendas || [])}
+      <p class="mut" style="font-size:13px;margin-top:14px">Período fixo: ${fmtData(P.periodo_de)} a ${fmtData(P.periodo_ate)} (vídeos com 30+ dias, para a venda ter tempo de acontecer). ${fmtNum(P.vendas)} vendas e ${fmtNum(P.leads)} leads ligados a ${P.videos} vídeos. Análise atualizada às segundas.</p>`;
+    return;
+  }
   if (!c) { el.innerHTML = '<div class="card vazio">Sem dados para este canal.</div>'; return; }
   const n = c.videos || 1, pct = k => Math.round(100 * c.contagem[k] / n) + '%';
   const lista = c.lista.filter(v => filtroConv === 'todos' || v.finalidades.includes(filtroConv));
-  el.innerHTML = `<div class="kpis">
+  el.innerHTML = vistas + `<div class="kpis">
       ${kpi('Vídeos analisados', c.videos, `longos, desde ${fmtData(CV.desde)}`)}
       ${kpi('Visualização', pct('visualizacao'), `${c.contagem.visualizacao} vídeos acima dos vizinhos`)}
       ${kpi('Autoridade', pct('autoridade'), `${c.contagem.autoridade} vídeos com engajamento acima`)}
@@ -678,6 +697,7 @@ function render() {
 }
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-aba]'); if (b) { location.hash = b.dataset.aba; return; }
+  const vc = e.target.closest('[data-vista-conv]'); if (vc) { vistaConv = vc.dataset.vistaConv; conversaoDesenhar(); return; }
   const fc = e.target.closest('[data-filtro-conv]'); if (fc) { filtroConv = fc.dataset.filtroConv; conversaoDesenhar(); return; }
   if (e.target.closest('#bloquear')) { CV = null; conversaoDesenhar(); return; }
   if (e.target.closest('#canal-chip')) { document.getElementById('opcoes').hidden ? abrirSeletor() : fecharSeletor(); return; }
