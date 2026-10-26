@@ -249,6 +249,7 @@ const ICONES = {
   nosso: '<path d="M22 8.5c0-2-1.5-3.5-3.5-3.5h-13C3.5 5 2 6.5 2 8.5v7C2 17.5 3.5 19 5.5 19h13c2 0 3.5-1.5 3.5-3.5z"/><path d="M10 9l5 3-5 3z"/>',
   validar: '<path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
   historico: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  cadeado: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
   sistema: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>'
 };
 const ico = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONES[k]}</svg>`;
@@ -434,6 +435,9 @@ const PAGINAS = {
   todas: {rotulo: 'Todas as notícias', icone: 'hoje', oculta: true, desenhar() {
     return `<p style="margin:0 0 8px"><a href="#hoje">← Voltar para Hoje</a></p><h1>Todas as notícias</h1><p class="lead" id="todas-lead">Tudo o que o RADAR leu na coleta do dia, antes da IA escolher. Só título, fonte e link.</p><input class="busca" type="search" id="busca" placeholder="Filtrar por palavra…" aria-label="Filtrar notícias"><div class="card todas" id="todas-lista"><p class="vazio">Carregando…</p></div>`;
   }, depois() { todasNoticias(); }},
+  conversao: {rotulo: 'Desempenho', icone: 'cadeado', desenhar() {
+    return `<h1>Desempenho dos vídeos</h1><p class="lead">Visualização, autoridade e venda de cada vídeo longo do ${esc(canal().nome)}. Área restrita: tem dado de venda.</p><div id="conv"></div>`;
+  }, depois() { conversaoDesenhar(); }},
   historico: {rotulo: 'Histórico', icone: 'historico', desenhar() {
     return `<h1>Histórico</h1><p class="lead">As pautas que a IA escolheu em cada dia. Os dias em verde têm lista — clique para ver.</p><div class="hist"><div class="card cal" id="cal"><p class="vazio">Carregando…</p></div><div id="hist-dia"></div></div>`;
   }, depois(arg) { historico(arg); }},
@@ -465,6 +469,54 @@ function desenharTodas(filtro) {
   el.innerHTML = its.length ? `<ul>${its.map(x => { const l = (x.links || [])[0]; const tit = l ? `<a class="t" href="${esc(l.link)}" target="_blank" rel="noopener noreferrer">${esc(x.titulo)} ↗</a>` : esc(x.titulo);
     return `<li><span style="flex:1">${tit}</span>${x.repeticoes > 1 ? pill(x.repeticoes + ' veículos', 'p-info') : ''}<span class="f">${esc(x.tipo === 'tendencia' ? 'Google Trends' : x.fonte)}</span></li>`; }).join('')}</ul>` : '<p class="vazio">Nenhuma notícia com essa palavra.</p>';
 }
+// ---------------------------------------------------------------- desempenho (area com senha, RADAR 3.3)
+// conversao.enc.json chega CIFRADO (radar\painel-conversao.ps1). A senha vira chave aqui no navegador
+// (PBKDF2-SHA256 -> AES-256 + HMAC); a assinatura e conferida antes de decifrar. Os dados decifrados ficam so
+// na memoria desta aba - recarregar a pagina pede a senha de novo. Nada de venda sai deste navegador.
+let CV = null, filtroConv = 'todos';
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function decifrar(senha) {
+  const env = await (await fetch('conversao.enc.json', {cache: 'no-store'})).json();
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(senha), 'PBKDF2', false, ['deriveBits']);
+  const bits = new Uint8Array(await crypto.subtle.deriveBits({name: 'PBKDF2', hash: 'SHA-256', salt: b64(env.sal), iterations: env.iter}, base, 512));
+  const kMac = await crypto.subtle.importKey('raw', bits.slice(32), {name: 'HMAC', hash: 'SHA-256'}, false, ['verify']);
+  const iv = b64(env.iv), dados = b64(env.dados), junto = new Uint8Array(iv.length + dados.length); junto.set(iv); junto.set(dados, iv.length);
+  if (!await crypto.subtle.verify('HMAC', kMac, b64(env.mac), junto)) throw new Error('senha');
+  const kAes = await crypto.subtle.importKey('raw', bits.slice(0, 32), 'AES-CBC', false, ['decrypt']);
+  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name: 'AES-CBC', iv}, kAes, dados)));
+}
+const FIN = {visualizacao: ['Visualização', 'p-info'], autoridade: ['Autoridade', 'p-ok'], conversao: ['Venda', 'p-alerta']};
+const rel = x => x == null ? '<span class="mut">–</span>' : `<span style="color:${x >= 1.25 ? 'var(--ok)' : x < 0.8 ? 'var(--ruim)' : 'inherit'}">${fmtDec(x)}x</span>`;
+function conversaoDesenhar() {
+  const el = document.getElementById('conv'); if (!el) return;
+  if (!CV) {
+    el.innerHTML = `<form class="card cofre" id="form-senha"><p class="conclusao" style="margin:0 0 6px">Digite a senha para ver</p><p class="mut" style="margin:0 0 14px;font-size:14px">Os números de venda são publicados embaralhados e só são lidos aqui, no seu navegador, com a senha certa.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><input class="busca" style="margin:0;flex:1;min-width:200px" type="password" id="senha" autocomplete="current-password" placeholder="Senha" aria-label="Senha"><button class="botao" type="submit">Entrar</button></div><p id="erro-senha" class="mut" style="color:var(--ruim);margin:10px 0 0" hidden></p></form>`;
+    setTimeout(() => document.getElementById('senha')?.focus(), 0);
+    return;
+  }
+  const c = CV.canais[canal().handle];
+  if (!c) { el.innerHTML = '<div class="card vazio">Sem dados para este canal.</div>'; return; }
+  const n = c.videos || 1, pct = k => Math.round(100 * c.contagem[k] / n) + '%';
+  const lista = c.lista.filter(v => filtroConv === 'todos' || v.finalidades.includes(filtroConv));
+  el.innerHTML = `<div class="kpis">
+      ${kpi('Vídeos analisados', c.videos, `longos, desde ${fmtData(CV.desde)}`)}
+      ${kpi('Visualização', pct('visualizacao'), `${c.contagem.visualizacao} vídeos acima dos vizinhos`)}
+      ${kpi('Autoridade', pct('autoridade'), `${c.contagem.autoridade} vídeos com engajamento acima`)}
+      ${c.conversao_medida ? kpi('Venda', pct('conversao'), `${c.contagem.conversao} vídeos · ${fmtNum(c.vendas)} vendas no período`) : kpi('Venda', '–', 'não rastreável neste canal')}
+    </div>
+    ${c.conversao_medida ? '' : `<div class="aviso" style="margin-top:14px">A venda não dá para medir neste canal: o link rastreado do YouTube guarda só a data do vídeo, não o canal. Nos dias em que só este canal publicou, quase não houve venda pelo link — as vendas por data foram atribuídas ao Investidor Sardinha. Para medir este canal, o link precisa levar o nome do canal.</div>`}
+    <p class="lead" style="margin-top:20px">Vídeos longos publicados nos últimos ${CV.janela_dias} dias, com 7 dias ou mais no ar. <strong>Visualização</strong>: views pelo menos 1,25x as dos vizinhos. <strong>Autoridade</strong>: engajamento (curtidas e comentários por view) acima dos vizinhos, sem estar entre os menos vistos. <strong>Venda</strong>: vendas por mil views pelo menos 1,25x as dos vizinhos, com 3 vendas ou mais. ${explica('ex-conv', 'Cada vídeo é comparado com os vídeos longos do mesmo canal publicados até 21 dias antes ou depois. <strong>1,0x</strong> = igual aos vizinhos. As views são as da base completa do canal (a mesma da visão geral). Venda = negócio ganho no Salesforce com o link do YouTube cuja campanha é a data do vídeo.')}</p>
+    <div class="abas" style="margin-bottom:14px">${['todos', 'visualizacao', 'autoridade', ...(c.conversao_medida ? ['conversao'] : [])].map(k => `<button aria-selected="${filtroConv === k}" data-filtro-conv="${k}">${k === 'todos' ? 'Todos' : FIN[k][0]} <span class="mut">(${k === 'todos' ? c.videos : c.contagem[k]})</span></button>`).join('')}</div>
+    <div class="card tabela"><table><thead><tr><th>Vídeo</th><th class="n">Views</th><th class="n">vs. vizinhos</th><th class="n">Engajamento</th>${c.conversao_medida ? '<th class="n">Vendas</th><th class="n">Por mil views</th>' : ''}<th>Cumpriu</th></tr></thead><tbody>
+    ${lista.map(v => `<tr><td style="min-width:260px"><a href="https://www.youtube.com/watch?v=${encodeURIComponent(v.id)}" target="_blank" rel="noopener noreferrer" style="color:var(--chumbo);text-decoration:none;font-weight:500">${esc(v.titulo)}</a><div class="mut" style="font-size:12px">${fmtData(v.publicado)}</div></td>
+      <td class="n">${fmtCurto(v.views)}</td><td class="n">${rel(v.views_rel)}</td><td class="n">${rel(v.eng_rel)}</td>
+      ${c.conversao_medida ? (v.sem_rastreio ? '<td class="n mut" colspan="2">sem rastreio</td>' : `<td class="n">${fmtNum(v.vendas)}</td><td class="n">${v.vendas_por_mil != null ? fmtDec(v.vendas_por_mil) : '–'} <span class="mut">(${fmtDec(v.conversao_rel)}x)</span></td>`) : ''}
+      <td>${v.finalidades.map(f => pill(FIN[f][0], FIN[f][1])).join(' ') || '<span class="mut">–</span>'}</td></tr>`).join('') || `<tr><td colspan="7" class="vazio">Nenhum vídeo neste filtro.</td></tr>`}
+    </tbody></table></div>
+    <p class="mut" style="font-size:13px;margin-top:14px">Atualizado em ${fmtDataHora(CV.gerado_em)}. ${c.conversao_medida ? `Vendas: ${fmtNum(CV.rastreio.vendas_casadas_no_periodo)} casadas com vídeos do período; última campanha com venda em ${fmtData(CV.rastreio.ultima_data_com_campanha)}.` : ''} <button class="ajuda" id="bloquear">Bloquear de novo</button></p>`;
+}
+
 // ---------------------------------------------------------------- historico (calendario)
 let H = null, mesCal = null;
 const maiuscula = s => s.charAt(0).toUpperCase() + s.slice(1);
@@ -527,6 +579,8 @@ function render() {
 }
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-aba]'); if (b) { location.hash = b.dataset.aba; return; }
+  const fc = e.target.closest('[data-filtro-conv]'); if (fc) { filtroConv = fc.dataset.filtroConv; conversaoDesenhar(); return; }
+  if (e.target.closest('#bloquear')) { CV = null; conversaoDesenhar(); return; }
   if (e.target.closest('#canal-chip')) { document.getElementById('opcoes').hidden ? abrirSeletor() : fecharSeletor(); return; }
   const tr = e.target.closest('[data-trocar]'); if (tr) { gravarCanal(tr.dataset.trocar); render(); return; }
   if (!e.target.closest('#seletor')) fecharSeletor();
@@ -535,6 +589,14 @@ document.addEventListener('click', e => {
   const dd = e.target.closest('[data-dia]'); if (dd) { history.replaceState(null, '', '#historico/' + dd.dataset.dia); desenharCal(dd.dataset.dia, Object.keys(H).sort()); desenharDia(dd.dataset.dia); return; }
   const mm = e.target.closest('[data-mes]'); if (mm) { mesCal = new Date(mesCal.getFullYear(), mesCal.getMonth() + Number(mm.dataset.mes), 1); desenharCal((location.hash.split('/')[1]) || '', Object.keys(H).sort()); return; }
   const a = e.target.closest('[data-explica]'); if (a) { const p = document.getElementById(a.dataset.explica); const ab = p.classList.toggle('aberto'); a.setAttribute('aria-expanded', ab); }
+});
+document.addEventListener('submit', async e => {
+  if (e.target.id !== 'form-senha') return;
+  e.preventDefault();
+  const btn = e.target.querySelector('button'), erro = document.getElementById('erro-senha');
+  btn.disabled = true; btn.textContent = 'Abrindo…'; erro.hidden = true;
+  try { CV = await decifrar(document.getElementById('senha').value); conversaoDesenhar(); }
+  catch (x) { erro.textContent = x.message === 'senha' ? 'Senha incorreta.' : 'Não consegui abrir os dados.'; erro.hidden = false; btn.disabled = false; btn.textContent = 'Entrar'; }
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharSeletor(); });
 document.addEventListener('input', e => { if (e.target.id === 'busca') desenharTodas(e.target.value); });
