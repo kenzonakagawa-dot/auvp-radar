@@ -40,7 +40,7 @@ button{font:inherit;cursor:pointer}
 .menu .cont{margin-left:auto;font:600 12px var(--f-titulo);background:var(--amarelo);color:var(--verde2);border-radius:99px;padding:1px 8px}
 .menu .rodape{margin-top:auto;border-top:1px solid var(--borda);padding-top:10px}
 .menu .rodape a{color:var(--cinza);font-size:14px}
-main{padding:32px 40px 64px;max-width:1120px;width:100%}
+main{padding:32px 40px 64px;max-width:1120px;width:100%;min-width:0}
 h1{font:700 28px/1.2 var(--f-titulo);margin:0 0 6px;color:var(--verde2)}
 .lead{color:var(--cinza);margin:0 0 24px;max-width:70ch}
 h2{font:600 18px var(--f-titulo);margin:36px 0 4px;color:var(--verde2)}
@@ -70,8 +70,8 @@ h2+.lead{margin-bottom:14px}
 .explica.aberto{display:block}
 
 /* pauta */
-.pauta{display:grid;grid-template-columns:44px 1fr;gap:4px 14px}
-.pauta.com-img{grid-template-columns:44px 1fr 176px}
+.pauta{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 14px}
+.pauta.com-img{grid-template-columns:44px minmax(0,1fr) 176px}
 .pauta .mini{grid-column:3;grid-row:1;width:176px;aspect-ratio:16/9;object-fit:cover;border-radius:10px;background:var(--cab)}
 .pauta.com-img details{grid-column:2 / 4}
 .pauta .num{font:700 22px var(--f-titulo);color:var(--amarelo);background:var(--verde);width:44px;height:44px;border-radius:12px;display:grid;place-items:center}
@@ -109,7 +109,8 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 tr.nosso td{background:#F3F8F5;font-weight:600}
 .barra{height:8px;border-radius:99px;background:var(--cab);overflow:hidden;min-width:80px}
 .barra i{display:block;height:100%;background:var(--verde);border-radius:99px}
-.dupla{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dupla{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:1180px){.dupla{grid-template-columns:minmax(0,1fr)}}
 .vazio{color:var(--cinza);text-align:center;padding:28px}
 .aviso{background:var(--alerta-f);color:var(--alerta);border-radius:12px;padding:12px 16px;font-size:14px;margin-bottom:20px}
 
@@ -125,6 +126,22 @@ tr.nosso td{background:#F3F8F5;font-weight:600}
 .todas .f{font-size:13px;color:var(--cinza);white-space:nowrap}
 .busca{width:100%;max-width:420px;padding:11px 14px;border:1px solid var(--borda);border-radius:10px;font:inherit;background:var(--branco);margin-bottom:16px}
 
+/* tela de canais e seletor no topo */
+.canal-chip{display:inline-flex;align-items:center;gap:8px;margin-left:12px;padding:5px 12px 5px 5px;border:1px solid var(--borda);border-radius:99px;text-decoration:none;color:var(--chumbo);font-weight:500;font-size:14px;max-width:260px}
+.canal-chip:hover{background:var(--cab)}
+.canal-chip img{width:26px;height:26px;border-radius:50%}
+.canal-chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.canal-chip b{color:var(--cinza);font-weight:400;font-size:12px}
+.inicio{max-width:960px}
+.canais{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.canal{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;border:2px solid transparent;cursor:pointer;padding:24px 18px}
+.canal:hover{border-color:var(--verde)}
+.canal.atual{border-color:var(--verde)}
+.canal img,.canal .sem-foto{width:84px;height:84px;border-radius:50%;background:var(--cab)}
+.canal .nome{font:600 17px var(--f-titulo);color:var(--verde2)}
+.canal .nums{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--cinza)}
+.canal .nums strong{color:var(--chumbo)}
+
 /* calendario do historico */
 .cal{max-width:420px}
 .cal .cab{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
@@ -138,9 +155,9 @@ tr.nosso td{background:#F3F8F5;font-weight:600}
 .cal .dia.tem:hover{outline:2px solid var(--verde)}
 .cal .dia[aria-pressed=true]{background:var(--verde);color:var(--branco)}
 .cal .dia:disabled{cursor:default}
-.hist{display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start}
+.hist{display:grid;grid-template-columns:340px minmax(0,1fr);gap:24px;align-items:start}
 .hist .cal{position:sticky;top:84px}
-@media (max-width:1000px){.hist{grid-template-columns:1fr}.hist .cal{position:static}}
+@media (max-width:1200px){.hist{grid-template-columns:1fr}.hist .cal{position:static}}
 
 /* celular */
 @media (max-width:860px){
@@ -163,6 +180,9 @@ tr.nosso td{background:#F3F8F5;font-weight:600}
   .pauta .mini{grid-column:1 / 3;grid-row:auto;order:-1;width:100%;aspect-ratio:2.4/1}
   .pauta.com-img details{grid-column:2}
   .topo .quando span{display:none}
+  .topo .quando{display:none}
+  .canal-chip{max-width:190px;margin-left:auto}
+  td:first-child{white-space:nowrap}
   .topo{padding:0 16px}
   .marca{white-space:nowrap}
   .topo .quando{font-size:12px}
@@ -176,6 +196,7 @@ tr.nosso td{background:#F3F8F5;font-weight:600}
 <body>
 <header class="topo">
   <a class="marca" href="#hoje"><svg class="logo" aria-hidden="true" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="currentColor"/><g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="16" cy="16" r="9"/><circle cx="16" cy="16" r="4.5"/><path d="M16 16l6.5-6.5"/></g></svg>AUVP RADAR</a>
+  <a class="canal-chip" id="canal-chip" href="#canais" hidden aria-label="Trocar de canal"></a>
   <span class="quando"><span>Atualizado em </span><strong id="quando">-</strong></span>
 </header>
 <div class="casca">
@@ -254,8 +275,55 @@ function cartaoQuente(q) {
 const quentesNovos = () => ((D.concorrentes.quentes || {}).itens || []).filter(q => !q.nos_ja_falamos);
 const placarBR = () => ((D.concorrentes.placar || {}).canais || []).filter(c => c.grupo !== 'internacional');
 
+// ---------------------------------------------------------------- canal escolhido (tela de inicio, 26/10/2026)
+// A escolha fica no navegador de quem usa (localStorage); sem escolha, o site abre na tela de canais.
+const CHAVE_CANAL = 'radar-canal';
+const lerCanal = () => { try { return localStorage.getItem(CHAVE_CANAL); } catch (e) { return null; } };
+const gravarCanal = h => { try { localStorage.setItem(CHAVE_CANAL, h); } catch (e) { } };
+const canal = () => (D.canais || []).find(c => c.handle === lerCanal()) || null;
+function chip() {
+  const el = document.getElementById('canal-chip'), c = canal();
+  if (!c) { el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = `${c.avatar ? `<img src="${esc(c.avatar)}" alt="" referrerpolicy="no-referrer">` : ''}<span>${esc(c.nome)}</span><b aria-hidden="true">▾</b>`;
+}
+// aviso para pagina que ainda nao existe para o canal escolhido
+const soSardinha = (o_que) => `<div class="card"><p class="conclusao">${o_que} ainda é só do Investidor Sardinha.</p><p class="mut" style="margin:0">Para o ${esc(canal().nome)}, veja a <a href="#nosso/visao">visão geral do canal</a>. ${o_que === 'A lista de pautas do dia' ? 'Gerar pautas para este canal exige escrever a linha editorial dele — dá para fazer quando vocês quiserem.' : ''}</p></div>`;
+function visaoCanal(c) {
+  const ms = c.meses || [], max = Math.max(1, ...ms.map(m => m.mediana_longos || 0));
+  const semanas = 90 / 7;
+  return `<div class="kpis">
+      ${kpi('Inscritos', fmtCurto(c.inscritos), `${fmtNum(c.videos)} vídeos desde ${fmtData(c.desde)}`)}
+      ${kpi('Views típicas', fmtCurto(c.j90.mediana_longos), 'vídeo longo, últimos 90 dias')}
+      ${kpi('Vídeos por semana', fmtDec((c.j90.longos + c.j90.shorts) / semanas), `${c.j90.longos} longos e ${c.j90.shorts} shorts em 90 dias`)}
+      ${kpi('Views em 90 dias', fmtCurto(c.j90.views), 'soma dos vídeos publicados no período')}
+    </div>
+    <h2>Mês a mês</h2><p class="lead">Views típicas dos vídeos longos publicados em cada mês. ${explica('ex-mes', '“Views típicas” é a mediana: o vídeo do meio, nem o melhor nem o pior. Os meses recentes ainda estão juntando views, então tendem a aparecer mais baixos. Vídeos exclusivos para membros ficam fora da conta (o YouTube não informa as views deles).')}</p>
+    <div class="card tabela"><table><thead><tr><th>Mês</th><th class="n">Longos</th><th class="n">Shorts</th><th>Views típicas</th></tr></thead><tbody>
+    ${ms.map(m => { const [a, mm] = m.mes.split('-'); const rot = maiuscula(new Date(+a, +mm - 1, 15).toLocaleDateString('pt-BR', {month: 'short', year: '2-digit'}).replace('.', '')); return `<tr><td>${rot}</td><td class="n">${m.longos}</td><td class="n">${m.shorts}</td><td><div style="display:flex;gap:10px;align-items:center"><strong style="min-width:56px">${fmtCurto(m.mediana_longos)}</strong><div class="barra" style="flex:1;max-width:260px"><i style="width:${Math.round(100 * (m.mediana_longos || 0) / max)}%"></i></div></div></td></tr>`; }).join('')}
+    </tbody></table></div>
+    <div class="dupla" style="margin-top:28px">
+      <div class="card"><p class="conclusao">Mais vistos dos últimos 90 dias</p>${(c.top90 || []).map((v, i) => cartaoVideo({...v, canal: c.nome}, i + 1)).join('') || '<p class="vazio">Sem vídeos no período.</p>'}</div>
+      <div class="card"><p class="conclusao">Últimos publicados</p>${(c.ultimos || []).map(v => cartaoVideo({...v, canal: c.nome, grupo: v.membros ? null : undefined})).join('')}</div>
+    </div>
+    <p class="mut" style="font-size:13px;margin-top:16px">Base completa conferida com o YouTube: ${fmtNum(c.conferencia.linhas)} vídeos na base × ${fmtNum(c.conferencia.videos_na_origem)} informados pelo canal${c.conferencia.membros ? ` (inclui ${c.conferencia.membros} exclusivos para membros)` : ''}.</p>`;
+}
+
 const PAGINAS = {
+  canais: {rotulo: 'Canais', icone: 'nosso', oculta: true, desenhar() {
+    const atual = lerCanal();
+    return `<div class="inicio"><h1>Qual canal você quer ver?</h1><p class="lead">Escolha um canal da AUVP. Dá para trocar a qualquer momento pelo nome do canal, no topo.</p>
+      <div class="canais">${(D.canais || []).map(c => `<button class="card canal ${c.handle === atual ? 'atual' : ''}" data-canal="${esc(c.handle)}">
+        ${c.avatar ? `<img src="${esc(c.avatar)}" alt="" referrerpolicy="no-referrer">` : '<span class="sem-foto"></span>'}
+        <span class="nome">${esc(c.nome)}</span>
+        <span class="nums"><span><strong>${fmtCurto(c.inscritos)}</strong> inscritos</span><span><strong>${fmtNum(c.videos)}</strong> vídeos</span></span>
+        <span class="nums"><span>Views típicas (90 dias): <strong>${fmtCurto(c.j90.mediana_longos)}</strong></span></span>
+        ${c.pautas_diarias ? pill('Pautas do dia', 'p-ok') : pill('Visão do canal', 'p-neutro')}
+      </button>`).join('')}</div></div>`;
+  }},
   hoje: {rotulo: 'Hoje', icone: 'hoje', desenhar() {
+    const c = canal();
+    if (c && !c.pautas_diarias) return `<h1>${esc(c.nome)}</h1><p class="lead">Como o canal está. ${''}</p>${soSardinha('A lista de pautas do dia')}<div style="margin-top:20px">${visaoCanal(c)}</div>`;
     const p = D.pautas, qn = quentesNovos(), br = placarBR(), nos = br.find(c => c.grupo === 'nosso');
     const posViews = nos ? 1 + br.filter(c => c.grupo !== 'nosso' && (c.mediana_views_90d || 0) > (nos.mediana_views_90d || 0)).length : null;
     return `<h1>O que pede atenção hoje</h1>
@@ -317,7 +385,8 @@ const PAGINAS = {
         ${mix.map(m => { const d = Math.round(m.pn - m.po); return `<tr><td>${esc(rotFam(m.f))}</td><td><div style="display:flex;gap:8px;align-items:center"><span style="min-width:34px">${Math.round(m.pn)}%</span><div class="barra" style="flex:1;max-width:160px"><i style="width:${m.pn}%"></i></div></div></td><td><div style="display:flex;gap:8px;align-items:center"><span style="min-width:34px">${Math.round(m.po)}%</span><div class="barra" style="flex:1;max-width:160px"><i style="width:${m.po}%;background:var(--cinza-claro)"></i></div></div></td><td class="n">${d >= 5 ? pill('+' + d + ' p.p.', 'p-ok') : d <= -5 ? pill(d + ' p.p.', 'p-alerta') : `<span class="mut">${d > 0 ? '+' : ''}${d} p.p.</span>`}</td></tr>`; }).join('')}</tbody></table></div>`;
     }]
   }},
-  nosso: {rotulo: 'Nosso canal', icone: 'nosso', abas: {
+  nosso: {rotulo: 'Canal', icone: 'nosso', abas: {
+    'visao': ['Visão geral', () => visaoCanal(canal())],
     'titulos': ['Títulos que rendem', () => {
       const t = D.nosso.titulos; if (!t) return '<div class="card vazio">Sem análise de títulos.</div>';
       const ps = (t.padroes || []).filter(p => !p.fraca).sort((a, b) => b.efeito_views - a.efeito_views);
@@ -404,18 +473,26 @@ function menu(atual) {
 function render() {
   let [pag, aba] = location.hash.replace('#', '').split('/');
   if (!PAGINAS[pag]) pag = 'hoje';
+  // sem canal escolhido, tudo comeca pela tela de canais
+  if (!canal()) pag = 'canais';
+  chip();
   const P = PAGINAS[pag]; menu(pag === 'todas' ? 'hoje' : pag);
+  const c = canal();
   let html;
-  if (P.abas) {
-    const ids = Object.keys(P.abas); if (!P.abas[aba]) aba = ids[0];
-    const SUB = {concorrentes: 'O que está rendendo nos canais monitorados pelo Evander e como o nosso canal se compara.', nosso: 'O que os dados mostram sobre o que funciona no Investidor Sardinha.'};
-    html = `<h1>${P.rotulo}</h1><p class="lead">${SUB[pag] || ''}</p><div class="abas" role="tablist">${ids.map(a => `<button role="tab" aria-selected="${a === aba}" data-aba="#${pag}/${a}">${P.abas[a][0]}</button>`).join('')}</div>${P.abas[aba][1]()}`;
+  if (pag === 'concorrentes' && !c.compara_concorrentes) html = `<h1>Concorrentes</h1>${soSardinha('A comparação com os concorrentes')}`;
+  else if (pag === 'historico' && !c.pautas_diarias) html = `<h1>Histórico</h1>${soSardinha('O histórico de pautas')}`;
+  else if (P.abas) {
+    // aba 'titulos' (analise de titulos) so existe para o canal das pautas diarias
+    const ids = Object.keys(P.abas).filter(a => !(a === 'titulos' && !c.pautas_diarias)); if (!ids.includes(aba)) aba = ids[0];
+    const SUB = {concorrentes: 'O que está rendendo nos canais monitorados pelo Evander e como o nosso canal se compara.', nosso: `O que os dados mostram sobre o ${esc(c.nome)}.`};
+    html = `<h1>${pag === 'nosso' ? esc(c.nome) : P.rotulo}</h1><p class="lead">${SUB[pag] || ''}</p><div class="abas" role="tablist">${ids.map(a => `<button role="tab" aria-selected="${a === aba}" data-aba="#${pag}/${a}">${P.abas[a][0]}</button>`).join('')}</div>${P.abas[aba][1]()}`;
   } else html = P.desenhar();
   const m = document.getElementById('conteudo'); m.innerHTML = html; window.scrollTo(0, 0);
   if (P.depois) P.depois(aba);
 }
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-aba]'); if (b) { location.hash = b.dataset.aba; return; }
+  const ec = e.target.closest('[data-canal]'); if (ec) { gravarCanal(ec.dataset.canal); if (location.hash === '#hoje') render(); else location.hash = 'hoje'; return; }
   const vm = e.target.closest('[data-vermais]'); if (vm) { const l = vm.parentElement.previousElementSibling; l.hidden = false; vm.parentElement.remove(); return; }
   const dd = e.target.closest('[data-dia]'); if (dd) { history.replaceState(null, '', '#historico/' + dd.dataset.dia); desenharCal(dd.dataset.dia, Object.keys(H).sort()); desenharDia(dd.dataset.dia); return; }
   const mm = e.target.closest('[data-mes]'); if (mm) { mesCal = new Date(mesCal.getFullYear(), mesCal.getMonth() + Number(mm.dataset.mes), 1); desenharCal((location.hash.split('/')[1]) || '', Object.keys(H).sort()); return; }
