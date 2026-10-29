@@ -163,7 +163,10 @@ tr.nosso td{background:#F3F8F5;font-weight:600}
 .pauta .meta{min-height:24px}
 .pauta .fontes{overflow:hidden;height:calc(1.5em * 2 + 6px);align-content:flex-start;line-height:1.5}
 .pauta:has(details[open]) h3,.pauta:has(details[open]) .ang{-webkit-line-clamp:unset;display:block;min-height:0}
-.pauta:has(details[open]) .fontes{height:auto}/* tela de canais e seletor no topo */
+.pauta:has(details[open]) .fontes{height:auto}.pot{font-size:12px;border-radius:99px;padding:2px 9px;white-space:nowrap;border:1px solid var(--borda);color:var(--cinza)}
+.pot-alto{border-color:var(--ok);color:var(--ok);font-weight:600}
+.pot-baixo{opacity:.75}
+/* tela de canais e seletor no topo */
 .logo-mini{width:26px;height:26px;flex:none}
 .opcoes .logo-mini{width:34px;height:34px}
 .canal .logo-mini{width:84px;height:84px}
@@ -320,14 +323,19 @@ function cartaoVideo(v, pos) {
     <span class="num"><strong>${fmtCurto(v.views)}</strong><span>views${v.por_dia ? ' · ' + fmtCurto(v.por_dia) + '/dia' : ''}</span></span>
   </a>`;
 }
-function cartaoPauta(p, i) {
-  const r = RESULTADO[String(p.resultado || '').toLowerCase()];
+// selos de potencial (RADAR 3.7): so aparecem quando o modelo passou na conferencia contra o passado
+const NIVEL = {alto: ['alto', 'pot-alto'], medio: ['médio', 'pot-medio'], baixo: ['baixo', 'pot-baixo']};
+function seloPotencial(pt) {
+  if (!pt) return '';
+  return [['viralizacao', 'Viralização'], ['leads', 'Leads']].map(([k, r]) => { const n = NIVEL[pt[k]]; return n ? `<span class="pot ${n[1]}" title="Potencial estimado pelo título e pelo assunto — é uma dica, não uma garantia">${r}: ${n[0]}</span>` : ''; }).join('');
+}
+function cartaoPauta(p, i) {  const r = RESULTADO[String(p.resultado || '').toLowerCase()];
   const links = (p.links || []).map(l => linkSeguro(l.link) ? `<a href="${esc(l.link)}" target="_blank" rel="noopener noreferrer">${esc(l.fonte)} ↗</a>` : '').join('');
   const img = linkSeguro(p.imagem) && /^https:/.test(p.imagem) ? `<img class="mini" src="${esc(p.imagem)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.pauta').classList.remove('com-img');this.remove()">` : '';
   return `<article class="card pauta${img ? ' com-img' : ''}">${img}
     <span class="num">${i}</span>
     <div><h3>${esc(p.tema)}</h3><p class="ang">${esc(p.angulo)}</p>
-      <div class="meta">${r ? pill(r[0], r[1]) : ''}${p.formato ? `<span class="tag">${esc(p.formato)}</span>` : ''}</div>
+      <div class="meta">${r ? pill(r[0], r[1]) : ''}${p.formato ? `<span class="tag">${esc(p.formato)}</span>` : ''}${seloPotencial(p.potencial)}</div>
       <div class="fontes">${links ? `<span class="mut">Fonte:</span>${links}` : ''}</div></div>
     <details><summary>Por que a IA escolheu</summary><p>${esc(p.porque)}</p>${p.risco ? `<p><strong>Risco:</strong> ${esc(p.risco)}</p>` : ''}</details>
   </article>`;
@@ -446,7 +454,7 @@ const PAGINAS = {
       </div>
       ${qn.length ? `<h2>Assunto quente que ainda não falamos</h2><p class="lead">Apareceu em 3 ou mais canais concorrentes nesta semana.</p><div class="lista">${qn.map(cartaoQuente).join('')}</div>` : ''}
       <h2>Pautas do dia</h2>
-      <p class="lead">As 10 principais, escolhidas às ${fmtDataHora(p.gerado_em).split(' ')[1] || ''} entre ${fmtNum(p.candidatos)} notícias. ${explica('ex-pautas', 'A IA leu as notícias do dia, os vídeos dos concorrentes e o histórico do canal, e escolheu as 10 que mais combinam com a linha editorial. Cada pauta diz se busca <strong>alcance</strong> (puxar gente nova) ou <strong>autoridade</strong> (agradar a base). Abra "Por que a IA escolheu" para ver o raciocínio e o risco.')}</p>
+      <p class="lead">As 10 principais, escolhidas às ${fmtDataHora(p.gerado_em).split(' ')[1] || ''} entre ${fmtNum(p.candidatos)} notícias. ${explica('ex-pautas', 'A IA leu as notícias do dia, os vídeos dos concorrentes e o histórico do canal, e escolheu as 10 que mais combinam com a linha editorial. Cada pauta diz se busca <strong>alcance</strong> (puxar gente nova) ou <strong>autoridade</strong> (agradar a base). Abra "Por que a IA escolheu" para ver o raciocínio e o risco.')} ${p.potencial ? explica('ex-pot', `<strong>Potencial de viralização e de leads</strong> é uma estimativa pelo título proposto e pelo assunto, aprendida com os vídeos do canal até junho de 2026 e conferida nos vídeos de ${fmtData(p.potencial.teste_de)} a ${fmtData(p.potencial.teste_ate)}, que o modelo não tinha visto. Dos que ele marcou “alto”, acertou ${fmtDec(p.potencial.viralizacao.precisao_pct)}% em viralização e ${fmtDec(p.potencial.leads.precisao_pct)}% em leads — chutando ao acaso seria ${fmtDec(p.potencial.leads.acaso_pct)}%. É um sinal fraco: use como dica de desempate, não como decisão.`).replace('Como ler', 'Sobre o potencial') : ''}</p>
       ${listaPautas(p.itens, true)}`;
   }},
   concorrentes: {rotulo: 'Concorrentes', icone: 'concorrentes', abas: {
