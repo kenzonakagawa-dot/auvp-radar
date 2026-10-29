@@ -406,6 +406,27 @@ function fecharSeletor() { document.getElementById('opcoes').hidden = true; docu
 function abrirSeletor() { document.getElementById('opcoes').hidden = false; document.getElementById('canal-chip').setAttribute('aria-expanded', 'true'); }
 // aviso para pagina que ainda nao existe para o canal escolhido
 const soSardinha = (o_que) => `<div class="card"><p class="conclusao">${o_que} ainda é só do Investidor Sardinha.</p><p class="mut" style="margin:0">${canal().todos ? 'Para os canais juntos' : 'Para o ' + esc(canal().nome)}, veja a <a href="#nosso/visao">visão geral do canal</a>. ${o_que === 'A lista de pautas do dia' ? 'Gerar pautas para este canal exige escrever a linha editorial dele — dá para fazer quando vocês quiserem.' : ''}</p></div>`;
+// motor de pautas por canal (29/10/2026): o Sardinha usa D.pautas; os outros, D.pautas_canais[handle] e os arquivos
+// historico-<handle>.json / todas-<handle>.json
+const ehSardinha = c => c && c.handle === 'investidorsardinha';
+const pautasDo = c => ehSardinha(c) ? D.pautas : (D.pautas_canais || {})[c.handle];
+const arqDoCanal = (base, c) => ehSardinha(c) ? base + '.json' : base + '-' + c.handle + '.json';
+function hojeCanal(c) {
+  const p = pautasDo(c);
+  if (!p) return `<h1>${esc(c.nome)}</h1><div class="card vazio">A lista de pautas deste canal ainda não foi gerada.</div><div style="margin-top:20px">${visaoCanal(c)}</div>`;
+  return `<h1>O que pede atenção hoje</h1>
+    <p class="lead">As pautas que a IA separou para o ${esc(c.nome)}, com as notícias e os concorrentes deste canal.</p>
+    <div class="kpis">
+      ${kpi('Pautas do dia', p.itens.length, `de ${fmtNum(p.candidatos)} notícias e vídeos lidos`)}
+      ${kpi('Views típicas', fmtCurto(c.j90.mediana_longos), 'vídeo longo, últimos 90 dias')}
+      ${kpi('Vídeos por semana', fmtDec((c.j90.longos + c.j90.shorts) / (90 / 7)), `${c.j90.longos} longos e ${c.j90.shorts} shorts em 90 dias`)}
+      ${kpi('Inscritos', fmtCurto(c.inscritos), `${fmtNum(c.videos)} vídeos publicados`)}
+    </div>
+    <h2>Pautas do dia</h2>
+    <p class="lead">As 10 principais, escolhidas às ${fmtDataHora(p.gerado_em).split(' ')[1] || ''}. ${explica('ex-pautas-c', 'A IA leu as notícias do dia e os vídeos recentes de 10 concorrentes deste canal (5 do Brasil e 5 de fora) e escolheu pela linha editorial do canal — o que mais rendeu e o que menos rendeu nos vídeos dos últimos 6 meses. Abra “Por que a IA escolheu” para ver o raciocínio e o risco. A linha editorial foi escrita a partir dos números do canal; se a equipe discordar de algum critério, ele é ajustado.')}</p>
+    ${listaPautas(p.itens, true)}
+    ${p.observacoes ? `<p class="mut" style="font-size:13px;margin-top:16px"><strong>Observação da IA:</strong> ${esc(p.observacoes)}</p>` : ''}`;
+}
 function visaoCanal(c) {
   const ms = c.meses || [], max = Math.max(1, ...ms.map(m => m.mediana_longos || 0));
   const semanas = 90 / 7;
@@ -442,6 +463,7 @@ const PAGINAS = {
     const c = canal();
     if (c && c.todos) return `<h1>Todos os canais</h1><p class="lead">Os 4 canais da AUVP somados.</p>${visaoTodos()}`;
     if (c && !c.pautas_diarias) return `<h1>${esc(c.nome)}</h1><p class="lead">Como o canal está. ${''}</p>${soSardinha('A lista de pautas do dia')}<div style="margin-top:20px">${visaoCanal(c)}</div>`;
+    if (c && !ehSardinha(c)) return hojeCanal(c);
     const p = D.pautas, qn = quentesNovos(), br = placarBR(), nos = br.find(c => c.grupo === 'nosso');
     const posViews = nos ? 1 + br.filter(c => c.grupo !== 'nosso' && (c.mediana_views_90d || 0) > (nos.mediana_views_90d || 0)).length : null;
     return `<h1>O que pede atenção hoje</h1>
@@ -541,9 +563,10 @@ const PAGINAS = {
 };
 
 // ---------------------------------------------------------------- todas as noticias
-let TD = null;
+let TD = null, TDarq = null;
 async function todasNoticias() {
-  if (!TD) { try { TD = await (await fetch('todas.json', {cache: 'no-store'})).json(); } catch (e) { document.getElementById('todas-lista').innerHTML = '<p class="vazio">Não consegui carregar.</p>'; return; } }
+  const arq = arqDoCanal('todas', canal()); if (TDarq !== arq) TD = null;
+  if (!TD) { try { TD = await (await fetch(arq, {cache: 'no-store'})).json(); TDarq = arq; } catch (e) { document.getElementById('todas-lista').innerHTML = '<p class="vazio">Não consegui carregar.</p>'; return; } }
   const lead = document.getElementById('todas-lead'); if (lead) lead.textContent = `${TD.itens.length} notícias lidas na coleta de ${fmtDataHora(TD.coletado_em)}, antes da IA escolher. Primeiro as que saíram em mais veículos.`;
   desenharTodas('');
 }
@@ -644,11 +667,12 @@ function conversaoDesenhar() {
 }
 
 // ---------------------------------------------------------------- historico (calendario)
-let H = null, mesCal = null;
+let H = null, Harq = null, mesCal = null;
 const maiuscula = s => s.charAt(0).toUpperCase() + s.slice(1);
 const chaveDia = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
 async function historico(diaPedido) {
-  if (!H) { try { H = await (await fetch('historico.json', {cache: 'no-store'})).json(); } catch (e) { document.getElementById('cal').innerHTML = '<p class="vazio">Não consegui carregar o histórico.</p>'; return; } }
+  const arq = arqDoCanal('historico', canal()); if (Harq !== arq) H = null;
+  if (!H) { try { H = await (await fetch(arq, {cache: 'no-store'})).json(); Harq = arq; } catch (e) { document.getElementById('cal').innerHTML = '<p class="vazio">Não consegui carregar o histórico.</p>'; return; } }
   const dias = Object.keys(H).sort(); if (!dias.length) return;
   const dia = H[diaPedido] ? diaPedido : dias[dias.length - 1];
   const [a, m] = dia.split('-').map(Number);
@@ -675,7 +699,7 @@ function desenharDia(k) {
 }
 // ---------------------------------------------------------------- navegacao (#pagina/aba)
 function menu(atual) {
-  const qn = quentesNovos().length;
+  const qn = ehSardinha(canal()) ? quentesNovos().length : 0;
   const link = ([id, p]) => `<a href="#${id}" ${id === atual ? 'aria-current="page"' : ''}>${ico(p.icone)}<span class="rot">${p.rotulo}</span>${id === 'hoje' && qn ? `<span class="cont" title="assuntos quentes novos">${qn}</span>` : ''}</a>`;
   const e = Object.entries(PAGINAS);
   document.getElementById('menu').innerHTML = e.filter(([, p]) => !p.rodape && !p.oculta).map(link).join('') + `<div class="rodape">${e.filter(([, p]) => p.rodape).map(link).join('')}</div>`;
@@ -695,8 +719,8 @@ function render() {
   if (pag === 'concorrentes' && !c.compara_concorrentes) html = `<h1>Concorrentes</h1>${soSardinha('A comparação com os concorrentes')}`;
   else if (pag === 'historico' && !c.pautas_diarias) html = `<h1>Histórico</h1>${soSardinha('O histórico de pautas')}`;
   else if (P.abas) {
-    // aba 'titulos' (analise de titulos) so existe para o canal das pautas diarias
-    const ids = Object.keys(P.abas).filter(a => !(a === 'titulos' && !c.pautas_diarias)); if (!ids.includes(aba)) aba = ids[0];
+    // aba 'titulos' (analise de titulos) so existe para o Investidor Sardinha
+    const ids = Object.keys(P.abas).filter(a => !(a === 'titulos' && !ehSardinha(c))); if (!ids.includes(aba)) aba = ids[0];
     const SUB = {concorrentes: 'O que está rendendo nos canais monitorados pelo Evander e como o nosso canal se compara.', nosso: `O que os dados mostram sobre o ${esc(c.nome)}.`};
     html = `<h1>${pag === 'nosso' ? esc(c.nome) : P.rotulo}</h1><p class="lead">${SUB[pag] || ''}</p><div class="abas" role="tablist">${ids.map(a => `<button role="tab" aria-selected="${a === aba}" data-aba="#${pag}/${a}">${P.abas[a][0]}</button>`).join('')}</div>${P.abas[aba][1]()}`;
   } else html = P.desenhar();
