@@ -354,8 +354,13 @@ function cartaoQuente(q) {
 }
 
 // ---------------------------------------------------------------- paginas
-const quentesNovos = () => ((D.concorrentes.quentes || {}).itens || []).filter(q => !q.nos_ja_falamos);
-const placarBR = () => ((D.concorrentes.placar || {}).canais || []).filter(c => c.grupo !== 'internacional');
+// concorrentes do canal escolhido (RADAR 2.5): o Sardinha usa D.concorrentes; os outros, D.concorrentes_canais[handle]
+const CC = () => { const c = canal(); return (!c || ehSardinha(c)) ? D.concorrentes : ((D.concorrentes_canais || {})[c.handle] || {ranking: []}); };
+const temConc = c => c && !c.todos && (ehSardinha(c) || !!(D.concorrentes_canais || {})[c.handle]);
+// razao legivel: abaixo de 0,1 o arredondamento daria '0,0x'
+const vezes = x => x == null ? '–' : x < 0.1 ? 'menos de 0,1x' : fmtDec(x) + 'x';
+const quentesNovos = () => ((CC().quentes || {}).itens || []).filter(q => !q.nos_ja_falamos);
+const placarBR = () => ((CC().placar || {}).canais || []).filter(c => c.grupo !== 'internacional');
 
 // ---------------------------------------------------------------- canal escolhido (tela de inicio, 26/10/2026)
 // A escolha fica no navegador de quem usa (localStorage); sem escolha, o site abre na tela de canais.
@@ -422,6 +427,7 @@ function hojeCanal(c) {
       ${kpi('Vídeos por semana', fmtDec((c.j90.longos + c.j90.shorts) / (90 / 7)), `${c.j90.longos} longos e ${c.j90.shorts} shorts em 90 dias`)}
       ${kpi('Inscritos', fmtCurto(c.inscritos), `${fmtNum(c.videos)} vídeos publicados`)}
     </div>
+    ${quentesNovos().length ? `<h2>Assunto quente que ainda não falamos</h2><p class="lead">Apareceu em 3 ou mais concorrentes deste canal nesta semana.</p><div class="lista">${quentesNovos().map(cartaoQuente).join('')}</div>` : ''}
     <h2>Pautas do dia</h2>
     <p class="lead">As 10 principais, escolhidas às ${fmtDataHora(p.gerado_em).split(' ')[1] || ''}. ${explica('ex-pautas-c', 'A IA leu as notícias do dia e os vídeos recentes de 10 concorrentes deste canal (5 do Brasil e 5 de fora) e escolheu pela linha editorial do canal — o que mais rendeu e o que menos rendeu nos vídeos dos últimos 6 meses. Abra “Por que a IA escolheu” para ver o raciocínio e o risco. A linha editorial foi escrita a partir dos números do canal; se a equipe discordar de algum critério, ele é ajustado.')}</p>
     ${listaPautas(p.itens, true)}
@@ -481,15 +487,15 @@ const PAGINAS = {
   }},
   concorrentes: {rotulo: 'Concorrentes', icone: 'concorrentes', abas: {
     'em-alta': ['Em alta agora', () => {
-      const rk = D.concorrentes.ranking || [], br = rk.filter(v => v.grupo !== 'internacional').sort((a, b) => b.views - a.views).slice(0, 10), int = rk.filter(v => v.grupo === 'internacional').sort((a, b) => b.views - a.views).slice(0, 10);
-      const q = (D.concorrentes.quentes || {}).itens || [];
+      const rk = CC().ranking || [], br = rk.filter(v => v.grupo !== 'internacional').sort((a, b) => b.views - a.views).slice(0, 10), int = rk.filter(v => v.grupo === 'internacional').sort((a, b) => b.views - a.views).slice(0, 10);
+      const q = (CC().quentes || {}).itens || [];
       return `<h2 style="margin-top:0">Assunto quente</h2><p class="lead">O mesmo assunto em 3 ou mais canais nos últimos 7 dias. ${explica('ex-q', 'A IA agrupa os vídeos pelo assunto; a contagem de canais é feita à parte, e um canal que posta 5 vídeos do mesmo tema conta uma vez só. A contagem tende a sair por baixo, nunca por cima.')}</p>
         <div class="lista">${q.length ? q.map(cartaoQuente).join('') : '<div class="card vazio">Nenhum assunto em 3+ canais nesta semana.</div>'}</div>
-        <h2>Mais vistos da semana</h2><p class="lead">Até 3 vídeos por canal, publicados nos últimos 7 dias. Coleta de ${fmtDataHora(D.concorrentes.coletado_em)}.</p>
+        <h2>Mais vistos da semana</h2><p class="lead">Até 3 vídeos por canal, publicados nos últimos 7 dias. Coleta de ${fmtDataHora(CC().coletado_em)}.</p>
         <div class="dupla"><div class="card"><p class="conclusao">Brasil</p>${br.map((v, i) => cartaoVideo(v, i + 1)).join('')}</div><div class="card"><p class="conclusao">Internacional</p>${int.map((v, i) => cartaoVideo(v, i + 1)).join('')}</div></div>`;
     }],
     'placar': ['Placar', () => {
-      const pl = D.concorrentes.placar || {canais: []};
+      const pl = CC().placar || {canais: []};
       const linhas = grupo => pl.canais.filter(c => grupo === 'int' ? c.grupo === 'internacional' : c.grupo !== 'internacional').sort((a, b) => (b.mediana_views_90d || 0) - (a.mediana_views_90d || 0));
       const max = Math.max(...pl.canais.map(c => c.mediana_views_90d || 0));
       const tab = (lista) => `<div class="card tabela resp2"><table><thead><tr><th>Canal</th><th>Views típicas</th><th class="n">Longos/sem</th><th class="n">Shorts/sem</th><th class="n">Inscritos</th><th>Fala mais de</th></tr></thead><tbody>
@@ -515,14 +521,14 @@ const PAGINAS = {
       const maior = mix.find(m => m.pn - m.po >= 5), menor = mix.find(m => m.po - m.pn >= 5);
       // frase-conclusao calculada dos dados: texto fixo ficaria errado no dia em que o placar mudar
       const razL = nos.longos_por_semana / (mediana(outros.map(c => c.longos_por_semana)) || 1), medS = mediana(outros.map(c => c.shorts_por_semana));
-      const fraseL = razL >= 1.2 ? ` e publicamos ${fmtDec(razL)}x mais vídeos longos` : razL <= 0.8 ? `, mas publicamos menos vídeos longos (${fmtDec(razL)}x)` : '';
+      const fraseL = razL >= 1.2 ? ` e publicamos ${fmtDec(razL)}x mais vídeos longos` : razL <= 0.8 ? `, mas publicamos menos vídeos longos (${vezes(razL)})` : '';
       const fraseS = (nos.shorts_por_semana || 0) < 0.5 && medS >= 1 ? ` O concorrente típico faz ${fmtDec(medS)} shorts por semana; nós, nenhum.` : '';
-      return `<div class="card" style="margin-bottom:20px"><p class="conclusao">Somos o ${posV}º do Brasil em views típicas (${fmtDec(nos.mediana_views_90d / vMed)}x o concorrente típico)${fraseL}.${fraseS}</p>
+      return `<div class="card" style="margin-bottom:20px"><p class="conclusao">Somos o ${posV}º do Brasil em views típicas (${vezes(nos.mediana_views_90d / vMed)} o concorrente típico)${fraseL}.${fraseS}</p>
         <p class="mut" style="margin:0;font-size:14px">Comparação com os ${outros.length} concorrentes do Brasil. "Concorrente típico" é o canal do meio (a mediana), para um canal gigante não distorcer a régua.</p></div>
         <div class="card tabela"><table><thead><tr><th>Medida</th><th class="n">Nosso canal</th><th class="n">Concorrente típico</th><th class="n">Posição</th></tr></thead><tbody>${linhas}</tbody></table></div>
-        <h2>De que assunto cada um fala</h2><p class="lead">${maior ? `Falamos mais de <strong>${esc(rotFam(maior.f))}</strong>` : ''}${maior && menor ? ' e menos de ' : ''}${menor ? `<strong>${esc(rotFam(menor.f))}</strong>` : ''} do que os concorrentes. <span class="mut">(${totN} vídeos nossos × ${tot} deles)</span></p>
+        ${!(tot + totN) ? '<p class="mut" style="font-size:13px;margin-top:14px">A comparação por assunto existe só no Investidor Sardinha: as categorias de assunto são as da linha editorial dele.</p>' : `<h2>De que assunto cada um fala</h2><p class="lead">${maior ? `Falamos mais de <strong>${esc(rotFam(maior.f))}</strong>` : ''}${maior && menor ? ' e menos de ' : ''}${menor ? `<strong>${esc(rotFam(menor.f))}</strong>` : ''} do que os concorrentes. <span class="mut">(${totN} vídeos nossos × ${tot} deles)</span></p>
         <div class="card tabela"><table><thead><tr><th>Assunto</th><th>Nós</th><th>Concorrentes</th><th class="n">Diferença</th></tr></thead><tbody>
-        ${mix.map(m => { const d = Math.round(m.pn - m.po); return `<tr><td>${esc(rotFam(m.f))}</td><td><div style="display:flex;gap:8px;align-items:center"><span style="min-width:34px">${Math.round(m.pn)}%</span><div class="barra" style="flex:1;max-width:160px"><i style="width:${m.pn}%"></i></div></div></td><td><div style="display:flex;gap:8px;align-items:center"><span style="min-width:34px">${Math.round(m.po)}%</span><div class="barra" style="flex:1;max-width:160px"><i style="width:${m.po}%;background:var(--cinza-claro)"></i></div></div></td><td class="n">${d >= 5 ? pill('+' + d + ' p.p.', 'p-ok') : d <= -5 ? pill(d + ' p.p.', 'p-alerta') : `<span class="mut">${d > 0 ? '+' : ''}${d} p.p.</span>`}</td></tr>`; }).join('')}</tbody></table></div>`;
+        ${mix.map(m => { const d = Math.round(m.pn - m.po); return `<tr><td>${esc(rotFam(m.f))}</td><td><div style="display:flex;gap:8px;align-items:center"><span style="min-width:34px">${Math.round(m.pn)}%</span><div class="barra" style="flex:1;max-width:160px"><i style="width:${m.pn}%"></i></div></div></td><td><div style="display:flex;gap:8px;align-items:center"><span style="min-width:34px">${Math.round(m.po)}%</span><div class="barra" style="flex:1;max-width:160px"><i style="width:${m.po}%;background:var(--cinza-claro)"></i></div></div></td><td class="n">${d >= 5 ? pill('+' + d + ' p.p.', 'p-ok') : d <= -5 ? pill(d + ' p.p.', 'p-alerta') : `<span class="mut">${d > 0 ? '+' : ''}${d} p.p.</span>`}</td></tr>`; }).join('')}</tbody></table></div>`}`;
     }]
   }},
   nosso: {rotulo: 'Canal', icone: 'nosso', abas: {
@@ -699,7 +705,7 @@ function desenharDia(k) {
 }
 // ---------------------------------------------------------------- navegacao (#pagina/aba)
 function menu(atual) {
-  const qn = ehSardinha(canal()) ? quentesNovos().length : 0;
+  const qn = temConc(canal()) ? quentesNovos().length : 0;
   const link = ([id, p]) => `<a href="#${id}" ${id === atual ? 'aria-current="page"' : ''}>${ico(p.icone)}<span class="rot">${p.rotulo}</span>${id === 'hoje' && qn ? `<span class="cont" title="assuntos quentes novos">${qn}</span>` : ''}</a>`;
   const e = Object.entries(PAGINAS);
   document.getElementById('menu').innerHTML = e.filter(([, p]) => !p.rodape && !p.oculta).map(link).join('') + `<div class="rodape">${e.filter(([, p]) => p.rodape).map(link).join('')}</div>`;
@@ -716,12 +722,12 @@ function render() {
   const P = PAGINAS[pag]; menu(pag === 'todas' ? 'hoje' : pag);
   const c = canal();
   let html;
-  if (pag === 'concorrentes' && !c.compara_concorrentes) html = `<h1>Concorrentes</h1>${soSardinha('A comparação com os concorrentes')}`;
+  if (pag === 'concorrentes' && !temConc(c)) html = `<h1>Concorrentes</h1>${soSardinha('A comparação com os concorrentes')}`;
   else if (pag === 'historico' && !c.pautas_diarias) html = `<h1>Histórico</h1>${soSardinha('O histórico de pautas')}`;
   else if (P.abas) {
     // aba 'titulos' (analise de titulos) so existe para o Investidor Sardinha
     const ids = Object.keys(P.abas).filter(a => !(a === 'titulos' && !ehSardinha(c))); if (!ids.includes(aba)) aba = ids[0];
-    const SUB = {concorrentes: 'O que está rendendo nos canais monitorados pelo Evander e como o nosso canal se compara.', nosso: `O que os dados mostram sobre o ${esc(c.nome)}.`};
+    const SUB = {concorrentes: ehSardinha(c) ? 'O que está rendendo nos canais monitorados pelo Evander e como o nosso canal se compara.' : 'O que está rendendo nos 10 concorrentes do ' + esc(c.nome) + ' (5 do Brasil e 5 de fora) e como o canal se compara.', nosso: `O que os dados mostram sobre o ${esc(c.nome)}.`};
     html = `<h1>${pag === 'nosso' ? esc(c.nome) : P.rotulo}</h1><p class="lead">${SUB[pag] || ''}</p><div class="abas" role="tablist">${ids.map(a => `<button role="tab" aria-selected="${a === aba}" data-aba="#${pag}/${a}">${P.abas[a][0]}</button>`).join('')}</div>${P.abas[aba][1]()}`;
   } else html = P.desenhar();
   const m = document.getElementById('conteudo'); m.innerHTML = html; window.scrollTo(0, 0);
